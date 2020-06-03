@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Ctc">
+
+	<insert id="Insert" parameterType="map">
+	 insert into hrms.payslip_heads_mst(pname,title) 
+		values(#{p.pname},#{p.title}) ; </insert>
+		
+		
+		
+		
+	<!-- <insert id="Insert" parameterType="map">
+		INSERT INTO hrms.payslip_heads_mst (pname,title)
+		SELECT pname,title FROM hrms.payslip_heads_mst
+		WHERE title='Earnings';
+	</insert>
+ -->
+	<select id="getAll" resultType="Ctc">
+		SELECT pname,title,status from
+		hrms.payslip_heads_mst;    
+	</select>
+	
+	
+	<select id="getEarnings" resultType="Ctc">
+		SELECT pname from
+		hrms.payslip_heads_mst where title='Earnings';
+	</select>
+	
+	<select id="getDeductions" resultType="Ctc">
+		SELECT pname from
+		hrms.payslip_heads_mst where title='Deductions';
+	</select>
+	
+	
+	    
+	
+	<delete id="deleteData" parameterType="java.lang.String">
+		delete from
+		hrms.payslip_heads_mst where pname = #{pname};
+	</delete>
+
+	<update id="updateData" parameterType="map">
+		update
+		hrms.payslip_heads_mst SET title=#{p.title},status=#{p.status} WHERE
+		pname=#{p.pname};
+	</update>
+	<select id="getById" resultType="Ctc">
+		SELECT title,status from hrms.payslip_heads_mst WHERE pname = #{pname};
+	</select>
+</mapper>	     

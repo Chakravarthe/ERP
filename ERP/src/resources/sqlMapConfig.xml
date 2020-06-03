@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>  
+   		<typeAliases>
+   		   <typeAlias alias="employee" type="com.spring.Model.Employee" />   
+   		   <typeAlias alias="Login" type="com.spring.Model.Login" />  
+   		   <typeAlias alias="Services" type="com.spring.Model.Services" />   
+   		   <typeAlias alias="vendor" type="com.spring.Model.Vendor" />  
+   		    <typeAlias alias="vendorApp" type="com.spring.Model.VendorApp" /> 
+   		    <typeAlias alias="Upload" type="com.spring.Model.Upload" />
+   		     <typeAlias alias="VendorService" type="com.spring.Model.VendorService" />
+   		     <typeAlias alias="EmployeeMaster" type="com.spring.Model.EmployeeMaster" />  
+   		     <typeAlias alias="CreatePo" type="com.spring.Model.CreatePO" />
+   		     <typeAlias alias="POList" type="com.spring.Model.POList" />    
+   		     <typeAlias alias="Attendance" type="com.spring.Model.Attendance" />
+   		        <typeAlias alias="Calc" type="com.spring.Model.Calc" />
+   		         <typeAlias alias="Ctc" type="com.spring.Model.Ctc" />  
+   		   
+      	</typeAliases>                 
+     
+   	 	<mappers>     
+   	 	  <mapper resource="com/example/security/model/Employee-MyBatis.xml" />
+		  <mapper resource="com/example/security/model/Login-MyBatis.xml" />
+		  <mapper resource="com/example/security/model/Services-MyBatis.xml" />
+		   <mapper resource="com/example/security/model/Vendor-MyBatis.xml" />
+		   <mapper resource="com/example/security/model/VendorApp-MyBatis.xml" />
+		   <mapper resource="com/example/security/model/VendorService-MyBatis.xml" />
+		    <mapper resource="com/example/security/model/EmployeeMaster-MyBatis.xml" />
+		    <mapper resource="com/example/security/model/Upload-MyBatis.xml" />
+		     <mapper resource="com/example/security/model/CreatePO-MyBatis.xml" />
+		     <mapper resource="com/example/security/model/POList-MyBatis.xml" />
+		    
+			 <mapper resource="com/example/security/model/Attendance-MyBatis.xml" />
+			  
+			 <mapper resource="com/example/security/model/Calc-MyBatis.xml" />
+			  <mapper resource="com/example/security/model/Ctc-Mybatis.xml" />
+			
+			 
+			           
+       	</mappers>                       
+          
+</configuration>                                                     

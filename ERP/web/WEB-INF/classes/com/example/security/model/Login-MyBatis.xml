@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Login">             
+   
+<select resultType="java.lang.Integer" parameterType="map" id="checkUser"> 
+select count(*) from hrms.logins where username = #{p.username} AND password = #{p.password} 
+</select>
+
+ <select parameterType="map" id="getRole" resultType="Login">     
+select roleid from hrms.logins where username = #{username} AND password = #{password} 
+</select>                 
+           
+<select resultType="Login" parameterType="map" id="getUserDetails"> 
+select  username,password,roleid,employeeid,email from hrms.logins where username = #{p.username} 
+AND password = #{password}
+</select>                             
+<select resultType="Login" parameterType="map" id="getUserDetails1"> 
+select  username,password,roleid,email,employeeid  from hrms.logins where username = #{username} 
+AND password = #{password}   
+</select>                    
+<select resultType="Login" parameterType="map" id="getUserDetails2">        
+select  username,password,roleid,email,employeeid  from hrms.logins where username = #{username} 
+AND password = #{password};
+</select>                     
+                      
+<insert parameterType="map" id="saveLogins">         
+insert into hrms.users_log(employeeid, roleid,login_time,logip)   
+values(#{p.employeeid} ,#{p.roleid},current_timestamp,#{p.ipaddress}) </insert>
+                 
+   
+<update parameterType="java.lang.String" id="deleteLoginLog">
+ update hrms.users_log set logout_time = current_timestamp  WHERE employeeid = (select replace(#{employeeid},'"','')); 
+ </update>                                      
+ 
+</mapper>           

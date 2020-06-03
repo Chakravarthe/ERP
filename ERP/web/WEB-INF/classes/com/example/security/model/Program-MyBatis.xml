@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Program">
+<select id="getDistricts" resultType="map">
+		SELECT distinct id as district_id,name from hrms.districts_mst where id not in (16)
+		ORDER BY id;
+	</select>
+	<select id="getNames" resultType="map">  
+		SELECT distinct id as employeeid, first_name from hrms.employee_personal_details;
+	</select> 
+ <select id="getProjects" resultType="map">
+		SELECT project_id,project_name from procurements.project_mst;
+	</select> 
+	 <select id="getSegments" resultType="map">
+		SELECT segment_id,segment_name from  procurements.segment_mst;
+	</select>   
+      <select id="getSectors" resultType="map">
+		SELECT sectorid,sectorname from  procurements.sectors_mst;
+	</select>   
+      
+     
+	 <delete id="deleteData" parameterType="java.lang.String">
+		delete from procurements.createprogram_mst where program_name = #{program_name};
+	</delete>                     
+	
+	
+    
+	 <insert id="Insert" parameterType="map">
+	insert into procurements.createprogram_mst(program_name,project_id,district_id,sectorid,segement_id,other,capex_budgetvalue,
+	opex_budgetvalue,from_date,to_date,headcount,description,physical_outcome,paymentgroup_id,secondary_responsibility)
+   values(#{p.program_name},#{p.project_id},#{p.district_id},#{p.sectorid},#{p.segement_id},#{p.other},
+   #{p.capex_budgetvalue},#{p.opex_budgetvalue},#{p.from_date},#{p.to_date},#{p.headcount},#{p.description},
+  #{p.physical_outcome},#{p.paymentgroup_id},#{p.secondary_responsibility})
+		</insert>
+		 
+		<select id="getAll" resultType="map">
+		SELECT program_name,project_id,district_id,sectorid,segement_id,other,capex_budgetvalue,opex_budgetvalue,
+		from_date,to_date,headcount,description,physical_outcome,paymentgroup_id,secondary_responsibility  
+		from procurements.createprogram_mst;
+	</select> 
+	
+	 <select id="getById" resultType="Program">       
+	 SELECT project_id,district_id,sectorid,segement_id,other,capex_budgetvalue,opex_budgetvalue,from_date,
+	 to_date,headcount,description,physical_outcome,paymentgroup_id,secondary_responsibility 
+	 from procurements.createprogram_mst WHERE program_name = #{program_name} ;     
+	 </select>  		  
+	  <select id="getGroups" resultType="map">          
+		SELECT id as paymentgroup_id ,group_name from procurements.payment_groups;
+	</select>
+		<update id="updateData"  parameterType="map">
+		update procurements.createprogram_mst SET project_id = #{p.project_id},district_id = #{p.district_id},sectorid = #{p.sectorid},segement_id = #{p.segment_id},other = #{p.other},
+		capex_budgetvalue = #{p.capex_budgetvalue},opex_budgetvalue = #{p.opex_budgetvalue},from_date = #{p.from_date},to_date = #{p.to_date},headcount=#{p.headcount},
+		description = #{p.description},physical_outcome = #{p.physical_outcome},paymentterm_group = #{p.paymentgroup_id},
+		secondary_responsibility = #{p.secondary_responsibility} WHERE program_name=#{p.program_name};                        
+	</update> 
+	  
+		            
+	</mapper>                          

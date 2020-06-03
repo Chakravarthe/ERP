@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EmployeeMaster">
+  
+	 <select id="getNameWiseData" resultType="EmployeeMaster">
+		SELECT empid,first_name,email,mobile from hrms.employee_personal_details where empid = #{empid};
+	  </select>
+			
+	<select id="getsearch" resultType="map">
+		SELECT empid,first_name,email,mobile from hrms.employee_personal_details where empid in (SELECT empid from hrms.employee_employment_details where designation= #{p.designation_id} AND department=#{p.departmentid} AND cader=#{p.caderid} AND grade=#{p.gradeid});
+	</select>  	
+	<select id="getAll" resultType="map">
+		SELECT empid,first_name,email,mobile,status from hrms.employee_personal_details;
+	</select>  
+	
+	<!-- update data based on empid in employee master -->
+	   
+	<select id="getById" resultType="EmployeeMaster">
+		SELECT empid,first_name,mobile,email,status from hrms.employee_personal_details WHERE empid = #{empid};
+	  </select>
+	  
+	  <update id="updateData"  parameterType="map">
+		update hrms.employee_personal_details SET first_name=#{p.first_name},mobile=#{p.mobile},email=#{p.email},status=#{p.status} WHERE empid=#{p.empid};
+	</update>
+	
+	
+	 <select id="getCaders" resultType="map">
+		SELECT distinct id as caderid, description from hrms.cader_mst;
+	</select>    
+	
+	<select id="getGrades" resultType="map">
+		SELECT distinct id as gradeid, grade_name from hrms.grades_mst;
+	</select>
+	
+	<select id="getDepartment" resultType="map">
+		SELECT distinct id as departmentid, department_name from hrms.department_mst;
+	</select>  
+	
+	<select id="getDesignation" resultType="map">
+		SELECT distinct id as designation_id, designation_name from hrms.designation_mst;   
+	</select>   
+	   
+	<!-- create hiring request add method -->  
+	
+	<select id="getCount1" resultType="java.lang.Integer">
+		SELECT count(id)+1 as count from hrms.create_hiring_request;
+	</select>
+	
+	<insert id="Insert" parameterType="map">
+		insert into	hrms.create_hiring_request(scheme_id,project_id,sector_id,departmentid,caderid,gradeid,designation_id,position,position_number,divisionid,total_experience,relevent_experience,job_id)
+		values(#{p.scheme_id},#{p.project_id},#{p.sector_id},#{p.departmentid},#{p.caderid},#{p.gradeid},#{p.designation_id},#{p.position},#{p.position_number},#{p.divisionid},#{p.total_experience},#{p.relevent_experience},('SDC' || '' ||lpad(CAST( #{id} AS character varying ),4,'0')));
+	</insert>
+	
+	<!-- candidate registration add1 method -->
+	       
+	<insert id="Insert0" parameterType="map">
+		insert into	hrms.candidates_mst(position,candidate_type,candidate_name,mobile,email,education_id,branch_id,passout_year,experience,relevent_experience,notice_period,coolingoff_period,designation,joining_date,contract_end_date)
+		values(#{p.position},#{p.candidate_type},#{p.candidate_name},#{p.mobile},#{p.email},#{p.education_id},#{p.branch_id},#{p.passout_year},#{p.experience},#{p.relevent_experience},#{p.notice_period},#{p.coolingoff_period},#{p.designation},#{p.joining_date},#{p.contract_end_date});
+	</insert>  
+	  
+	<!-- getting data in table in hiring request -->
+	
+	<select id="hiringRequest" resultType="map">
+		SELECT distinct job_id,position,position_number from hrms.create_hiring_request;
+	</select> 
+	
+	<!-- education and branch in candidate registration -->
+	
+	<select id="getEducations" resultType="map">   
+		SELECT distinct education_id, education_name from hrms.education_mst ORDER BY education_id;
+	</select>   
+	
+	<select id="getBranches" parameterType="map" resultType="Employee">  
+		select branch_name, branch_id from hrms.branch_mst where education_id = #{education_id}  order by branch_name;
+	</select>
+	
+	<!-- getting details to front end in select candidate -->
+	<select id="getCandidates" resultType="map">   
+		SELECT candidate_type,candidate_name,mobile,email from hrms.candidates_mst where position = #{p.position};
+	</select>
+	
+	
+	<!-- search bar in hiring request  -->
+	
+	<!-- <select id="getHiringsearch" resultType="map">
+		SELECT job_id,position,position_number from hrms.create_hiring_request where job_id in (SELECT job_id from hrms.employee_employment_details where designation= #{p.designation_id} AND department=#{p.departmentid} AND cader=#{p.caderid} AND grade=#{p.gradeid});
+	</select> -->
+	
+	<!-- Getting data in table for others in payslip -->
+	<select id="getStaff" resultType="map">
+		SELECT distinct id as id, staff_type from hrms.staff_mst order by id;
+	</select>      
+	
+	<select id="getdetails" resultType="EmployeeMaster">
+		select concat(first_name,' ',last_name) as name,b.pan_no,b.bank_name,b.bank_acno,b.brach,b.ifsc_code from (select * from hrms.employee_personal_details) a inner join (select * from hrms.employee_bank_details) b on (a.empid=b.empid) inner join (select empid,employee_type from hrms.employee_employment_details) c on(c.empid=a.empid)
+		inner join (select * from hrms.staff_mst) d on (d.id=c.employee_type) where c.employee_type = #{p.employee_type}   
+    </select>
+    
+    <!-- Getting data in My timesheets table -->
+	
+	<select id="getdata" resultType="EmployeeMaster" parameterType="map">    
+	select concat(first_name,' ',last_name) as name,b.timesheet_date,b.task,b.description,b.start_time,b.end_time,b.duration,b.status from (select * from hrms.employee_personal_details) a inner join (select * from hrms.employee_timesheet where created_date::date>=#{p.from_date}::timestamp AND #{p.to_date} ::timestamp>=created_date::date) b on (b.empid=a.empid)
+	</select>
+	
+	<select id="getByIddata" resultType="EmployeeMaster">
+		SELECT * from hrms.employee_timesheet WHERE task = #{task};
+	</select> 
+	
+	<!-- Removing data based on task in my timesheet page -->
+	
+	<delete id="deletedata" parameterType="java.lang.String">
+		delete from hrms.employee_timesheet where task = #{task};
+	</delete>   
+	
+	<!-- updating data based on task in my timesheet page -->
+	       
+	<update id="updatedata"  parameterType="map">
+		update hrms.employee_timesheet SET timesheet_date=#{p.timesheet_date},location=#{p.location},status=#{p.status},description=#{p.description},start_time=#{p.start_time},end_time=#{p.end_time} WHERE task=#{p.task};
+	</update>
+	
+	
+	<!--getting Leavetype-->
+	<select id="getLeavetype" resultType="map">
+		SELECT distinct id, type from hrms.leave_types_mst;
+	</select>
+	
+	
+	<!--getting reporting-->
+	<select id="getReporting" resultType="EmployeeMaster">
+		SELECT id,reporting_to from hrms.employee_employment_details where empid=#{p.empid};
+	</select>
+	
+	<!--create apply leave-->
+	<insert id="Insert1" parameterType="map">
+		insert into	hrms.leaves (empid,leave_type,emergency_number,from_date,to_date,reason,approval_by,file_name)
+		                     values(#{p.empid},#{p.leave_type},#{p.emergency_number},#{p.from_date},#{p.to_date},#{p.reason},#{p.reporting_to},#{p.file_name});
+	</insert>
+	     
+	
+	</mapper>                          

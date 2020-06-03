@@ -1,0 +1,656 @@
+<script src="/erp/scripts/general/hrprofile.js"></script>
+
+<style type="text/css">
+ #date .ui-datepicker .ui-datepicker-title
+     
+.ui-widget-header{
+     
+border: 1px solid #0044cc;     
+    background: #83c174 ;
+}
+
+ .ui-datepicker .ui-datepicker-prev .ui-datepicker-next{
+ background:#83c174;
+
+}
+
+.dropdown-btn {
+  padding: 6px 8px 10px 16px;
+  text-decoration: none;
+  color: #818181;
+  display: block;    
+  border: none; 
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: hand;
+  outline: none;
+  
+} 
+
+.active, {
+  color: orange;
+}
+
+.dropdown-container {
+  display: none;
+  /* background-color:#f7f9fb; */
+  /* padding-left: 10px; */
+}    
+ 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+/* .dropdown:hover .dropdown-content {
+  display: block;
+}
+ */
+div ul li a{
+color:#337ab7;
+ /*  background-color:#f9f9f9; */
+ /* background-color:#61AA00;
+ */
+ font-size:19px;
+
+}
+</style>
+<div>
+<div id="instructions"  style="padding-left:2%;">         
+     <div id="mainhome" >
+<div class="container" style="margin-top:-10.5%;margin-right:-2%;margin-left:15.4%;width: 80%;" id="hrDiv"  data-ng-controller="HrprofileController">
+		<ul class="nav nav-tabs"style="position:fixed;  background-color:white; width: 85%;z-index:100;"  >    
+			<li class="active"><a data-toggle="tab" href="#person" style="background-color:#4095D1;">Personal  <i class="fa fa-info-circle" aria-hidden="true" ></i></a></li>
+			<li><a data-toggle="tab" href="#com">Communication  <i class="fa fa-commenting-o" aria-hidden="true"></i></a></li>
+		 	<li><a data-toggle="tab" href="#empt">Employment  <i class="fa fa-user" aria-hidden="true"></i></a></li>
+			<li><a data-toggle="tab" href="#bank">Bank Details  <i class="fa fa-usd" aria-hidden="true"></i></a></li>    
+			<li><a data-toggle="tab" href="#prof">Professional Details  <i class="fa fa-briefcase" aria-hidden="true"></i></a></li>
+				<li><a data-toggle="tab" href="#edu">Education  <i class="fa fa-graduation-cap" aria-hidden="true"></i></a></li>
+			<li><a data-toggle="tab" href="#fam">Family  <i class="fa fa-users" aria-hidden="true"></i></a></li>   
+			  
+			<!--  <li>
+				<div class="dropdown">
+			 
+  		 <div class="dropdown-content">     
+  				<ul>       
+  				<li><a data-toggle="tab" href="#Home">Home</a></li>     
+		 	<li><a data-toggle="tab" href="#edit">Edit Profile</a></li>
+			<li><a data-toggle="tab" href="#Notif">Notifications</a></li>    
+			</ul>
+ 				</div> 
+ 				</div></li>   -->    
+		</ul>   
+		
+		<div class="tab-content">         
+			<div id="person" class="tab-pane fade in active"
+				style="width: 100%; margin-left: 2%;">        
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">   
+					<div class="form-group row">        
+					      
+						<div class="form-group col-md-4">
+							<label>Title<b style="color: red">*</b></label> <!-- <label
+			 				class="form-control" style="font-weight: 100;">{{student.title}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.title" placeholder="Enter Title name"/>
+						</div>
+						<div class="form-group col-md-4">               
+							<label class="control-label">First Name<b style="color: red">*</b></label>
+							<input type="text" class="form-control"  data-ng-model="data2.object.first_name" placeholder="Enter first name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Middle Name</label> 	
+							<input type="text" class="form-control" data-ng-model="data2.object.middle_name" placeholder="Enter middle name" />
+						</div>
+					</div>
+					 <div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Last Name<b style="color: red">*</b></label> <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.last_name}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.last_name" placeholder="Enter last name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">Phone Number<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.mobile" placeholder="Enter mobile number" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Alternate Number<b style="color: red">*</b></label><!--  <label
+								class="form-control" style="font-weight: 100;">{{student.alternate_mobile}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.alternate_mobile" placeholder="Enter mobile number" />
+						</div>
+					</div>   
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Date Of Birth<b style="color: red">*</b></label> 
+							<input class="form-control" type="date"  data-ng-model="data2.object.dob" id="date" placeholder="Select date" />
+							<!-- <label
+								class="form-control" style="font-weight: 100;">{{student.dob}}</label> -->
+								<!-- 	<input type="text" class="form-control" data-ng-model="data2.object.dob" placeholder="Enter name" /> -->
+						</div>
+						<!-- <div class="form-group col-md-4">
+							<label>Birthday Date  <b style="color: red">*</b></label>
+ 						<input type="text" class="datePick form-control" data-ng-model="data2.object.birthday_date" id="date" placeholder="Enter name" />
+						</div>  -->
+						<div class="form-group col-md-4">
+							<label>Email</label>
+							<input type="text" class="form-control" disabled data-ng-model="data2.object.email" placeholder="Enter email" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Gender<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data2.object.gender">
+								<option value="M">Male</option>
+								<option value="F">Female</option>
+							</select>
+						</div>  
+					</div>          
+					<div class="form-group row">
+						
+						<div class="form-group col-md-4">       
+							<label>Aadhaar No<b style="color: red">*</b></label>
+							<input class="form-control" type="text" data-ng-model="data2.object.aadhaar" placeholder="Enter adhaar number" />
+						</div>
+							<div class="form-group col-md-4">
+							<label>Paasport</label><!--  <label
+								class="form-control" style="font-weight: 100;">{{student.passport}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.passport" placeholder="Enter passport number" />
+						</div>
+							<div class="form-group col-md-4">
+							<label>Nationality<b style="color: red">*</b></label> <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.nationality}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.nationality" placeholder="Enter nationality" />
+						</div>
+					</div>
+						<div class="form-group row">
+					
+						<div class="form-group col-md-4">
+							<label class="control-label">Nativity<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.nativity" placeholder="Enter nativity" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Caste<b style="color: red">*</b></label> <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.caste}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.caste" placeholder="Enter caste" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Sub-Caste<b style="color: red">*</b></label> <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.sub_caste}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.sub_caste" placeholder="Enter sub-caste" />
+						</div>
+					</div>
+					<div class="form-group row">
+						
+						<div class="form-group col-md-4">
+							<label class="control-label">Blood Group<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.blood_group" placeholder="Enter blood group" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Emergency Person Name<b style="color: red">*</b></label><!--  <label
+								class="form-control" style="font-weight: 100;">{{student.emergency_name}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.emergency_name" placeholder="Enter person name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Emergency Contact<b style="color: red">*</b></label><!--  <label
+								class="form-control" style="font-weight: 100;">{{student.emergency_contact}}</label> -->
+									<input type="text" class="form-control" data-ng-model="data2.object.emergency_contact" placeholder="Enter contact number" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						
+						<div class="form-group col-md-4">
+							<label>Relation&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control"  
+						data-ng-model="data2.object.relation">
+						<option></option>
+						<option data-ng-repeat="relation in relations"
+							value="{{relation.id}}">{{relation.name}}</option>
+					    </select>
+						</div>      
+					</div>
+					   
+					
+							<ul class="pager">
+								<li class="next"  id="personalin" style="cursor:pointer;background-color:rgb(60, 179, 113)"><a>Next</a></li>
+							</ul>
+						
+				      
+		</form>
+		</div>
+			</div>
+			 <div id="com" class="tab-pane fade"
+				style="width: 100%; margin-left: 2%;">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Pincode<b style="color: red">*</b></label>
+							<input class="form-control" type="number" id="pincodeId" maxlength="6" data-ng-model="data2.object.pincode"
+						    placeholder="Enter pincode" />
+						</div>
+						
+						<!-- data-ng-blur="getPincodeDetails(data2.object);" -->
+						<div class="form-group col-md-4">
+							<label>House/Door number<b style="color: red">*</b></label>
+							<input class="form-control" type="text" data-ng-model="data2.object.dno" placeholder="Enter house / door number" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Street</label>
+							<input class="form-control" type="text" data-ng-model="data2.object.street" placeholder="Enter street name" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Village name<b style="color: red">*</b></label>
+							<input class="form-control" type="text" data-ng-model="data2.object.village" placeholder="Enter village name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Mandal name<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.mandal" placeholder="Enter mandal name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>District<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data2.object.districtid">
+								<option data-ng-repeat="district in districts"
+									value="{{district.id}}">{{district.name}}</option>    
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>State<b style="color: red">*</b></label>
+							<input class="form-control" type="text" data-ng-model="data2.object.state" placeholder="Enter state name" />
+						</div>
+						
+					</div>
+						<!-- <div class="form-group col-md-4">
+							<label>Alternate mobile</label>
+								placeholder="Enter alternate mobile number" data-ng-blur="checkMobileNumber(data2.object.alternatemobileno);"
+								pattern="^[9|7|6|8][0-9]{9}" maxlength="10" title="Mobile number starts with 9 or 8 or 7 and should be 10 digits" />
+						</div> -->
+					
+							<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="comip" style="cursor:pointer"><a>previous</a></li>
+					<li class="next" id="comin" style="cursor:pointer"><a>Next</a></li>
+				</ul>
+						
+					
+				</form>
+				</div>
+			</div>
+			
+			
+			
+			 <div id="empt" class="tab-pane fade"
+				style="width: 100%; margin-left: 2%;">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Company Email</label>
+							<input class="form-control" type="text" id="emailid" disabled data-ng-model="data2.object.company_email"
+								placeholder="Enter Email" />
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label>Cader</label>
+							<input class="form-control" type="text" id="cader" disabled data-ng-model="data2.object.cader" />
+						</div>
+						
+						
+						<div class="form-group col-md-4">
+							<label>Grade</label>
+							<input class="form-control" type="text" id="grade" disabled data-ng-model="data2.object.grade" />
+						</div>
+						
+						
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Joining Date</label>
+							<input class="form-control" type="text" disabled data-ng-model="data2.object.joining_date" placeholder="select date" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Confirmed Date</label>
+							<input class="form-control" type="text" disabled data-ng-model="data2.object.confirmed_date" placeholder="select date" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Contract From</label>
+							<input class="form-control" type="text" disabled data-ng-model="data2.object.contract_from" placeholder="select date" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Contract To</label>
+							<input class="form-control" type="text" disabled data-ng-model="data2.object.contract_to" placeholder="select date" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Relieved Date</label>
+						<input class="form-control" type="text" disabled data-ng-model="data2.object.relieved_date" placeholder="select date" />
+						</div>
+						
+						
+						<div class="form-group col-md-4">
+							<label>Department</label>
+							<input class="form-control" type="text" id="department" disabled data-ng-model="data2.object.department" />
+						</div>
+						
+						
+					</div>
+					<div class="form-group row">
+					
+					
+					<div class="form-group col-md-4">
+							<label>Designation</label>
+							<input class="form-control" type="text" id="designation" disabled data-ng-model="data2.object.designation" />
+						</div>						 
+						 <div class="form-group col-md-4">
+							<label>Division</label>
+							<input class="form-control" type="text" id="division" disabled data-ng-model="data2.object.division" />
+						</div>
+						 
+						 <div class="form-group col-md-4">
+							<label>Cost Center</label>
+							<input class="form-control" type="text" id="costcenter" disabled data-ng-model="data2.object.cost_center" />
+						</div>
+						 
+						</div>
+						
+ 						<div class="form-group row">						
+						<div class="form-group col-md-4">
+							<label>Reporting To</label>
+						<input class="form-control" type="text" disabled data-ng-model="data2.object.reporting_to" placeholder="Enter reporting person name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Notice Period</label>
+							<input class="form-control" type="text" disabled data-ng-model="data2.object.notice_period" placeholder="Enter notice period" required="required" />
+								</div>
+
+                    </div>
+
+				
+								<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="emptip" style="cursor:pointer"><a>previous</a></li>
+					<li class="next" id="emptin" style="cursor:pointer" ><a>next</a></li>
+				</ul>
+						
+					
+				</form>
+				</div>
+			</div>
+			    
+			
+			
+
+			<div id="bank" class="tab-pane fade">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label class="control-label">Bank Account Number</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.bank_acno" disabled placeholder="Enter acount number" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Bank Name</label> 
+								<input type="text" class="form-control" data-ng-model="data2.object.bank_name" disabled placeholder="Enter bank name" />
+						
+						</div>  
+						<div class="form-group col-md-4">
+							<label>Branch</label>
+								<input type="text" class="form-control" data-ng-model="data2.object.brach" disabled placeholder="Enter branch name" />
+						</div>
+					
+					</div>
+					
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>IFSC Code</label>
+								<input type="text" class="form-control" data-ng-model="data2.object.ifsc_code" disabled placeholder="Enter IFSC code" /> <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.ifsc_code}}</label> -->
+						</div>
+						<div class="form-group col-md-4">
+							<label>Name as in PAN Card</label> 
+							<input type="text" class="form-control" data-ng-model="data2.object.pan_name" disabled placeholder="Enter name as in PAN Card" />
+							<!-- <label
+								class="form-control" style="font-weight: 100;">{{student.pan_name}}</label> -->
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">PAN Number</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.pan_no" disabled placeholder="Enter pan number" />
+						</div>
+					</div>
+						<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>ESI Number</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.esi_no" disabled placeholder="Enter ESI Number" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>UAN Number</label> 
+							<input type="text" class="form-control" data-ng-model="data2.object.uan_no" disabled placeholder="Enter UAN Number" />
+							
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">PF Number</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.pf_no" disabled placeholder="Enter pf number" />
+						</div>
+					</div>	
+					
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Beneficiary Code</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.beneficiary_code" disabled placeholder="Enter Beneficiary Code" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>CTC</label> 
+							<input type="text" class="form-control" data-ng-model="data2.object.ctc" disabled placeholder="Enter CTC as per annum" />
+							<!-- <label
+								class="form-control" style="font-weight: 100;">{{student.pan_name}}</label> -->
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">CTC Calculator</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.ctc_calculator" disabled placeholder="Enter CTC Calculator" />
+						</div>
+					</div>
+					
+									
+					
+						<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="bankip" style="cursor:pointer"><a>previous</a></li>
+					<li class="next" id="bankin" style="cursor:pointer"><a>next</a></li>
+				</ul>
+				</form>	
+			</div>
+				
+			</div>
+
+			<div id="prof" class="tab-pane fade">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+				<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label class="control-label">Employee Id</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.empid" disabled placeholder="Enter employeeid" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Company Name<b style="color: red">*</b></label> 
+							<input type="text" class="form-control" data-ng-model="data2.object.company_name" placeholder="Enter company name" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>Designation</label> 	
+							<input type="text" class="form-control" data-ng-model="data2.object.designation" disabled placeholder="Enter designation" />
+						</div>
+					
+					</div>
+					
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>From Date<b style="color: red">*</b></label> 
+								<input type="date" class="form-control" data-ng-model="data2.object.from_date" placeholder="select date" />
+						</div>
+						<div class="form-group col-md-4">
+							<label>To Date<b style="color: red">*</b></label>
+							<input type="date" class="form-control" data-ng-model="data2.object.to_date" placeholder="select date" />
+						</div>
+						<div class="form-group col-md-4">
+							<label class="control-label">Document Name</label>
+							<input type="text" class="form-control" data-ng-model="data2.object.document_name" placeholder="Enter document name" />
+						</div>
+					</div>
+						<div class="form-group row">
+						<!-- <div class="form-group col-md-4">
+							<label>ESI Number  <b style="color: red">*</b></label> 
+							<input type="text" class="form-control" data-ng-model="data2.object.esi_no" disabled placeholder="Enter ESI number" />
+							 <label
+								class="form-control" style="font-weight: 100;">{{student.esi_no}}</label>
+						</div> -->
+						<div class="form-group col-md-4">
+							<label>Consent</label> 
+								<input type="text" class="form-control" data-ng-model="data2.object.consent" placeholder="Enter consent" />
+						</div>
+						
+					</div>
+					
+					
+				<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="profip" style="cursor:pointer"><a>previous</a></li>
+					<li class="next" id="profin" style="cursor:pointer"><a>next</a></li>
+				</ul>
+				</form>
+				</div>
+			</div>
+			
+				 <div id="edu" class="tab-pane fade">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Institute<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data2.object.institute">
+									<!-- <option>Select</option> -->    
+									<option value="school">School</option>
+									<option value="college">College</option>
+									<option value="university">University</option>  
+									<option value="others">Others</option>
+							</select>	
+						</div>
+						<div class="form-group col-md-4">
+							<label>Highest Qualification<b style="color: red">*</b></label>   
+							<select class="form-control" data-ng-model="data2.object.highest_qualification">
+									<!-- <option>Select</option> -->
+									<option value="diploma">Diploma</option> 
+									<option value="bsc">BSC</option> 
+									<option value="btech">B.Tech</option>  
+									<option value="mtech">M.Tech</option> 
+									<option value="mba">MBA</option> 
+									<option value="msc">MSC</option> 
+									<option value="be">BE</option> 
+							</select>	
+						</div>
+					</div>		
+				
+				
+				<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="eduip" style="cursor:pointer"><a>previous</a></li>
+					<li class="next" id="eduin" style="cursor:pointer"><a>next</a></li>
+				</ul>
+				</form>
+				</div>
+			</div>
+				  <div id="fam" class="tab-pane fade">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label>Name<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.name" placeholder="Enter name" />
+							<!--  <label
+								class="form-control" style="font-weight: 100;">{{student.name}}</label> -->
+						</div>
+						<div class="form-group col-md-4">
+							<label>Date of Birth<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data2.object.dob1" placeholder="Enter name" />
+							 <!-- <label
+								class="form-control" style="font-weight: 100;">{{student.dob}}</label> -->
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label>Relation<b style="color: red">*</b></label>
+							<select class="form-control"  
+						data-ng-model="data2.object.relationid">
+						<option data-ng-repeat="relation in relations"
+							value="{{relation.id}}">{{relation.name}}</option>
+					    </select>
+						</div>  
+					</div> 
+					
+					</form>
+				<ul class="pager" style="width: 85%; margin-left: 5%;">
+					<li class="previous" id="famip" style="cursor:pointer" ><a>Previous</a></li>
+					
+				</ul>
+				<center><button class="btn btn-primary" id="sdfkj" data-ng-click="personaldata(data2.object);" style="cursor:pointer">Update</button> </center>
+			</div>
+		</div>  
+	
+	</div>
+	</div>
+	</div>
+
+</div>
+<script>  
+$(function() {
+	$(".datePick").datepicker({
+		 changeMonth : true,         
+		changeYear : true, 
+		dateFormat : 'dd-mm-yy',   
+		 yearRange : '-50:+5' 
+	}); 
+});
+         
+jQuery("#personalin,#comin,#emptin,#bankin,#profin,#eduin,#famin").click(function() {
+	$('.nav-tabs > .active').next('li').find('a').trigger('click');
+});
+jQuery("#comip,#emptip,#bankip,#profip,#eduip,#famip").click(function() {
+	$('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
+
+jQuery(document).ready(function() {  
+	$("#button").show();
+	
+	angular.bootstrap(jQuery("#hrDiv"), [ 'hrprofile' ]);
+});
+
+
+jQuery("#submit").click(function(){
+	$("#button").show();
+	$("#change").hide();
+	$("#instructions").show();  
+	$("#replaceDiv").show();       
+});
+
+
+</script>
+
+<script type="text/javascript">
+$("a").click(function(){
+	$("a").css("background-color","");
+	$(this).css("background-color","#4095D1");
+});
+</script>
+</div>

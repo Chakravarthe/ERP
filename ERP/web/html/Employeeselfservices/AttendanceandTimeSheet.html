@@ -1,0 +1,284 @@
+	<script src="/erp/scripts/general/employeeRegister.js"></script>
+	<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}   
+p {
+	style ="margin-left: 14%;      
+	color: red;
+}
+.btn-group button {
+  background-color: #4461db
+
+; /* Green background */
+  border: 1px  #4461db
+
+; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: center; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {     
+  background-color:#4461db;
+}
+</style>
+	<div class="container" style="margin-top: -10%; width: 100%; padding-left: 12%"
+		id="employeeDiv" data-ng-controller="EmployeeController">
+		<ul class="nav nav-tabs"
+			style="position: left; background-color:#4461db; z-index: 100; width: 100%;">
+			<li class="active"><a data-toggle="tab" href="#person"><i
+					class="fa fa-check " aria-hidden="true"></i></a></li>
+     
+			<li><a data-toggle="tab" href="#empt"> <i style= "align=right"
+					class="fa fa-clock-o" aria-hidden="true"></i></a></li>
+
+		</ul>       
+
+		<div class="tab-content">
+			<div id="person" class="tab-pane fade in active"
+				style="width: 100%; margin-left:0%;">
+				<br /> <br />
+				<div
+					style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<div class="form-group row">
+     
+
+							<!-- <div class="panel panel-primary"
+				style="margin-left: 14%; margin-top: 1%; margin-right: 7%">
+		 -->
+							<h4>Attendence&Timesheet</h4>
+							<!-- <div class="panel-heading">Score Candidate</div> -->
+							<div class="panel-body">
+
+								<div class="form-group col-md-2">
+									<button type="button" class="btn btn-primary" id="removebtn"
+										data-ng-click="getsearch(data.object);">LoginTime</button>
+								</div>
+								<div class="form-group col-md-3">
+									<input type="text" class="form-control"
+										data-ng-model="data.object.needbydate" placeholder="" />
+								</div>
+								<div class="form-group col-md-2">
+									<button type="button" class="btn btn-primary" id="removebtn"
+										data-ng-click="getsearch(data.object);">LogoutTime</button>
+								</div>
+								<div class="form-group col-md-3">
+									<input type="text" class="form-control"
+										data-ng-model="data.object.needbydate" placeholder="" />
+								</div>
+								<br>
+
+
+							</div>
+
+
+						</div>
+
+
+					</form>
+
+				</div>
+				<P>Please click on submit button after clicking login or logout
+					to submit your attendence.</P>
+
+				<button type="button" class="btn btn-primary" id="removebtn"
+					data-ng-click="getsearch(data.object);" style="margin-left: 45%">submit</button>
+
+			</div>
+
+
+
+			<div id="empt" class="tab-pane fade"
+				style="width: 100%; margin-left: 0%;">
+				<br /> <br />
+				<div
+					style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<div class="panel panel-primary">
+							<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+							<div class="panel-body">
+								<div class="form-group row">
+									<div class="form-group col-md-4">
+										<label>TodayLogintime <b style="color: red">*</b></label> <input
+											class="form-control" type="text" id="pincodeId"
+											data-ng-model="data.object.company_email" placeholder="" />
+									</div>
+									<div class="form-group col-md-4">
+										<label>TodayLogouttime <b style="color: red">*</b></label> <input
+											class="form-control" type="text" id="pincodeId"
+											data-ng-model="data.object.company_email" placeholder="" />
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<!-- <-------------------->
+						<h3>TimeSheet</h3>
+						<div class="panel panel-primary">
+	 						<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+							<div class="panel-body">
+
+
+								<div class="form-group col-md-3">
+									<label>TimesheetDate <b style="color: red">*</b></label> <input
+										class="form-control" type="text" id="pincodeId"
+										data-ng-model="data.object.company_email" placeholder="" />
+								</div>
+								<div class="form-group col-md-3">
+									<label>Location<b style="color: red">*</b></label> <input
+										class="form-control" type="text" id="pincodeId"
+										data-ng-model="data.object.company_email" placeholder="" />
+								</div>
+							
+								<div class="form-group col-md-3">
+									<label>Duration <b style="color: red">*</b></label> <input
+										class="form-control" type="text" id="pincodeId"
+										data-ng-model="data.object.company_email" placeholder="" />
+								</div>
+
+							</div>
+						</div>
+				</div>
+<!-- <---------------------------------------------------------------------> 
+<div class="panel panel-primary">
+							<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+		     					<div class="panel-body">
+		     					<table class="table table-bordered">
+				<tr style='background-color: CornflowerBlue '>   
+				<th>Task</th>                       
+				   <th>Description</th>
+				   <th>Starttime</th>
+				    <th>Endtime</th>     
+				   <th>Duration</th>       
+				    <th>Action</th>       
+				    
+				</tr>
+				<tr data-ng-repeat="data in filteredResult =(regdetails | filter:search)">   
+				     <td align="right">{{$index+1}}</td>   
+					<td><a data-ng-click="getNameWiseData(data)">{{data.empid}}</a></td>
+					<td>{{data.first_name}}</td>  
+					<td>{{data.mobile}}</td>
+					<td>{{data.email}}</td> 
+					 
+				
+					      
+				</tr>
+				
+			</table>
+		     					
+</div>
+</div>    
+<center>
+<div class="btn-group">
+  <button>Addtask</button>
+  <button>save</button>
+  <button>Submit</button>
+</div>
+</center>
+	</form>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+<script>          
+$(function() {
+	$(".datePick").datepicker({
+		 changeMonth : true,         
+		changeYear : true, 
+		dateFormat : 'dd-mm-yy',   
+		 yearRange : '-50:+5' 
+	}); 
+});
+         
+jQuery("#personalin,#comin,#emptin,#bankin,#profin,#eduin,#famin").click(function() {
+	$('.nav-tabs > .active').next('li').find('a').trigger('click');
+});
+jQuery("#comip,#emptip,#bankip,#profip,#eduip,#famip").click(function() {
+	$('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
+
+jQuery(document).ready(function() {  
+	$("#button").show();
+	
+	angular.bootstrap(jQuery("#employeeDiv"), [ 'EmployeeRegister' ]);
+});     
+
+
+jQuery("#submit").click(function(){
+	$("#button").show();
+	$("#change").hide();
+	$("#instructions").show();  
+	$("#replaceDiv").show();       
+});
+
+
+</script>
+</div>
+
+

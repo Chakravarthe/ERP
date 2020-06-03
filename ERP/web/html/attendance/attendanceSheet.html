@@ -1,0 +1,287 @@
+<script src="/erp/scripts/general/attendanceSheetModule.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<style>   
+#registrationTab:hover, .previous, .next {
+	cursor: pointer;
+}
+   
+#imgId {      
+	width: 120px;
+}
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+
+.clearfix {   
+	zoom: 1;
+	clear: both;             
+}
+
+::selection {
+	background: #b3d4fc;   
+	text-shadow: none;
+}
+
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+.row {
+ 
+          
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;      
+  
+} 
+/* .panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} */
+
+.panel,.panel-default,.panel-body
+ {  
+  height :350px;       
+  padding-top: -5px;     
+  padding-right: 0px;  
+  padding-bottom: 0px;        
+  padding-left:  0px;
+ } 
+ .panel,.panel-default
+{   
+ border-style: solid;
+}
+.card{
+   
+ padding-top: -50px;   
+  padding-right: 0px;
+  padding-bottom: -100px;        
+  padding-left:  0px;   
+                                                                                               
+background-color: white;  
+}  
+.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+ .card-panel
+ {                 
+    padding-top: 0px;   
+  padding-right: 0px;   
+  padding-bottom: 0px;     
+  padding-left:  0px;    
+background-color: white;
+}   
+    
+</style>   
+</head><body>
+<div id="attendanceSheetDiv"  
+	data-ng-controller="attendanceSheetController" style="margin-left: 18%;margin-right: 2%;margin-top:-12%;">
+<br>  
+
+<div class="text-left">     
+			<h3>Employee Attendance Sheet </h3> 
+		</div>          
+			<br>   
+			
+	    <div class="panel-default">  
+       <div class="panel-body">   
+   	<div class="row" id="attendanceSheet">   
+					<div class="form-group row" >
+					<div class="form-group col-md-4">       
+						<label for="department"><span ><font color="black">*</font></span><font color="black">Department</font></label>
+						 
+								<select name="department" class="form-control">
+								<option value="">All</option>
+								<option value="">Operations</option>
+								<option value="">Human Resources</option>
+								<option value="">Finance & Accounts</option>
+								<option value="">Corporate Connect</option>
+						        </select>          
+						</div>    
+						<div class="form-group col-md-4">       
+						<label for="cadre"><span ><font color="black">*</font></span><font color="black">Cadre</font></label>
+						 
+								<select name="cadre" class="form-control">
+								<option value="">All</option>
+								<option value="">L</option>
+								<option value="">S</option>
+								<option value="">M</option>
+								<option value="">J</option>
+								<option value="">F</option>
+								<option value="">Others</option>
+						        </select>          
+						</div>    
+						<div class="form-group col-md-4">       
+						<label for="grade"><span ><font color="black">*</font></span><font color="black">Grade</font></label>
+						 
+								<select name="grade" class="form-control">
+								<option value="">All</option>
+								<option value="">1</option>
+								<option value="">2</option>
+								<option value="">3</option>
+								<option value="">4</option>
+								</select>          
+						</div>
+						
+					
+						<div class="form-group col-md-4">       
+						<label for="employeetype"><span ><font color="black">*</font></span><font color="black">Employee Type</font></label>
+						 
+								<select name="employeetype" class="form-control">
+								<option value="">All</option>
+								<option value="">Staff</option>
+								<option value="">Others</option>
+								<option value="">Employee</option>
+								<option value="">Deputation</option>
+								<option value="">Contract</option>
+								<option value="">Intern</option>
+								<option value="">Fellow</option>
+								</select>          
+						</div>
+						<div class="form-group col-md-4">  <label
+								for="fromdate"><span><font color="black">*</font></span><font color="black">From Date</font></label>
+						        <input class="datepicker form-control" id="fromdate" name="fromdate" type="text" placeholder="Enter From Date">
+							</div>  
+						               
+						<div class="form-group col-md-4">       
+						<label for="todate"><span ><font color="black">*</font></span><font color="black">To Date</font></label>
+						       
+							<input class="datepicker form-control" id="todate" name="todate" type="text" placeholder="Enter to Date">
+							</div> 
+							     
+					                            
+					
+					<div class="form-group col-md-4">        
+						<label for="repoting Manager"><span ><font color="black">*</font></span><font color="black">Reporting Manager</font></label>
+						   <select name="reportingmanager" class="form-control">
+								<option value="">All</option>
+								<option value="">CEO</option>
+								</select>      
+						</div>
+						       
+					    <div class="form-group col-md-4">      
+					    <label for="location"><span ><font color="black">*</font></span><font color="black">Location</font></label>
+						         
+							      <select name="location" class="form-control">
+								  <option value="">All</option>   
+								  <option value="">APSSDC Head Office</option>
+								  <option value="">PMDC</option>
+							     </select>      
+						 
+						</div>   
+						      
+					<div class="col-xs-12 col-md-12 text-center">
+				<button class="btn btn-default" style="margin-bottom: 15px;" value="submit" type="submit">Search</button></div>				      
+      </div>
+     
+				  
+
+   
+</div>
+</div>    
+				</div>      
+				     
+			  <br>   
+				    <br>   
+				    <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <button class="button">CSV</button>
+				
+				        
+				   
+				        <div class="input-group col-md-4" style="float: right;">
+	
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>	    
+			 <br>   
+		<div id="dataDiv">       
+	               
+			<table class="table table-bordered">  
+			<thread> 
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.no</th>           
+					<th align="left">Employee Name</th>  
+					<th align="left">No.of Absent Days</th> 
+					<th align="left">No.of Present Days</th> 
+					<th align="left">No.of Leaves</th>      
+					<th align="left">No.of Holidays</th> 
+					      
+				</tr>     
+				      
+				<tr data-ng-repeat="emp in empDetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td>          
+					 <td align="left">{{emp.employeename}}</td>  
+					 <td align="left">{{emp.absent}}</td>  
+					 <td align="left">{{emp.present}}</td>  
+					 <td align="left">{{emp.leaves}}</td>  
+					 <td align="left">{{emp.holidays}}</td>           
+			     
+				</tr>    
+				</thread>        
+				<tbody>
+				<tr class="odd">
+				<td valign="top" colspan="2" class="dataTables_empty"><center>No data available in table</center></td>
+				</tr></tbody>                          
+			</table>  
+	</div>
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	
+</div>
+
+      
+<script>
+jQuery(document).ready(function() {
+	   
+	$("#attendance").show();
+	/* $("#dataDiv").hide(); */
+	angular.bootstrap(jQuery("#attendanceSheetDiv"), [ 'attendanceSheetModule' ]);
+	
+});   
+                 
+	
+$(function() {
+	$(".datepicker").datepicker({
+		/* minDate : new Date,
+		changeMonth : true,
+		changeYear : true, */
+		dateFormat : 'dd-mm-yy'   
+	});
+});    
+	              
+</script>
+</body>

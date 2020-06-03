@@ -1,0 +1,69 @@
+ <script src="/erp/scripts/general/POListModule.js"></script>
+
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<style>
+.button:hover span {
+  padding-right: 25px;
+}     
+</style>
+<div id="polist" data-ng-controller="POListController" style="margin-top:-9%;margin-left:8%;margin-right:3%">
+			
+   <div class="text-center" style="padding-left:14%;margin-top:3%">     
+   <button type="button" class="btn btn-primary" data-ng-click="submitted();">Submitted List</button>
+   
+    <button type="button" class="btn btn-primary" data-ng-click="save();">Pending List</button>
+  
+  <button type="button" class="btn btn-primary" data-ng-click="save();">Approved List</button>
+       <button type="button" class="btn btn-primary" data-ng-click="submitted();">CEO Auto Forwarded</button>
+       </div>
+ 
+      
+ 
+ 
+ <div class="panel-body" >
+			<div class="form-group row"style="margin-left: 11%;overflow-x: scroll;">           
+			<table class="table table-bordered">
+				<tr style="background-color: ghostwhite">   
+					<th>SNO</th>   
+					<th>Existing PO#</th>   
+					<th>PO#</th>   
+					<th>PO Date</th>   
+					<th>Created Date</th>   
+					<th>Program</th>   
+					<th>Vendor Name</th>                   
+					<th>Created BY</th>  
+					<th>Approved BY</th>  
+					<th>Amount</th>  
+					<th>Status</th>     
+					<th>Action</th>  
+					<th>PDF/Print</th>  
+						  
+				</tr>
+				<tr data-ng-repeat="data in poldetails">   
+				    <td align="right">{{$index+1}}</td> 
+					<td>{{data.purchaseotypename}}</td>
+					<td>{{data.purchasetypename}}</td>
+					<td>{{data.order_date}}</td>
+				    <td>{{data.created_date}}</td>
+				      <td>{{data.programname}}</td>
+				      <td>{{data.vendorname}}</td>
+					<td>{{data.created_by}}</td>
+					<td>{{data.approved_by}}</td>
+					<td>{{data.amount}}</td>
+					<td>{{data.status}}</td>  
+					<td>{{data.action}}</td>
+					<td>{{data.document_path}}</td>
+					
+				
+				
+				</table></div></div>
+</div>
+<script >
+jQuery(document).ready(function() { 
+	 angular.bootstrap(jQuery("#polist"), [ 'POListModule' ]); 
+});
+
+</script>
+
+

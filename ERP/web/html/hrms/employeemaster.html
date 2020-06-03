@@ -1,0 +1,190 @@
+ <script src="/erp/scripts/general/EmployeeMaster.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script>             
+<div id="empId" data-ng-controller="EmployeeMasterController"  style="margin-top:-16%;padding-left:6%;">
+		<br><br><br><br>
+		<b style="font-size: large; margin-left:14%;margin-top:9%">Employee List</b>
+  
+<div class="panel panel-default"  id="lb6b" style="margin-left:14%;margin-top:1%;margin-right:5%;padding-bottom:15%">    
+		
+				<div class="form-group col-md-4">
+						<label>Department&nbsp;<b style="color: red">*</b></label>
+						<select class="form-control"
+						data-ng-model="data.object.departmentid">
+						<option></option>
+						<option data-ng-repeat="department in departments"
+							value="{{department.departmentid}}">{{department.department_name}}</option>
+					</select>
+					</div>
+			<div class="form-group col-md-4">
+							<label>Cader&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control"
+						data-ng-model="data.object.caderid">
+						<option></option>
+						<option data-ng-repeat="cader in caders"
+							value="{{cader.caderid}}">{{cader.description}}</option>
+					</select>
+							</div>
+			<div class="form-group col-md-4">
+							<label>Grade&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control"
+						data-ng-model="data.object.gradeid">
+						<option></option>
+						<option data-ng-repeat="grade in grades"
+							value="{{grade.gradeid}}">{{grade.grade_name}}</option>
+					</select>
+					</div>
+					
+				<div class="form-group col-md-4">
+							<label>Designation&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control"
+						data-ng-model="data.object.designation_id">  
+						<option></option>
+						<option data-ng-repeat="designation in designations"
+							value="{{designation.designation_id}}">{{designation.designation_name}}</option>
+					</select>
+				</div>	
+					<!-- <div class="form-group col-md-4">
+							<label>Status&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control"
+						data-ng-model="data.object.designationid">  
+						<option></option>
+						<option data-ng-repeat="designation in designations"
+							value="{{designation.designation_code}}">{{designation.designation_name}}</option>
+					</select>
+						</div> -->
+					
+					
+			</div>
+  
+  <button type="button" class="btn btn-primary" id="removebtn"
+							 data-ng-click="getsearch(data.object);" style="margin-left:45%">
+							Search
+						</button> 
+  
+<div class="panel panel-default"  id="lb6b" style="margin-left:14%;margin-top:3%;margin-right:5%;">  
+		<div class="dataTables_length" id="employeeListTableList_length">
+		<label>Show 
+		<select name="employeeListTableList_length" aria-controls="employeeListTableList" class="">
+		<option value="10">10</option>
+		<option value="25">25</option>
+		<option value="50">50</option>
+		<option value="-1">All</option>
+		</select> entries</label>
+		&nbsp;&nbsp;&nbsp;  
+		<div id="employeeListTableList_filter" class="dataTables_filter" style="margin-left:70%; border-style: solid;border-color: CornflowerBlue;  border-radius: 5px; width:250px; height:32px;">
+		<label style="background-color:CornflowerBlue; width:70px; height:27px">Search:</label><input type="search" placeholder="search" data-ng-model= "search.empid">
+		</div>
+		</div>
+			
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row">             
+			<table class="table table-bordered">
+				<tr style='background-color: CornflowerBlue '>   
+				<th>S.no</th>                       
+				   <th>Employee ID</th>
+				   <th>Employee Name</th>
+				    <th>Phone Number</th>     
+				   <th>Email</th>
+				   <th>Active</th>
+				   <th>Action</th>       
+				    
+				</tr>
+				<tr data-ng-repeat="data in filteredResult = (regdetails | filter:search)">   
+				     <td align="right">{{$index+1}}</td>   
+					<td><a data-ng-click="getNameWiseData(data)">{{data.empid}}</a></td>
+					<td>{{data.first_name}}</td>  
+					<td>{{data.mobile}}</td>  
+					<td>{{data.email}}</td>    
+					<td>{{data.status}}</td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" id="editData" data-ng-click="getById(data.empid)"
+							class="btn btn-success btn-md" data-toggle="modal"
+							data-target="#myModal">   
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+					</td>
+				</tr>				    
+			</table>
+			
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Employee Personal Details</h4>
+						</div>
+						<div class="modal-body">   
+							<div class="panel panel-success">  
+								<div class="panel-body">
+									<form>
+										<br> <label class="control-label col-md-2">Employee ID:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" disabled
+												data-ng-model="data.object.empid" data-ng-value=>
+										</div>
+										<label class="control-label col-md-2">Employee Name:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" disabled
+												data-ng-model="data.object.first_name">
+										</div>
+										<br> <br> <br> <br> <label
+											class="control-label col-md-2">Phone Number:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" disabled
+												data-ng-model="data.object.mobile">
+										</div>
+										<label class="control-label col-md-2">Email Id:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control" disabled
+												data-ng-model="data.object.email">
+										</div>			
+										<br> <br> <br> <br> <label class="control-label col-md-2">Status:</label>
+										<div class="col-md-4">     
+										<select class="form-control" data-ng-model="data.object.status">
+											<option value="true">Active</option>
+											<option value="false">In-Active</option>
+										</select>   
+										</div>							
+									</form>
+								</div>  
+							</div>   
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="update" class="btn btn-primary"
+								data-ng-click="updateData(data.object)" data-dismiss="modal"
+								style="width: 100px">Update</button>
+							<button type="button" class="btn btn-warning"
+								style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+			
+			</div>
+			</div>
+				</div>
+							
+			
+								</div>
+				<script>                                             
+		jQuery(document).ready(function() {     
+			 $("#add").hide();
+			$("#update").hide();
+			
+  			 angular.bootstrap(jQuery("#empId"), [ 'EmployeeMaster' ]); 
+	    });
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  
+		
+		
+	</script>
+	

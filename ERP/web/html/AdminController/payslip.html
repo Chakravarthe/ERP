@@ -1,0 +1,300 @@
+<script src="/erp/scripts/general/payslip.js"></script>
+<div id="payslip" data-ng-controller="payslipcontroller">
+	<div id="instructions" style="padding-left: 2%;">
+		<div id="mainhome">
+			<div class="container"
+				style="margin-top: -10%; margin-right: 15%; margin-left: 15%;">
+				<h3>
+					<b>Pay Slip</b>
+				</h3>
+				<div class="tab-content">
+					<div>
+						<div
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+							<form class="form" data-role="form">
+								<div class="form-group row">    
+									<div class="form-group col-md-4">
+										<label><b>Financial Year</b><b style="color: red">*</b></label>
+										<select class="form-control"
+											data-ng-model="data.object.financial_year">
+											<!-- <option>--Select Year--</option> -->
+											<option data-ng-repeat="year in years"
+												value="{{year.yearid}}">{{year.years}}</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label><b>Month</b><b style="color: red">*</b></label> <select
+											class="form-control" data-ng-model="data.object.monthid">
+											<option data-ng-repeat="month in months"
+												value="{{month.monthid}}">{{month.months}}</option>
+										</select>
+									</div>
+									<div class="form-group col-md-4">
+										<label><b>Employee Type</b><b style="color: red">*</b></label><br>
+										<select class="form-control"
+											data-ng-model="data.object.employee_type">
+											<option data-ng-repeat="type in types" value="{{type.id}}">{{type.staff_type}}</option>
+										</select>
+									</div>    
+								</div>
+								<div data-ng-show="data.object.employee_type == '1'">
+								<center>
+								<button class="btn btn-primary" id="staff" data-ng-click="getdetails(data.object);" style="cursor: pointer">Get</button>
+								</center>     
+								</div>
+								
+								<div data-ng-show="data.object.employee_type == '2'">
+								<center>
+								<button class="btn btn-primary" id="deputation" data-ng-click="getdetails(data.object);" style="cursor: pointer">Get</button>
+								</center>
+								</div>    
+								
+								<div data-ng-show="data.object.employee_type == '3'">
+								<center>
+								<button class="btn btn-primary" id="intern" data-ng-click="getdetails(data.object);" style="cursor: pointer">Get</button>
+								</center>   
+								</div>  
+								
+								<div data-ng-show="data.object.employee_type == '4'">
+								<center>
+								<button class="btn btn-primary" id="fellow" data-ng-click="getdetails(data.object);" style="cursor: pointer">Get</button>
+								</center>   
+								</div>  
+								
+								<div data-ng-show="data.object.employee_type == '5'">
+								<center>
+								<button class="btn btn-primary" id="others" data-ng-click="getdetails(data.object);" style="cursor: pointer">Get</button>
+								</center>
+								</div>								    
+							</form>
+
+						</div>   
+						<br>
+						<br>
+						
+						<!-- Staff -->
+						<div id="gettable1"
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+						<table class="table table-bordered" overflow-x: scroll">
+							<tr style='background-color: ghostwhite'>
+								<th>S.NO</th>
+								<th>Employee Name</th>
+								<!-- <th>Loss Of Days</th>
+					<th>Loss Of Amount</th>
+					<th>Gross</th>
+					<th>TDS</th> -->
+								<th>PAN Number</th>
+								<th>Bank Name</th>
+								<th>Account Number</th>
+								<th>Bank Branch</th>
+								<th>IFSC Code</th>
+
+							</tr>
+							<tr data-ng-repeat="data in regdetails">
+								<td align="right">{{$index+1}}</td>
+								<td>{{data.name}}</td>
+								<!-- <td>{{data.loss_days}}</td>
+					<td>{{data.loss_amount}}</td>
+					<td>{{data.gross}}</td>
+					<td>{{data.tds}}</td>  -->
+								<td>{{data.pan_no}}</td>
+								<td>{{data.bank_name}}</td>
+								<td>{{data.bank_acno}}</td>
+								<td>{{data.brach}}</td>
+								<td>{{data.ifsc_code}}</td>
+							</tr>
+						</table>
+						</div>
+						
+						<!-- Deputation -->
+						<div id="gettable2"
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+						<table class="table table-bordered" overflow-x: scroll">
+							<tr style='background-color: ghostwhite'>
+								<th>S.NO</th>
+								<th>Employee Name</th>
+								<!-- <th>Loss Of Days</th>
+					<th>Loss Of Amount</th>
+					<th>Gross</th>
+					<th>TDS</th> -->
+								<th>PAN Number</th>
+								<th>Bank Name</th>
+								<th>Account Number</th>
+								<th>Bank Branch</th>
+								<th>IFSC Code</th>
+							</tr>
+							<tr data-ng-repeat="data in regdetails">
+								<td align="right">{{$index+1}}</td>
+								<td>{{data.name}}</td>
+								<!-- <td>{{data.loss_days}}</td>
+					<td>{{data.loss_amount}}</td>
+					<td>{{data.gross}}</td>
+					<td>{{data.tds}}</td>  -->
+								<td>{{data.pan_no}}</td>
+								<td>{{data.bank_name}}</td>
+								<td>{{data.bank_acno}}</td>
+								<td>{{data.brach}}</td>
+								<td>{{data.ifsc_code}}</td>
+							</tr>
+						</table>
+						</div>	
+						
+						<!-- Intern -->
+						
+						<div id="gettable3"
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+						<table class="table table-bordered" overflow-x: scroll">
+							<tr style='background-color: ghostwhite'>
+								<th>S.NO</th>
+								<th>Employee Name</th>
+								<!-- <th>Loss Of Days</th>
+					<th>Loss Of Amount</th>
+					<th>Gross</th>
+					<th>TDS</th> -->
+								<th>PAN Number</th>
+								<th>Bank Name</th>
+								<th>Account Number</th>
+								<th>Bank Branch</th>
+								<th>IFSC Code</th>
+							</tr>
+							<tr data-ng-repeat="data in regdetails">
+								<td align="right">{{$index+1}}</td>
+								<td>{{data.name}}</td>
+								<!-- <td>{{data.loss_days}}</td>
+					<td>{{data.loss_amount}}</td>
+					<td>{{data.gross}}</td>
+					<td>{{data.tds}}</td>  -->
+								<td>{{data.pan_no}}</td>
+								<td>{{data.bank_name}}</td>
+								<td>{{data.bank_acno}}</td>
+								<td>{{data.brach}}</td>
+								<td>{{data.ifsc_code}}</td>
+							</tr>
+						</table>
+						</div> 
+						
+						<!-- Fellow -->
+						
+						<div id="gettable4"
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+						<table class="table table-bordered" overflow-x: scroll">
+							<tr style='background-color: ghostwhite'>
+								<th>S.NO</th>
+								<th>Employee Name</th>
+								<!-- <th>Loss Of Days</th>
+					<th>Loss Of Amount</th>
+					<th>Gross</th>
+					<th>TDS</th> -->
+								<th>PAN Number</th>
+								<th>Bank Name</th>
+								<th>Account Number</th>
+								<th>Bank Branch</th>
+								<th>IFSC Code</th>
+							</tr>
+							<tr data-ng-repeat="data in regdetails">
+								<td align="right">{{$index+1}}</td>
+								<td>{{data.name}}</td>
+								<!-- <td>{{data.loss_days}}</td>
+					<td>{{data.loss_amount}}</td>
+					<td>{{data.gross}}</td>
+					<td>{{data.tds}}</td>  -->
+								<td>{{data.pan_no}}</td>
+								<td>{{data.bank_name}}</td>
+								<td>{{data.bank_acno}}</td>
+								<td>{{data.brach}}</td>
+								<td>{{data.ifsc_code}}</td>
+							</tr>
+						</table>
+						</div>
+						
+						<!-- Others -->
+						<div id="gettable5"
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+						<table class="table table-bordered" overflow-x: scroll">
+							<tr style='background-color: ghostwhite'>
+								<th>S.NO</th>
+								<th>Employee Name</th>
+								<!-- <th>Loss Of Days</th>
+					<th>Loss Of Amount</th>
+					<th>Gross</th>
+					<th>TDS</th> -->
+								<th>PAN Number</th>
+								<th>Bank Name</th>
+								<th>Account Number</th>
+								<th>Bank Branch</th>
+								<th>IFSC Code</th>
+							</tr>
+							<tr data-ng-repeat="data in regdetails">
+								<td align="right">{{$index+1}}</td>
+								<td>{{data.name}}</td>
+								<!-- <td>{{data.loss_days}}</td>
+					<td>{{data.loss_amount}}</td>
+					<td>{{data.gross}}</td>
+					<td>{{data.tds}}</td>  -->
+								<td>{{data.pan_no}}</td>
+								<td>{{data.bank_name}}</td>
+								<td>{{data.bank_acno}}</td>
+								<td>{{data.brach}}</td>
+								<td>{{data.ifsc_code}}</td>
+							</tr>
+						</table>
+						</div>			
+  					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- <div id="payslips"></div> -->
+<script>
+	jQuery(document).ready(function() {
+		$("#gettable1").hide();
+		$("#gettable2").hide();
+		$("#gettable3").hide();
+		$("#gettable4").hide();
+		$("#gettable5").hide();
+		angular.bootstrap(jQuery("#payslip"), [ 'payslip' ]);
+	});
+		
+	jQuery("#staff").click(function() {
+		$("#gettable1").show(); 
+		$("#gettable2").hide();
+		$("#gettable3").hide();
+		$("#gettable4").hide();
+		$("#gettable5").hide();
+	});    
+	
+	jQuery("#deputation").click(function() {
+		$("#gettable1").hide();
+		$("#gettable3").hide();
+		$("#gettable4").hide();
+		$("#gettable5").hide();
+		$("#gettable2").show();
+	});    
+	
+	jQuery("#intern").click(function() {   
+		$("#gettable1").hide(); 
+		$("#gettable5").hide();
+		$("#gettable2").hide();
+		$("#gettable4").hide();
+		$("#gettable3").show();
+	});
+	
+	jQuery("#fellow").click(function() {
+		$("#gettable1").hide();
+		$("#gettable2").hide();
+		$("#gettable3").hide();
+		$("#gettable4").show();
+		$("#gettable5").hide();		
+	});
+	
+	jQuery("#others").click(function() {
+		$("#gettable1").hide();
+		$("#gettable2").hide();
+		$("#gettable3").hide();
+		$("#gettable4").hide();
+		$("#gettable5").show();
+	}); 
+	
+</script>  
+ 

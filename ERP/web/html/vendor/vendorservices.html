@@ -1,0 +1,147 @@
+
+<script src="/erp/scripts/general/VendorServiceModule.js"></script>
+<div id="serviceid" data-ng-controller="VendorServiceController" >
+<div class="panel panel-default"  id="lb6b" style="padding-left:20%;margin-top:-11%;">    
+		<div class="panel-heading">                  
+		          <div class="text-center">     
+		<b style="font-size: large;color:#337ab7;">Services Information</b>    
+					</div>
+		
+		        
+			<button type="button" id="register"
+				class="btn btn-primary btn-md pull-right" style='background-color:MediumSeaGreen;top-padding:5% ' data-toggle="modal"
+				data-target="#myModal" data-ng-click="">                                    
+				create Services
+				<!-- <span class="glyphicon glyphicon-plus"></span> -->    
+			</button>
+			<button   type ="button" class = "btn btn-xs btn-success pull-right" 
+            data-ng-click ="toggle('searchrow');"   
+            style = "margin-right:2%;margin-top:1.5% ;color:">   
+            <span class = "glyphicon glyphicon-search"></span></button> 
+			 
+			</div>  
+			<br>
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row">             
+			<table class="table table-bordered">
+				<tr style='background-color: CornflowerBlue '>   
+				<th>S.no</th>                       
+				   <th>Service Name</th>
+				   <th>IsActive</th>
+				 	  <th>Edit</th>   
+				</tr>
+			<tr id="searchrow">
+				<th></th>
+				<th><input data-ng-model= "search.service_name" class = "form-control"></th>
+				<th></th>
+				<th></th>
+				<th></th>   
+				    </tr> 
+				    
+				 <tr data-ng-repeat="data in filteredResult=(regdetails | filter:search)" > 
+                    
+				     <td align="right">{{$index+1}}</td>   
+					<td><a data-ng-click="getNameWiseData(data)">{{data.service_name}}</a></td>
+					<td>{{data.status}}</td>    
+						
+					
+				
+					<td>&nbsp;&nbsp;&nbsp;
+					 <button type="button" id="editData"       
+					 data-ng-click="getById(data.service_id)"
+					 class="btn btn-primary btn-md" data-toggle="modal"
+					 data-target="#myModal">
+					 <span class="glyphicon glyphicon-pencil"></span>
+					 </button>   
+					 <!--  &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(data.branch)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button> -->     
+					</td>
+				</tr>
+				
+			</table>
+			
+			</div>
+			</div>
+				</div>
+						
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Add Services </h4>
+						</div>
+						<div class="modal-body">
+						<!-- <div class="panel panel-success"> 
+								 <div class="panel-body">   -->
+								 <div class="container" style="padding-right:8%">
+										<div class="row">  
+										
+										
+											<div class="col-md-3" >
+				              	<label for="vendorname"><b>Name of the Service<b style="color:red">*</b></b></label>
+												
+													<input type="text"  required 
+														data-ng-model="data.object.service_name" class="form-control"
+								  						placeholder="Enter Service Name" >
+			  									
+											</div>        
+											<div class="col-md-3">
+											<label for="vendorname"><b>Status<b style="color:red">*</b></b></label><br>
+							<input type="radio"  name="r1" value="t" data-ng-model="data.object.status">Active
+							<input type="radio" name="r1" value="f" data-ng-model="data.object.status">InActive
+						</div>
+						  
+						</div>
+						
+						   
+						
+						
+						
+						
+						    
+						</div>
+											
+											 	</div>  
+											       
+											<div class="modal-footer">
+							<button type="button" id="add" class="btn btn-primary"
+				            style="width: 100px" data-ng-click="save(data.object);">Save</button>
+				                                              
+							<button type="button" id="update" class="btn btn-primary"
+							data-ng-click="updateData(data.object)" data-dismiss="modal"
+							style="width: 100px">Update</button>
+									<button type="button" class="btn btn-warning" id="close"
+						  	style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+					</div>                  								       
+		 			</div>
+						</div>
+						</div>
+								</div>
+											<script>                                             
+		 jQuery(document).ready(function() {     
+			 $("#searchrow").hide();
+  			 angular.bootstrap(jQuery("#serviceid"), [ 'VendorServiceModule' ]); 
+	    }); 
+		jQuery("#register").click(function(){
+			$("#add").show();
+			$("#update").hide();
+		
+			
+			
+			
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  
+		
+		
+		/* /* $("#vendortype").on('change',function(){ */
+		
+		
+	</script>
+						

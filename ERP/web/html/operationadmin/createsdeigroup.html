@@ -1,0 +1,189 @@
+ <script src="/erp/scripts/general/sdei.js"></script>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+    </style>
+<div id="sdeiId" data-ng-controller="sdeiController">
+ <br>
+  <div class="panel panel-primary" style="margin-left: 16%;position:absolute;top:220px;width:1000px">
+   
+   <div class="panel-heading">Create SDEI Group</div>
+    <div class="panel-body">
+	 <div class="form-group col-md-4">
+       <label>SDEI Group Number&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Group Number" data-ng-model="data.object.sdei_groupnumber" />
+	</div>
+	
+	<div class="form-group col-md-4">
+       <label>SDEI Group Name&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Group Name" data-ng-model="data.object.sdei_groupname" />
+	</div>
+	<div class="form-group col-md-4">
+				<label>Description&nbsp;<b style="color: red">*</b></label>
+				<textarea cols="5" rows="2" class="form-control"
+					placeholder="Enter Description"
+					data-ng-model="data.object.description"></textarea>
+			</div>
+	
+	<button type="button" class="btn btn-primary" id="removebtn" data-ng-click="registration(data.object);" style="margin-left:35%">SUBMIT</button> 
+ 
+
+    </div>   
+    </div>
+        
+ 
+ <div class="panel panel-primary" style="margin-left: 16%;position:absolute;top:500px;width:1000px">
+   
+   <div class="panel-heading"></div>
+    <div class="panel-body"><br><br>
+     <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <!--    <button class="button">CSV</button>    -->  
+				        <div class="input-group col-md-4" style="float: right;">
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>  </div> <br>
+
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>S.No</th>
+<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox">
+</th>
+<th style="min-width: 200px;max-width: 200px;">SDEI Group Number</th>
+<th style="min-width: 120px;max-width: 120px;">SDEI Group Name</th>
+<th style="min-width: 120px;max-width: 120px;">Description</th>
+<th style="min-width: 120px;max-width: 120px;">Created Date</th>
+<th style="min-width: 120px;max-width: 120px;">Status</th>
+<th style="min-width: 120px;max-width: 120px;">Update/Delete</th>
+</tr>
+</thead>
+ <tr data-ng-repeat="userdata in filteredResult =(userdetails | filter:search)">   
+        <td>{{data.S.No}}</td> 
+        
+       <td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td> 
+		<td>{{userdata.sdei_groupnumber}}</td>	
+		<td>{{userdata.sdei_groupname}}</td>  
+		<td>{{userdata.description}}</td>
+		<td>{{userdata.created_date}}</td>	
+		 	<td>{{userdata.status}}</td>	
+		 	<td>&nbsp;&nbsp;&nbsp;
+						<button type="button" id="editData" data-ng-click="getById(userdata.sdei_groupnumber)"
+							class="btn btn-success btn-md" data-toggle="modal"
+							data-target="#myModal">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button> &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(userdata.sdei_groupnumber)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td> 
+	</tr>
+</table>
+<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">   
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Update
+								Form</h4>
+						</div>
+						<div class="modal-body">
+							<div class="panel panel-success">
+								<div class="panel-body">
+									<form>
+										<br> <label class="control-label col-md-2">SDEI Group Name:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.sdei_groupname"  required disabled>
+										</div>
+										<label class="control-label col-md-2">SDEI Group Number:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.sdei_groupnumber"  required disabled>
+										</div><br><br><br><br>
+										 <label
+											class="control-label col-md-2">Description:</label>
+										<div class="col-md-4">
+											<input type="text" class="form-control"
+												data-ng-model="data.object.description" required disabled>
+										</div>
+										
+							<label class="control-label col-md-2">Status&nbsp;<b style="color: red">*</b></label>
+							<div class="col-md-4">
+							<select class="form-control" data-ng-model="data.object.status">
+							<option>Active</option>
+								<option >Inactive</option>	
+							</select>
+							
+						</div> 	
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="update" class="btn btn-primary"
+								data-ng-click="updateData(data.object)" data-dismiss="modal"
+								style="width: 100px">Update</button>
+							<button type="button" class="btn btn-warning"
+								style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+						</div>              
+					</div>
+				</div>
+			</div>  
+		</div>                                
+</div>
+</div>
+<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries
+
+</div>
+	
+</div>
+ 
+<script>
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#sdeiId"), [ 'sdeiModule' ]); 
+	    });
+		
+	</script>
+	

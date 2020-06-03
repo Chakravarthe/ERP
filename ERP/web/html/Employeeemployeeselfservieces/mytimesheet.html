@@ -1,0 +1,221 @@
+<script src="/erp/scripts/employeeemployeeselfserviece/mytimesheet.js"></script>
+<style>
+/* input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+} */
+/* 
+input:focus {
+	background-color: #ffe6b3;
+}
+ */    
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;   
+	color: black;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #63afdc;
+}
+
+.button {
+	background-color: #63afdc;       
+	border: none;
+	color: black;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;       
+	border-radius: 10px;
+}
+</style>
+<div id="timesheetid" data-ng-controller="MytimesheetController" style="margin-left: 3%; margin-top: 10%; margin-right: 0%">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -11%; margin-right: 5%">
+
+		<div class="panel-heading">MyTimeSheet</div>
+		<div class="panel-body">
+			<div class="form-group col-md-3">
+				<label>From Date <b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"
+					data-ng-model="data.object.from_date" placeholder="" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>To Date<b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"
+					data-ng-model="data.object.to_date" placeholder="" />
+			</div>
+			<br>
+			<div class="form-group col-md-3">
+				<button type="button" class="btn btn-primary" id="b1"
+					data-ng-click="getdata(data.object);">Submit</button>
+			</div>
+		</div>
+	</div>
+	
+	<div id="display" style="margin-left: 18%;position:absolute;top:380px;width:1000px">                 
+		   <div class="panel-body">
+				<div class="form-group col-md-3"><label>FromDate:</label></div>
+				<div class="form-group col-md-2">{{data.object.from_date | date:"dd-MM-yyyy"}}</div>
+				<div class="form-group col-md-3"><label>ToDate:</label></div> 
+				<div class="form-group col-md-2">{{data.object.to_date | date:"dd-MM-yyyy"}}</div>
+		   </div>    
+	</div>
+	
+	<div class="panel panel-primary" id="report" style="margin-left:18%;top:500px;width:1000px;margin-right: 0%;position:absolute;padding:0px;">
+		<div class="panel-body">
+ 			<div class="dataTables_length" id="scheduleTimetableList_length">
+ 			<br><br>
+ 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  					<select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    	<option value="10">10</option>
+				    	<option value="25">25 </option>
+				    	<option value="50">50 </option>                  
+				    	<option value="-1">all</option>    
+					</select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<div class="input-group col-md-4" style="float: right;">
+	   				<span class="input-group-btn">
+        				<button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      				</span>  
+      				<input type="text" class="form-control" placeholder="Search Records">     
+            	</div>
+			</div>	    
+			 <br>   
+		   <div id="dataDiv" class="scroll">          
+				<table class="table table-bordered"> 
+				 <thread>    
+			  		 <tr style='background-color:CornflowerBlue'>        
+						<th align="left">S.no</th>
+						<th align="left">EmployeeName</th>     
+						<th align="left">Date</th>
+				    	<th align="left">StartTime</th>  
+				    	<th align="left">EndTime</th>
+				    	<th align="left">Task</th>     
+				    	<th align="left">Description</th>        
+				    	<th align="left">Status</th> 
+				    	<th align="left">Action</th>                 
+					</tr>     	      
+					<tr data-ng-repeat="userdata in userdetails | filter:search"> 
+				     	<td align="left">{{$index+1}}</td> 
+				     	<td align="left">{{userdata.name}}</td> 
+					 	<td align="left">{{userdata.timesheet_date}}</td>    
+					 	<td align="left">{{userdata.start_time}}</td>      
+					 	<td align="left">{{userdata.end_time}}</td>
+					 	<td align="left">{{userdata.task}}</td>       
+					 	<td align="left">{{userdata.description}}</td>       
+					 	<td align="left">{{userdata.status}}</td> 
+					 	<td>&nbsp;&nbsp;&nbsp;      
+							<button type="button" id="viewData"	class="btn btn-success btn-md" data-toggle="modal" data-ng-click="getByIddata(userdata.task)" data-target="#myModal">View/Edit
+							</button>				    			 
+						</td>          
+					</tr>        
+				</thread>                    
+			</table>
+			<!-- Pop up div -->
+			               
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="tab-content">
+				<form data-ng-signup="add8()" name="myForm" class="form-signin">
+				<br> <br>    
+				<div
+					style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<br>
+						<!-- <-------------------->  
+						<div class="panel panel-primary">   
+	 						<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+							<div class="panel-body">       
+								<div class="form-group col-md-4">
+									<label>Time Sheet Date<b style="color: red">*</b></label> <input
+										class="form-control" type="date" id="pincodeId"
+										data-ng-model="data.object.timesheet_date" placeholder="" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>Location<b style="color: red">*</b></label> <input
+										class="form-control" type="text" id="pincodeId"
+										data-ng-model="data.object.location" placeholder="" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>Status<b style="color: red">*</b></label>
+										<select class="form-control" data-ng-model="data.object.status">
+											<option value="true">Complete</option>
+											<option value="false">In-Complete</option>
+										</select>
+								</div>
+							</div>
+						</div>
+				</div>   
+				<br>
+<!-- <--------------------------------------------------------------------->
+			<div class="panel panel-primary">
+				<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+				<div class="panel-body">
+					<table class="table table-bordered">
+						<tr style='background-color: CornflowerBlue'>
+							<th>Task</th>
+							<th>Description</th>
+							<th>Start time</th>
+							<th>End Time</th>    
+							<th>Duration</th>
+							<th>Action</th>
+						</tr>     
+						<tr>
+							<td>
+								<input class="form-control" type="text" id="task" data-ng-model="data.object.task"/>
+							</td>
+							<td>
+								<textarea class="form-control" type="text" data-ng-model="data.object.description"></textarea>
+							</td>
+							<td>
+								<input class="form-control" type="time" id="starttime" data-ng-model="data.object.start_time" />
+							</td>
+							<td>
+								<input class="form-control" type="time" id="endtime" data-ng-model="data.object.end_time" />
+							</td>
+							<td>
+								<input class="form-control" type="time" id="duration" data-ng-model="data.object.duration" disabled/>
+							</td>
+							<td>
+								<button type="button" class="btn btn-danger" id="removebtn"	data-ng-click="removedata(data.task)">Delete</button>
+							</td>
+						</tr>       
+					</table>
+				</div>      
+			</div>
+			<center>
+				<div>  
+					<!-- <button class="btn btn-primary">Add task</button>&nbsp;&nbsp;&nbsp; -->
+					<button class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-primary" data-ng-click="updatedata(data.object);">Submit</button>&nbsp;&nbsp;&nbsp;
+				</div>
+			</center>    
+			</form>   
+		</div>             
+					</div>
+				</div>           
+			</div>     
+			       
+		</div>     
+	</div>   
+	<!-- <div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div> -->
+	</div>
+	 
+</div>
+<script>
+	jQuery(document).ready(function() {
+		$("#display").hide();
+		$("#report").hide();
+		angular.bootstrap(jQuery("#timesheetid"), [ 'mytimesheet' ]);
+	});
+	
+	jQuery("#b1").click(function() {
+		$("#display").show();
+		$("#report").show(); 
+	});
+</script>
+

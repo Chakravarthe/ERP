@@ -1,0 +1,450 @@
+<link rel="stylesheet" href="/andromeda/css/general/font-awesome.min.css">
+<script src="/erp/scripts/js/main.js"></script>
+<script src="/erp/scripts/js/fontawesome.js"></script>
+<script src="/erp/scripts/js/fontawesome.min.js"></script>
+
+       
+
+<script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display == "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }    
+  });   
+}   
+</script>      
+
+<style type="text/css">
+ #date .ui-datepicker .ui-datepicker-title
+     
+.ui-widget-header{
+     
+border: 1px solid #0044cc;     
+    background: #83c174 ;
+}
+
+ .ui-datepicker .ui-datepicker-prev .ui-datepicker-next{
+ background:#83c174;
+
+}
+
+
+.dropdown-btn {
+ /*  padding: 6px 8px 10px 16px; */
+  padding: 4px 7px 7px 10px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  border: none; 
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: hand;
+  outline: none;
+} 
+
+.active, {
+  color: orange;
+}
+
+.dropdown-container {
+  display: none;
+ /*  background-color:#337ab7; */
+ /* background: linear-gradient(to left,#008c45,#f26805); */
+ /* background: linear-gradient(to left,rgb(60, 179, 113),#337ab7); */
+  padding-left:10px;
+}      
+.dropdown-container a{
+  display: none;
+  /* background-color:#337ab7; */
+  margin-left:0;
+}      
+ 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  /* background-color: #f9f9f9; */
+  
+  background-color:#337ab7;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+
+
+/* sidebar menu */
+
+/* body, html {
+    height: 100%;
+    margin: 0;
+    font-family: helvetica;
+    font-weight: 100;
+}  */
+.container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    left: 0;
+}
+ 
+.main-content.open-sidebar {
+    left: 200px;
+}
+#sidebar {
+  
+    position: fixed;
+    z-index: 1000;
+    left: -240px;
+    /* background: #63afdc; */
+   /*  background: linear-gradient(to bottom,#008c45,#f26805); */
+   /*  background: linear-gradient(to right,#f26805,#337ab7); */
+    width: 220px;
+    height: 80%;
+    box-sizing: border-box;
+      -webkit-transition:  left 0.4s ease-in-out;
+    -moz-transition:  left 0.4s ease-in-out;
+    -ms-transition:  left 0.4s ease-in-out;
+    -o-transition:  left 0.4s ease-in-out;
+    transition:  left 0.4s ease-in-out;
+    overflow:auto;
+    margin-bottom:50px;
+    overflow-x:scroll;
+    
+}
+.change-sidebar{
+  left: 0px !important;
+}
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#sidebar ul li {
+    margin: 0;
+    
+}
+#sidebar ul li a {
+    padding: 9px 20px;
+    font-size: 18px;
+    font-weight: 100;
+    color:#000000;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #337ab7;
+    -webkit-transition:  background 0.3s ease-in-out;
+    -moz-transition:  background 0.3s ease-in-out;
+    -ms-transition:  background 0.3s ease-in-out;
+    -o-transition:  background 0.3s ease-in-out;
+    transition:  background 0.3s ease-in-out;
+    
+}
+/*  #sidebar ul li:hover a {
+    background:#ffe680;
+} */
+.main-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    position: relative;
+  left: 0;
+      -webkit-transition:  left 0.4s ease-in-out;
+    -moz-transition:  left 0.4s ease-in-out ;
+    -ms-transition:  left 0.4s ease-in-out;
+    -o-transition:  left 0.4s ease-in-out;
+    transition:  left 0.4s ease-in-out;
+}
+.main-content .content{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+padding-left: 60px;
+width: 100%;
+}
+/* .main-content .content h1{
+    font-weight: 100;
+} */
+/* .main-content .content p{
+    width: 100%;
+    line-height: 160%;
+} */
+.main-content #sidebar-toggle {
+    /* background: #DF314D; */
+   /*  background:#00cc66; */
+   /* background: linear-gradient(to left,#008c45,#f26805); */
+  /*  background: linear-gradient(to left,#f26805,gray); */
+  background:#337ab7;
+    border-radius: 3px;
+    display: block;
+    position: fixed;
+    padding: 8px 7px;
+    float: left;
+}
+.main-content #sidebar-toggle .bar{
+     display: block;
+    width: 15px;
+    margin-bottom: 3px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 1px;   
+}
+.main-content #sidebar-toggle .bar:last-child{
+     margin-bottom: 0;   
+}
+.large{
+  margin-top: 800px;
+}
+
+
+
+</style>
+
+<div class="page-container">	
+
+	<div class="#" style="position:sticky;z-index:100; top:0;">	
+<img  src="/andromeda/images/Banner.png" style=" background-color:white;width:100%; padding-left: 0%;"height="90px" class="img img-responsive">
+				</div>    
+	                  
+					      
+					
+<div id="instructions"">         
+     <div id="mainhome">
+
+	</div>
+
+</div>
+ 
+				
+   
+     
+<!--slider menu-->
+   <div class="sidebar-menu" style="position:fixed; margin-top:11%;" id="button">
+   
+   
+   
+		    <div class="container">
+		      <div id="sidebar">  
+		      <ul>    
+		    
+		      
+		       <li><a class="dropdown-btn">
+		     <i class="fa fa-file-text" style="font-size:24px"></i><br>
+		      <span>HRMS</span><i class="fa fa-caret-down" style="float: right;padding-right: 6px;">
+		      </i></a>  
+		         
+		          <div class="dropdown-container">
+		         
+  					   <div id="1" >  <a href="#" onclick="Andromeda.showCreateEmployeePage();">Update Employee</a></div>
+  					  
+		                      
+		                                        
+  					</div>      
+  				</li>          
+		 
+		           
+		       <li><a class="dropdown-btn">
+		      <!-- <i class="fa fa-shopping-basket" style="font-size:24px"></i> -->
+		      <i class="fa fa-cart-plus" style="font-size:24px"></i><br>
+		      <span>Procurements</span><i class="fa fa-caret-down" style="float: right;padding-right: 6px;">
+		      </i></a>  
+		      <div class="dropdown-container">
+		         
+  					  <div id="1"><a href="#" onclick="Andromeda.showVendors();">Create Vendor</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showVendorApp();">Vendor Approvals</a></div>
+		            
+		   
+		                                  
+		                                        
+  					</div> 
+  				</li>  
+  				
+  				
+  				  
+		       <li><a class="dropdown-btn">
+		      <i class="fa fa-bank" style="font-size:24px"></i><br>
+		      <span>Finance</span><i class="fa fa-caret-down" style="float: right;padding-right: 6px;">
+		      </i></a>     
+  				</li>  
+  				
+  				  
+		         <li><a class="dropdown-btn" >
+		      <i class="fa fa-user-plus" style="font-size:24px"></i><br>
+		      <span>Employee Self-Services</span><i class="fa fa-caret-down" style="float: right;padding-right: 5px;">
+		      </i></a>  
+		          <div class="dropdown-container">
+		         
+  					  <!-- <div id="1"><a href="#" onclick="Andromeda.showRecruitments();">Recruitments</a></div> -->
+  					 <!--  <div id="1"><a href="#" class="dropdown-btn">Recruitments<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showCreateHiringrequest();">Create Hiring Request</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showHiringrequest();">Hiring Requests</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showCandidateregistration();">Candidate Registration</a></div>
+  					   <div id="4"><a href="#" onclick="Andromeda.showScorecandidate();">Score Candidate</a></div>
+  					   </div>
+  					   </div> -->
+  					   
+  					   <div id="2"><a href="#" onclick="Andromeda.showEmployeedashboard();">Employee Dash Board</a></div>
+  					   
+  					  <!-- <div id="3"><a href="#" onclick="Andromeda.showTimeandattendance();">Time & Attendance</a></div> -->
+  					  <div id="3"><a href="#" class="dropdown-btn">Time & Attendance<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showAttendanceandTimesheetpage();">Attendance & Time Sheet</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showMyTimesheet();">My Time Sheets</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showAttendancesummaryGraph();">Attendance Summary Graph</a></div>
+  					   </div>  
+  					   </div>
+  					   
+  					  <!--  <div id="4"><a href="#" onclick="Andromeda.showLeavemanagement();">Leave Management</a></div> -->
+  					  
+  					  <div id="4"><a href="#" class="dropdown-btn">Leave Management<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showApplyleave();">Apply leave</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showMyleaves();">My Leaves</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showLeavestatusPage();">Leave Status</a></div>
+  					   </div>
+  					   </div>
+  					   
+  					   <div id="5"><a href="#" onclick="Andromeda.showondutyrequestpage();">On Duty Request</a></div>
+  					   <div id="6"><a href="#" onclick="Andromeda.showontravelrequestpage();">On Travel Request</a></div>
+  					   <div id="7"><a href="#" onclick="Andromeda.showitsavingspage();">IT Savings(Declarations)</a></div>
+  					   <div id="8"><a href="#" onclick="Andromeda.showhelpdeskpage();">HelpDesk</a></div>
+  					   <div id="9"><a href="#" onclick="Andromeda.showhrpoliciespages();">HR Policies</a></div>
+  					   <div id="10"><a href="#" onclick="Andromeda.showemployeedirectorypage();">Employee Directory</a></div>
+  					   <div id="11"><a href="#" onclick="Andromeda.showviewpayslip();">View Payslip</a></div>
+  					   <div id="12"><a href="#" onclick="Andromeda.showemployeeprojectmappingpage();">Employee Project Mapping</a></div>
+  					  
+  					  <!--  <div id="13"><a href="#" onclick="Andromeda.showEexit();">e-Exit</a></div> -->
+  					  
+  					  <div id="13"><a href="#" class="dropdown-btn">e-Exit<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showIExitpage();">I Exit</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showexitemployeereportpage();">Exit Employee Report</a></div>
+  					   </div>
+  					   </div>
+  					   
+  					   <!-- <div id="14"><a href="#" onclick="Andromeda.showEperform();">e-Perform</a></div> -->
+  					   <div id="14"><a href="#" class="dropdown-btn">e-Perform<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showPerformancegoals();">Set Performance Goals</a></div>
+  					   <div id="2"><a href="#" onclick="Andromeda.showAppraisalfactors();">Appraisal Factors</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showPerformancerating();">Performance Rating</a></div>
+  					   <div id="4"><a href="#" onclick="Andromeda.showFinalrating();">Final Rating</a></div>
+  					   </div>
+  					   </div>
+  					   
+  					   
+  					   
+  					            
+		      </div> 
+		          
+  				 
+  				</li> 
+  				  
+		       <li><a class="dropdown-btn" id="b5" >
+		      <i class="fa fa-user" style="font-size:24px"></i><br>
+		      <span>Manager Self-Services</span><i class="fa fa-caret-down" style="float: right;padding-right: 6px;">
+		      </i></a>  
+		         
+		          
+  				</li>  
+  				
+  				
+  				
+  				  
+		       <li><a class="dropdown-btn" id="b6">
+		      <i class="fa fa-lock" style="font-size:24px"></i><br>
+		      <span>Administrator</span><i class="fa fa-caret-down" style="float: right;padding-right: 6px;">
+		      </i></a>  
+		         
+		                
+  				</li>  
+		       
+		        <li><a href="#" onclick="Andromeda.logout();" title=" Logout" class="dropdown-btn">
+		             <i class="fa fa-sign-out" style="font-size:24px"></i><br><span> Logout </span></a></li>
+		      </ul> 
+		    </div>
+		    
+		    <div class="main-content">
+		  		
+			  
+			  
+			  <div class="swipe-area"></div>
+        <a href="#" data-toggle=".main-content" id="sidebar-toggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+         <div class="content">
+        <div class="large"></div>
+        </div>
+        
+    </div>  
+    
+	 <!--  <div class="clearfix"> </div> -->
+	</div>
+	 </div> 
+	
+
+<script>  
+$(function() {
+	$(".datePick").datepicker({
+		 changeMonth : true,         
+		changeYear : true, 
+		dateFormat : 'dd-mm-yy',   
+		 yearRange : '-50:+5' 
+	}); 
+});
+         
+jQuery("#personalin,#comin,#emptin,#bankin,#profin,#eduin,#famin").click(function() {
+	$('.nav-tabs > .active').next('li').find('a').trigger('click');
+});
+jQuery("#comip,#emptip,#bankip,#profip,#eduip,#famip").click(function() {
+	$('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
+
+
+
+ /* jQuery("#submit").click(function(){
+	$("#button").show();
+	$("#change").hide();
+	$("#instructions").show();  
+	$("#replaceDiv").show();       
+});
+ */
+ 
+
+</script>
+<script>
+$(document).ready(function() {
+  $("[data-toggle]").click(function() {
+    var toggle_el = $(this).data("toggle");
+    $(toggle_el).toggleClass("open-sidebar");
+    $('#sidebar').toggleClass("change-sidebar");
+  });
+});
+</script>
+</div> 
+
+               

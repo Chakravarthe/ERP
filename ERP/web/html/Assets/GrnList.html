@@ -1,0 +1,81 @@
+ <script src="/erp/scripts/general/GrnList.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script>
+             
+<div id="grnId" data-ng-controller="GrnListController" style="margin-left:5%;margin-top:-12%;">
+ <br>
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Create GRN</div>
+    <div class="panel-body">
+    <div class="form-group col-md-3">
+    <div class="input-group">
+       <span class="input-group-addon"> From<span class="cc-mandatory"> *</span></span>
+       <input placeholder="Select From Date" class="form-control" required="required" id="fromDate" autocomplete="off" name="fromDate" type="date">
+     </div></div>
+     
+	 <div class="form-group col-md-3">
+    <div class="input-group" style="margin-left:25%">
+       <span class="input-group-addon"> to<span class="cc-mandatory"> *</span></span>
+       <input placeholder="Select From Date" class="form-control" required="required" id="ToDate" autocomplete="off" name="Todate" type="date" >
+     </div>
+	</div>
+	<div class="form-group col-md-3">
+	<button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);" style="margin-left:45%">Submit</button>
+   </div>               
+  </div>
+  </div>
+  
+<div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+ <div class="panel-heading">Line Items</div>
+  <div class="panel-body">
+   <div class=" table-responsive">
+   <table id="itemsTable" class="table table-hover table-bordered table-striped ">
+   <thead>
+   <tr>
+   <th>S.No</th>
+   <th style="min-width: 200px;max-width: 200px;">GRN #</th>
+   <th style="min-width: 120px;max-width: 120px;"> GRN Date </th>
+   <th style="min-width: 120px;max-width: 120px;"> PO # </th>
+   <th style="min-width: 120px;max-width: 120px;"> PO Date</th>
+   <th style="min-width: 120px;max-width: 120px;"> Created Date</th>
+   <th style="min-width: 120px;max-width: 120px;"> Program</th>
+   <th style="min-width: 120px;max-width: 120px;"> Vendor Name </th>
+   <th style="min-width: 120px;max-width: 120px;"> Amount($) </th>
+   <th style="min-width: 120px;max-width: 120px;"> View </th>
+   </tr>
+  </thead>
+  <tr data-ng-repeat="data in filteredResult =(linedetails | filter:search)">   
+        <td>{{data.GRN}}</td> 
+        <td>{{data.GRN_Date}}</td>  
+		<td>{{data.PO_#}}</td>	 
+		<td>{{data.PO_Date}}</td>	 
+		<td>{{data.Created_Date}}</td>	 
+		<td>{{data.Program}}</td>	            
+		<td>{{data.Amount($)}}</td>	 
+		<td>{{data.View}}</td>	 
+	</tr>
+</table>
+</div>
+ </div>
+  </div>
+  </div>       
+     
+<script>                        
+		jQuery(document).ready(function() {         
+			 $("#add").hide();
+			$("#update").hide(); 
+  			 angular.bootstrap(jQuery("#grnId"), [ 'GrnList' ]); 
+	    });
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});              
+		
+		
+	</script>
+	

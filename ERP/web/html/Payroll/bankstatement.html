@@ -1,0 +1,179 @@
+
+<!-- <script src="/erp/scripts/general/CreateGrn.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<script src="/erp/scripts/js/angular.js"></script> -->
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.but {
+  padding: 5px 10px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #1E565A;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #999;
+}
+
+.but:hover {background-color: #1E565A}
+
+.but:active {
+  background-color: 1E565A;
+  box-shadow: 0 3px #666;
+  transform: translateY(3px);
+}
+  </style>
+<div id="grnId" data-ng-controller="CreateGrnController">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 16%;position:absolute;top:210px;width:1000px">
+
+		<div class="panel-heading">Bank Statement</div>
+		<div class="panel-body">                            
+			<div class="form-group col-md-4">
+			<div> 
+        <label>Financial year*</label>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+        <label>Month*</label>&ensp;&ensp;&ensp;<select>    
+             <option>January</option>
+             <option>February</option>
+             <option>March</option>
+             <option>April</option>
+             <option>May</option>
+             <option>June</option>
+             <option>July</option>
+             <option>August</option>
+             <option>September</option>
+             <option>October</option>
+             <option>November</option>
+             <option>December</option>
+             <br><br><br><br><br>
+      </select>
+       <form action="/action_page.php">
+      <input type="radio" id="kotak" name="select" value="kotak">
+    <label for="kotak">Kotak Mahindra</label>
+    <input type="radio" id="other"  name="select" value="other">
+    <label for="other">Other Than Kotak</label>
+    <input type="radio" id="all"  name="select" value="other">
+    <label for="all">All</label>
+   <br> 
+   </div>
+   
+         <div>
+         <div style="margin-top:12%;margin-left:45%;">
+				  <button type="button" class="btn btn-primary" id="removebtn" data-toggle="modal"data-ng-click="getsearch(data.object);" >Get</button> 
+			 </div>
+         </div>  
+        
+	<div class="panel panel-primary"
+		style="margin-left: 2%;position:absolute;top:250px;width:900px">
+		<div class="panel-heading"> Showing results for</div>
+		<div class="panel-body">
+			<div class="form-group col-md-3">
+				<label>Year&nbsp;<b style="color: red">*</b></label>
+                                 <select>    
+                                       <option>2015</option>  
+                                       <option>2016</option>
+                                       <option>2017</option>
+                                       <option>2018</option>
+                                       <option>2019</option>
+                                       <option>2020</option>
+                                       <option>2021</option>
+                                       <option>2022</option>
+                                       <option>2023</option>
+                                       <option>2024</option>
+                                       <option>2025</option>
+                                       <option>2026</option>
+                                    </select>
+			  </div>
+			<div class="form-group col-md-3">
+				<label>Month&nbsp;<b style="color: red">*</b></label> 
+                             
+                              <select>    
+                                       <option>January</option>  
+                                       <option>February</option>
+                                       <option>March</option>
+                                       <option>April</option>
+                                       <option>May</option>
+                                       <option>June</option>
+                                       <option>July</option>
+                                       <option>August</option>
+                                       <option>September</option>
+                                       <option>October</option>
+                                       <option>November</option>
+                                       <option>December</option>
+                                    </select>
+			</div>
+           
+
+			<div class="panel panel-primary"
+                   style="margin-left: 2%;position:absolute;top:200px;width:800px">            
+		<div class="panel-body">
+			 <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+				    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	    		         
+		  <div class="input-group col-md-4" style="float: right;">
+	         
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>	    
+			 <br>   
+		<div id="dataDiv">       
+			<table class="table table-bordered"> 
+			<center>
+			<thread> 
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.no</th>           
+					<th align="left">Accountnumber</th>  
+				    <th align="left">Amount&#x20B9</th>  
+				    <th align="left">Description</th>  
+				    <th align="left">Name</th>   
+				</tr>            
+				<tr data-ng-repeat="emp in empDetails | filter:search"> 
+				</tr>        
+				</thread>
+				<tbody><tr class="odd">
+				<td valign="top" colspan="9" class="dataTables_empty"><center>No data available in table</center></td>
+				</tr></tbody>        
+				</center>                                          
+			      </table>          
+			   </div>                 
+			             

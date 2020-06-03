@@ -1,0 +1,110 @@
+<script src="/erp/scripts/employeeemployeeselfservieces/applyleave.js"></script>
+<!-- <script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script> -->
+
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;   
+}    
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;         
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}  
+#btn {
+ /*  background-color:#63afdc ; */
+  border: none;
+  color: white;
+  padding: 30px 25px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#btn:hover {
+  background-color: #1A5276;
+}  
+    </style>
+        
+<div id="applyleave" data-ng-controller="ApplyLeaveController" style="margin-left:6%;margin-top:1%;margin-right:-1%">
+<h3 style="margin-left:16%">Apply Leave</h3>
+ <br>
+  <div class="panel panel-primary" style="margin-left:16%;margin-top:1%;margin-right:7%">
+  <button class="btn btn-primary" id="btn">Total Credits</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" id="btn">Availed Leaves</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button class="btn btn-primary" id="btn">Leave Balance</button>
+    <div class="panel-body">
+         
+	  <div class="form-group col-md-4">
+      <label>Leave Type&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" placeholder="Select" data-ng-model="data.object.po#">
+	  <option></option>
+	   <option data-ng-repeat="department in departments"  value="{{department.departmentid}}">{{department.department_name}}</option>
+	  </select>
+	</div>	
+	
+	<div class="form-group col-md-4">
+       <label>Contact No.while on Leave&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" id="date1" class="form-control" placeholder="Enter contact Number" data-ng-model="data.object.needbydate" />
+	</div><br><br><br><br>
+	
+		<div class="form-group col-md-4">
+       <label>From Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control datepicker" id="datepicker-1" placeholder="Enter From date" data-ng-model="data.object.needbydate" />
+	</div>
+		
+	<div class="form-group col-md-4">
+       <label>To Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control datepicker" id="datepicker-2" placeholder="Enter To Date" data-ng-model="data.object.needbydate" />
+	</div>	
+<br><br><br><br>
+	<div class="form-group col-md-8">
+	  <label>To&nbsp;<b style="color: red">*</b></label>       
+	 <input type="text" class="form-control" placeholder="Enter To" data-ng-model="data.object.podate" />
+	</div><br><br><br><br>
+	<div class="form-group col-md-8">
+      <label>Reason&nbsp;<b style="color: red">*</b></label>
+	   <textarea cols="30" rows="2" class="form-control" placeholder="Enter Description" data-ng-model="data.object.needbydate"></textarea>
+	</div><br><br><br><br><br>
+	
+ <div class="form-group col-md-4">     
+<button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);">Apply Leave</button> 
+ </div>
+  </div>
+</div>
+</div>
+<!-- Javascript -->
+<script>
+	$(function() {
+		$("#datepicker-1").datepicker();
+	});
+	$(function() {
+		$("#datepicker-2").datepicker();
+	});
+
+	jQuery(document).ready(function() {
+		/* $("#button").show(); */
+
+		angular.bootstrap(jQuery("#applyleave"), [ 'ApplyLeaveController' ]);
+	});
+</script>

@@ -1,0 +1,206 @@
+<script src="/erp/scripts/employeeemployeeselfserviece/employeeprojectmapping.js"></script>
+<style>
+/* input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+} */
+/* 
+input:focus {
+	background-color: #ffe6b3;
+}      
+ */    
+.btn-search {    
+	background: #63afdc;
+	border-radius: 0;   
+	color: black;
+	border-width: 1px;   
+	border-style: solid;
+	border-color: #63afdc;    
+}
+
+.button {
+	background-color: #63afdc;           
+	border: none;    
+	color: black;   
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;        
+	cursor: pointer;       
+	border-radius: 10px;
+}   
+</style>
+<div id="empprojectid" data-ng-controller="projectController" style="margin-left: 3%; margin-top: 10%; margin-right: 0%">
+	<br>   
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -11%; margin-right: 5%">
+
+		<div class="panel-heading"><b><h4>Employee Project Mapping</h4></b></div>
+		<div class="panel-body">
+			<div class="form-group row">
+			<div class="form-group col-md-4">
+				<label>Project <b style="color: red">*</b></label>   
+				<select class="form-control"       
+					data-ng-model="data.object.project">
+						<option></option>
+						<option data-ng-repeat="project in projects"
+							value="{{project.project}}">{{project.project_name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label>Location <b style="color: red">*</b></label>
+				 <select class="form-control"
+					data-ng-model="data.object.id">  
+						<option></option>
+						<option data-ng-repeat="loc in locations"
+							value="{{loc.id}}">{{loc.location_name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label>From Date <b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"
+					data-ng-model="data.object.from_date" placeholder="" />
+			</div>
+			</div>
+			<div class="form-group row">         
+			<div class="form-group col-md-4">
+				<label>To Date<b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"
+					data-ng-model="data.object.to_date" placeholder="" />
+			</div>
+			<div class="form-group col-md-4">
+				<label>Reporting To <b style="color: red">*</b></label>
+				<select class="form-control"    
+					data-ng-model="data.object.reporting">
+						<option></option>   
+						<option data-ng-repeat="report in reporting"
+							value="{{report.reporting}}">{{report.reporting_to}}</option>
+				</select>
+			</div>
+			</div>
+			<br>              
+			<div>
+			<center>
+				<button type="button" class="btn btn-primary" id="b1"
+					data-ng-click="getempprojectdata(data.object);">Submit</button>
+			</center>
+			</div>
+	</div>
+	<div class="panel panel-primary" id="report" style="margin-left:-1.5%;top:530px;width:1000px;margin-right: 0%;position:absolute;padding:0px;">
+		<div class="panel-body">
+ 			<div class="dataTables_length" id="scheduleTimetableList_length">
+ 			<br><br>
+ 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  					<select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    	<option value="10">10</option>
+				    	<option value="25">25 </option>
+				    	<option value="50">50 </option>                  
+				    	<option value="-1">all</option>    
+					</select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<div class="input-group col-md-4" style="float: right;">
+	   				<span class="input-group-btn">
+        				<button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      				</span>  
+      				<input type="text" class="form-control" placeholder="Search Records">     
+            	</div>
+			</div>	    
+			 <br>   
+		   <div id="dataDiv" class="scroll">              
+				<table class="table table-bordered"> 
+				 <thread>    
+			  		 <tr style='background-color:CornflowerBlue'>        
+						<th align="left">S.no</th>   
+						<th align="left">Project Name</th>     
+						<th align="left">Location</th>
+				    	<th align="left">From Date</th>  
+				    	<th align="left">To date</th>
+				    	<th align="left">Reporting To</th>        
+				    	<th align="left">Update</th>                      
+					</tr>     	      
+					<tr data-ng-repeat="data in regdetails | filter:search"> 
+				     	<td align="left">{{$index+1}}</td> 
+				     	<td align="left">{{data.project_name}}</td> 
+					 	<td align="left">{{data.location}}</td>    
+					 	<td align="left">{{data.from_date}}</td>         
+					 	<td align="left">{{data.to_date}}</td>
+					 	<td align="left">{{data.reporting_to}}</td>             
+					 	<!-- <td align="left">{{userdata.status}}</td> --> 
+					 	<td>&nbsp;&nbsp;&nbsp;            
+							<button type="button" id="viewData"	class="btn btn-success btn-md" data-toggle="modal" data-ng-click="getByproject(data.project_name);" data-target="#myModal">Update</button>				    			 
+						</td>              
+					</tr>        
+				</thread>                       
+			</table>
+			<!-- Pop up div -->
+			               
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="tab-content">     
+			
+				<br> <br>    
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<br>
+						<!-- <-------------------->  
+						<div class="panel panel-primary">   
+	 						<!-- style="margin-left: 14%; margin-top: 1%; margin-right: 7%" -->
+							<div class="panel-body">
+							<div class="form-group row">       
+								<div class="form-group col-md-6">
+									<label>Project Name<b style="color: red">*</b></label>
+									<select class="form-control" disabled 
+											data-ng-model="data.object.project">
+											<option></option>
+											<option data-ng-repeat="project in projects"
+													value="{{project.project}}">{{project.project_name}}</option>
+									</select>
+								</div>   
+								<div class="form-group col-md-6">
+									<label>Location<b style="color: red">*</b></label>
+									<select class="form-control"
+											data-ng-model="data.object.id">
+											<option></option>
+											<option data-ng-repeat="loc in locations"
+													value="{{loc.id}}">{{loc.location_name}}</option>
+									</select>                    
+								</div>            
+							</div>          
+							<div class="form-group row">   
+								<div class="form-group col-md-4">
+									<label>Reporting To <b style="color: red">*</b></label>
+										<select class="form-control"    
+												data-ng-model="data.object.reporting">
+												<option></option>
+												<option data-ng-repeat="report in reporting"
+														value="{{report.reporting}}">{{report.reporting_to}}</option>
+										</select>    
+								</div>   
+							</div>   
+							</div>
+						</div>
+				</div>      
+				<br>   
+			<center>
+				<div>
+					<button class="btn btn-primary" data-ng-click="updateprojectdata(data.object);">Update</button>&nbsp;&nbsp;&nbsp;
+				</div>
+			</center>
+			</form>   
+		</div>             
+					</div>
+				</div>   
+			</div>
+			       
+		</div> 
+	</div>   
+	<!-- <div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div> -->
+	</div>
+   </div> 
+</div>
+<script>
+jQuery(document).ready(function() {
+	angular.bootstrap(jQuery("#empprojectid"), [ 'employeeprojectmapping' ]);
+});
+</script>

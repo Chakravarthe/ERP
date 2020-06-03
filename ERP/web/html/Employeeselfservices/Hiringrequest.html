@@ -1,0 +1,163 @@
+ <script src="/erp/scripts/general/hiringrequest.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<head>
+<style>   
+/* #registrationTab:hover, .previous, .next {
+	cursor: pointer;
+}
+   
+#imgId {       
+	width: 120px;
+} */
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;       
+	  border-width: 1px;    
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+
+/* .clearfix {   
+	zoom: 1;
+	clear: both;         
+}
+
+::selection {
+	background: #b3d4fc;   
+	text-shadow: none;
+}
+
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+.row {
+ 
+          
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;      
+  
+} 
+.panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} 
+
+.panel,.panel-default,.panel-body
+ {  
+  height :260px;       
+  padding-top: 0px;
+  padding-right: 0px;  
+  padding-bottom: 0px;        
+  padding-left:  0px;             
+ 
+} 
+.panel,.panel-default
+{   
+ border-style: solid;
+}
+.card{
+   
+ padding-top: -50px;   
+  padding-right: 0px;
+  padding-bottom: -100px;        
+  padding-left:  0px;   
+                                                                                               
+background-color: white;  
+}  
+.button {
+  background-color:#63afdc;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+ .card-panel     
+ {                 
+    padding-top: 0px;   
+  padding-right: 0px;   
+  padding-bottom: 0px;     
+  padding-left:  0px;    
+background-color: white;
+}  */  
+    
+</style>   
+
+</head>
+<br>
+<div id="hiringreq" data-ng-controller="hiringrequestcon">
+<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -11%; margin-right: 3%">
+<div class="panel-heading"><b>ManPowerRequestList</b></div>
+		<div class="panel-body">
+   <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+				    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	    		         
+				        <div class="input-group col-md-4" style="float: right;">
+	         
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+        <input placeholder="search" data-ng-model= "search.empid"/>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>	       
+		<div class="panel-body" id="six-x" >
+			<div class="form-group row">             
+			<table class="table table-bordered">
+				<tr style='background-color: CornflowerBlue '>   
+					<th>S.no</th>                       
+				   <th>Job Number</th>   
+				   <th>Required Position</th>
+				    <th>No.of Positions</th>     
+				   <!-- <th>Status</th>  
+				   <th>Action</th> -->      
+				    
+				</tr>
+				<tr data-ng-repeat="data in filteredResult =(regdetails | filter:search)">   
+				      <td align="right">{{$index+1}}</td>
+					 <td><a data-ng-click="getJobNumberWiseData(data)">{{data.job_id}}</a></td>
+					<td>{{data.position}}</td>  
+					<td>{{data.position_number}}</td>
+					<!-- <td>{{data.status}}</td>
+					<td>{{data.action}}</td> -->
+				</tr>
+			</table>
+			</div>  
+			</div>   
+			        
+	
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	</div>     
+</div>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function() {  
+	
+	angular.bootstrap(jQuery("#hiringreq"), [ 'hiringrequest' ]);
+});
+</script>
+

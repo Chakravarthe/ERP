@@ -1,0 +1,207 @@
+ <script src="/erp/scripts/general/attendanceReportModule.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<head>
+<style>   
+#registrationTab:hover, .previous, .next {
+	cursor: pointer;
+}
+   
+#imgId {       
+	width: 120px;
+}
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;       
+	  border-width: 1px;    
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+
+.clearfix {   
+	zoom: 1;
+	clear: both;         
+}
+
+::selection {
+	background: #b3d4fc;   
+	text-shadow: none;
+}
+
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+.row {
+ 
+          
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;      
+  
+} 
+/* .panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} */
+
+.panel,.panel-default,.panel-body
+ {  
+  height :260px;       
+  padding-top: 0px;
+  padding-right: 0px;  
+  padding-bottom: 0px;        
+  padding-left:  0px;             
+ 
+} 
+.panel,.panel-default
+{   
+ border-style: solid;
+}
+.card{
+   
+ padding-top: -50px;   
+  padding-right: 0px;
+  padding-bottom: -100px;        
+  padding-left:  0px;   
+                                                                                               
+background-color: white;  
+}  
+.button {
+  background-color:#63afdc;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+ .card-panel     
+ {                 
+    padding-top: 0px;   
+  padding-right: 0px;   
+  padding-bottom: 0px;     
+  padding-left:  0px;    
+background-color: white;
+}   
+    
+</style>   
+</head>
+<br>
+
+    </head>
+    <body>
+<div>
+      
+        
+  <label for="summary">Summary</label>
+  <input type="radio" id="other"  name="select" value="other">
+  <label for="detailed">Detailed</label>
+<br>
+ <label class="control-label col-md-2">Employee:<span style="color:red">*</span></label>
+                    <div class="col-md-2">
+                     <input type="text" placeholder="" class="form-control"
+                        data-ng-model="data.object.employee"  ng-required value ="" data-ng-value="">
+                    <select>
+                      <option> one </option>
+	              <option >two </option>
+	              <option >three</option>
+	              <option >four </option>
+	              <option >five </option>
+	          </select>
+
+                    </div>
+
+<label class="control-label col-md-2">Financial Year:<span style="color:red">*</span></label>
+             <select>    
+             <option>2015</option>
+             <option>2016</option>
+             <option>2017</option>
+             <option>2018</option>
+             <option>2019</option>
+             <option>2020</option>
+             <option>2021</option>
+             <option>2022</option>
+             <option>2023</option>
+             <option>2024</option>
+             <option>2025</option>
+             <option>2026</option>
+      </select>
+     
+                    <label class="control-label col-md-2">Stop Date:<span style="color:red">*</span></label>
+                    <div class="col-md-2">
+                      <input type="text" placeholder="Salary Stop Date" class="form-control"
+                        data-ng-model="data.object.salarystopdate"  ng-required value ="" data-ng-value="">
+                   </div>
+         </p> </form><br><br><br>
+               <center><button input type="button" style="background-color:green;color:white;width:60px;height:40px;" value="Submit">Submit</button></center>   
+                             </p></form>        
+</div>
+    </body>
+
+<div class="panel panel-primary"
+		style="margin-left: 16%;position:absolute;top:220px;width:1000px">     
+<div class="panel-heading">Employee Stop Salary</div>
+		<div class="panel-body">
+   <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+				    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	    		         
+				        <div class="input-group col-md-4" style="float: right;">
+	         
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search">     
+</div>
+			 </div>	    
+			 <br>   
+		<div id="dataDiv">       
+			<table class="table table-bordered"> 
+			<center>
+			<thread> 
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.no</th>           
+					<th align="left">Name</th>  
+				        <th align="left">Department</th>  
+				        <th align="left">Cadre</th>  
+				        <th align="left">Grade</th> 
+                                        <th align="left">FinancialYear</th> 
+                                        <th align="left">StopDate</th> 
+                                        <th align="left">ArrearAmount&#x20B9</th>   
+				</tr>        
+				<tr data-ng-repeat="emp in empDetails | filter:search"> 
+				</tr>        
+				</thread>
+				<tbody><tr class="odd">
+	
+				</tr></tbody>        
+				</center>                      
+			</table>    
+			</div>    
+			        
+	
+	
+	
+	</div>     
+</div>                

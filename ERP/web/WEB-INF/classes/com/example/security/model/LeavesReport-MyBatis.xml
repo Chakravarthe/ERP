@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LeavesReport">
+	<select id="getleavesDetailedReport" resultType="LeavesReport"
+		parameterType="map">
+		select
+		a.empid,a.employeename,b.department,b.designation,b.cader,b.grade,b.reporting_to,c.leave_type,c.leave_nature,c.from_date,c.to_date,c.approval_by,c.reason,c.leavestatus,c.comp_date,c.created_date
+		from
+		(select empid,concat(first_name,'',last_name) as employeename from
+		hrms.employee_personal_details)a inner join (select
+		empid,department,designation,cader,grade,reporting_to from
+		hrms.employee_employment_details)b on a.empid=b.empid
+		inner join
+		(select
+		empid,leave_type,leave_nature,from_date,to_date,approval_by,reason,leavestatus,comp_date,created_date
+		from hrms.leaves)c on b.empid=c.empid where
+		c.created_date>=#{p.from_date}::timestamp and
+		#{p.to_date}::timestamp>=c.created_date and
+		c.leave_type=#{p.leave_type}
+	</select>
+	<select id="getLeaves" resultType="map">
+		SELECT distinct id,type from
+		hrms.leave_types_mst;
+	</select>
+	<select id="getSummary1" resultType="LeavesReport" parameterType="map">	
+    select empid,count(empid) as empid1, count(leave_type) as count, leave_type from hrms.leaves where  leave_type=#{p.leave_type} group by empid,leave_type 
+	</select>
+</mapper>                          

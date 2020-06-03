@@ -1,0 +1,225 @@
+
+<style>
+body {
+	font-family: Arial;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+
+form.example input[type=text] {
+	padding: 5px;
+	font-size: 17px;
+	border: none;
+	border-bottom: 1px solid #2196F3;
+	float: left;
+	width: 90%;
+	background: #ffeecc;
+}
+
+form.example button {
+	float: left;
+	width: 10%;
+	padding: 5px;
+	background: #2196F3;
+	color: white;
+	font-size: 17px;
+	border: none;
+	border-bottom: 1px solid #2196F3;
+	border-left: none;
+	cursor: pointer;
+}
+
+form.example button:hover {
+	background: #0b7dda;
+}
+
+form.example::after {
+	content: "";
+	clear: both;
+	display: table;
+}
+   
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;
+	color: black;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #63afdc;
+}
+</style>
+<script src="/erp/scripts/general/ctcview.js"></script>
+<script src="/erp/scripts/general/letterheader.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script>
+<h3 style="margin-left: 16%; position: absolute; top: 200px">
+	Modify CTC</h3>
+
+<div id="Ctcid" data-ng-controller="CtcviewController">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 16%; position: absolute; top: 230px; width: 1000px; padding: 0px">
+
+		<div class="panel-heading"></div>
+		<div class="panel-body">
+			<div class="form-group col-md-3">
+				<!-- <label>Name&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control" placeholder="Enter Name"
+					data-ng-model="data.object.name" /> -->
+					
+						<label>Name&nbsp;<b style="color: red">*</b></label> <select
+						class="form-control" data-ng-model="data.object.name" disabled >
+						<option>--Select --</option>
+						<option id="tab1">L S M Cader</option>
+						<option id="tab2">F2 and F3</option>
+						<option id="tab3">J and F1</option>
+						<option id="tab4">Others</option>
+					</select> 
+					
+					
+					
+					
+					
+					     
+					    
+					
+					
+			</div>
+			<div class="form-group col-md-3">
+				<label>Financial Year&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.financial_year" disabled>
+					<option>--Select Year--</option>
+					<option data-ng-repeat="year in years" value="{{year.yearid}}">{{year.years}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Cader&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.caderid" disabled>
+					<option></option>
+					<option data-ng-repeat="cader in caders" value="{{cader.caderid}}">{{cader.cader_name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Grade&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.gradeid" disabled>
+					<option></option>
+					<option data-ng-repeat="grade in grades" value="{{grade.gradeid}}">{{grade.grade_name}}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<br> <br> <br>
+
+
+	<!-- ----------------------------------------------------------------------------- -->
+	<!-- ----------------------------------------------------------------------------- -->
+
+
+	 <div class="panel panel-primary"
+		style="margin-left: 16%; position: absolute; top: 410px; width: 500px; padding: 0px;">
+		<div class="panel-heading">Earnings</div>
+		<div class="panel-body"  >
+			<table style="width: 100%">
+			<tr>
+					<th>Payslip Heads</th>
+					<th>Entity Type</th>
+					<th>value</th>
+				</tr>
+				<tr >
+					<td class="form-group col-md-3">{{letterhead.pname}}</td>
+					<td class="form-group col-md-3">
+					</td>
+					<td class="form-group col-md-3" ><input type="text"
+			        	class="form-control"  placeholder="Enter Value" 
+						data-ng-model="data.object.value" /></td>
+				</tr>       
+			</table>       
+		</div>
+	</div> 
+	<div class="panel panel-primary"
+		style="margin-left: 56%; position: absolute; top: 410px; width: 500px; padding: 0px;">
+
+		<div class="panel-heading">Deductions</div>
+		<div class="panel-body">
+			<table style="width: 100%">
+				<tr>
+					<th>Payslip Heads</th>    
+					<th>Entity Type</th>
+					<th>value</th>    
+				</tr>
+				   <tr  >
+
+					<td  class="form-group col-md-3">{{letterhead.pname}}</td>
+					<td class="form-group col-md-3"></td>
+					<td class="form-group col-md-3"><input type="text"
+						class="form-control" placeholder="Enter Name"
+						data-ng-model="data.object.deductions" /></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	</div>
+
+
+
+<script>
+	jQuery(document).ready(function() {
+		$("#add").hide();
+		$("#update").hide();
+		angular.bootstrap(jQuery("#Ctcid"), [ 'Ctcview' ]);
+	});
+	jQuery("#register").click(function() {
+		$("#update").hide();
+		$("#add").show();
+	});
+	jQuery(document).on('click', "#editData", function() {
+		$("#update").show();
+		$("#add").hide();
+	});
+
+	/* jQuery(document).on('click', "#ctc1", function() {
+		var tds = ((value * 10) / 100);
+		var net = value - tds;
+		function savedata() {
+			 
+			  document.getElementById("ctc1").innerHTML = net.deductions();
+			}
+
+	});
+	
+	
+	 */
+	/* jQuery(document).on('click', "#ctc2", function() {
+
+		var value = 12000;
+		function savedata() {
+			return ((value * 10) / 100);
+		}
+		document.getElementById("ctc1").innerHTML = savedata(value);
+
+	}); */
+	
+	
+	/*  jQuery(document).on('click', "#sub", function() {
+		var Gross=employeectc/12; */
+	
+	
+</script>

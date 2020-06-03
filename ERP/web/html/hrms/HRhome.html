@@ -1,0 +1,793 @@
+<link rel="stylesheet"
+	href="/andromeda/css/general/font-awesome.min.css">
+<script src="/erp/scripts/js/main.js"></script>
+<script src="/erp/scripts/js/fontawesome.js"></script>
+<script src="/erp/scripts/js/fontawesome.min.js"></script>
+<script>
+	/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+	var dropdown = document.getElementsByClassName("dropdown-btn");
+	var i;
+	for (i = 0; i < dropdown.length; i++) {
+		dropdown[i].addEventListener("click", function() {
+			this.classList.toggle("active");
+			var dropdownContent = this.nextElementSibling;
+			if (dropdownContent.style.display == "block") {
+				dropdownContent.style.display = "none";
+			} else {
+				dropdownContent.style.display = "block";
+			}
+		});
+	}
+</script>
+
+<style type="text/css">
+#date .ui-datepicker .ui-datepicker-title
+     
+.ui-widget-header {
+	border: 1px solid #0044cc;
+	background: #83c174;
+}
+
+.ui-datepicker .ui-datepicker-prev .ui-datepicker-next {
+	background: #83c174;
+}
+/* adding color */
+.dropdown-container .dropdown-container {
+	display: none;
+	/* background-color:#f7f9fb; */
+	/*  background-color:#c93679; */
+	background: #b1b3b4;
+	padding-left: 10px;
+}
+
+.dropdown-container .dropdown-container   .dropdown-container {
+	display: none;
+	/* background-color:#f7f9fb; */
+	/*  background-color:#c93679; */
+	background: #9b9c9d;
+	padding-left: 10px;
+}
+
+.dropdown-btn {
+	padding: 6px 8px 10px 16px;
+	text-decoration: none;
+	color: #818181;
+	display: block;
+	border: none;
+	background: none;
+	width: 100%;
+	text-align: center;
+	cursor: hand;
+	outline: none;
+}
+
+.active
+,
+{
+color
+:
+ 
+orange
+;
+
+
+}
+.dropdown-container {
+	display: none;
+	/* background-color:#f7f9fb; */
+	/*  background-color:#c93679; */
+	/* background: linear-gradient(to left,#008c45,#337ab7); */
+	background: #c7c9ca;
+	padding-left: 10px;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	/*  background-color: #f9f9f9; */
+	/*  background-color: #c93679; */
+	/*  background: linear-gradient(to bottom,#008c45,#337ab7); */
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+	z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+/* sidebar menu */
+
+/* body, html {
+    height: 100%;
+    margin: 0;
+    font-family: helvetica;
+    font-weight: 100;
+}  */
+.container {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	left: 0;
+}
+
+.main-content.open-sidebar {
+	left: 200px;
+}
+
+#sidebar {
+	position: fixed;
+	z-index: 1000;
+	left: -240px;
+	/*  background: #337ab7; */
+	/* background: linear-gradient(to right,#008c45,#337ab7); */
+	/* background: #00cc66; */
+	width: 220px;
+	height: 80%;
+	box-sizing: border-box;
+	-webkit-transition: left 0.4s ease-in-out;
+	-moz-transition: left 0.4s ease-in-out;
+	-ms-transition: left 0.4s ease-in-out;
+	-o-transition: left 0.4s ease-in-out;
+	transition: left 0.4s ease-in-out;
+	overflow: auto;
+	margin-bottom: 50px;
+	overflow-x: scroll;
+	background: #dee0e1;
+}
+
+.change-sidebar {
+	left: 0px !important;
+}
+
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar ul li {
+	margin: 0;
+}
+
+#sidebar ul li a {
+	padding: 9px 20px;
+	font-size: 18px;
+	font-weight: 100;
+	color: #000000;
+	text-decoration: none;
+	display: block;
+	border-bottom: 1px solid #00cc66;
+	-webkit-transition: background 0.3s ease-in-out;
+	-moz-transition: background 0.3s ease-in-out;
+	-ms-transition: background 0.3s ease-in-out;
+	-o-transition: background 0.3s ease-in-out;
+	transition: background 0.3s ease-in-out;
+}
+/* #sidebar ul li:hover a {
+    background:#337ab7;
+}  */
+.main-content {
+	width: 100%;
+	height: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	position: relative;
+	left: 0;
+	-webkit-transition: left 0.4s ease-in-out;
+	-moz-transition: left 0.4s ease-in-out;
+	-ms-transition: left 0.4s ease-in-out;
+	-o-transition: left 0.4s ease-in-out;
+	transition: left 0.4s ease-in-out;
+}
+
+.main-content .content {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	padding-left: 60px;
+	width: 100%;
+}
+/* .main-content .content h1{
+    font-weight: 100;
+} */
+/* .main-content .content p{
+    width: 100%;
+    line-height: 160%;
+} */
+.main-content #sidebar-toggle {
+	/* background: #DF314D; */
+	background: #337ab7;
+	/* background: linear-gradient(to top,#008c45,#337ab7); */
+	border-radius: 3px;
+	display: block;
+	position: fixed;
+	padding: 8px 7px;
+	float: left;
+}
+
+.main-content #sidebar-toggle .bar {
+	display: block;
+	width: 15px;
+	margin-bottom: 3px;
+	height: 2px;
+	background-color: #fff;
+	border-radius: 1px;
+}
+
+.main-content #sidebar-toggle .bar:last-child {
+	margin-bottom: 0;
+}
+
+.large {
+	margin-top: 800px;
+}
+</style>
+
+
+
+
+<div class="#" style="position: sticky; z-index: 100; top: 0;">
+	<img src="/andromeda/images/Banner.png"
+		style="background-color: white; width: 100%; padding-left: 0%;"
+		height="90px" class="img img-responsive">
+</div>
+
+<div id="instructions" style="padding-left: 2%; margin-top: 10%;">
+	<div id="hrhome"></div>
+
+
+</div>
+
+
+
+<!--slider menu-->
+<div class="sidebar-menu" style="position: fixed; margin-top: 11%;"button">
+	<!-- <div class="logo"> <a href="#" class="sidebar-icon btn-primary"> <span class="fa fa-bars">
+		  	</span> </a> <a href="#"> <span id="logo" ></span> 
+			      
+			  </a> </div>	 -->
+	<div class="container">
+		<div id="sidebar">
+			<ul>
+
+				<li><br></li>
+				<li><a class="dropdown-btn" href="#"
+					onclick="Andromeda.showhrprofile();"><i class="fa fa-user"
+						style="font-size: 24px"></i>&nbsp;&nbsp; <span>PROFILE</span></a></li>
+
+				<li><a class="dropdown-btn"> <i class="fa fa-file-text"
+						style="font-size: 24px"></i><br> <span>HRMS</span><i
+						class="fa fa-caret-down" style="float: right; padding-right: 5px;">
+					</i></a>
+
+					<div class="dropdown-container">
+
+						<div id="1">
+							<a href="#" class="dropdown-btn">Recruitments<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showCreateHiringrequest();">Create
+										Hiring Request</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showHiringrequest();">Hiring
+										Requests</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showcandidateregistration();">Candidate
+										Registration</a>
+								</div>
+								<div id="4">
+									<a href="#" onclick="Andromeda.showselectcandidate();">Select
+										Candidates</a>
+								</div>
+								<!-- <div id="5"><a href="#" onclick="Andromeda.showtrackinterviewstatus();">Track Interview Status</a></div> -->
+							</div>
+						</div>
+
+						<div id="2">
+							<a href="#" class="dropdown-btn">Onboarding<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showHrEmployeePage();"
+										class="active">Create Employee</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showUploadEmployee();">Upload
+										Employee</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showEmployeeMaster();">Employee
+										Master</a>
+								</div>
+							</div>
+						</div>
+
+					</div></li>
+
+
+				<li><a class="dropdown-btn"> <i
+						class="fa fa-shopping-cart" style="font-size: 24px"></i><br>
+						<span>Procurements</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+					<div class="dropdown-container">
+
+						<div id="1">
+							<a href="#" onclick="Andromeda.showVendorCreation();">Create
+								Vendor</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.showVendorApprove();">Vendor
+								Approvals</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.showNatureService();">Nature
+								of Services</a>
+						</div>
+					</div></li>
+				<li><a class="dropdown-btn"> <i class="fa fa-book"
+						style="font-size: 24px""></i><br> <span>Attendance</span><i
+						class="fa fa-caret-down" style="float: right; padding-right: 5px;">
+					</i></a>
+					<div class="dropdown-container">
+
+						<div id="1">
+							<a href="#" onclick="Andromeda.showAttendanceSheet();">Attendance
+								Sheet</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.showAttendanceReport();">Attendance
+								Report</a>
+						</div>
+						<div id="3">
+							<a href="#" onclick="Andromeda.showAttendanceUpdate();">Attendance
+								Update</a>
+						</div>
+						<div id="4">
+							<a href="#" onclick="Andromeda.showLeaveReport();">Leave
+								Report</a>
+						</div>
+						<div id="5"><a href="#" onclick="Andromeda.showCalendarPage();">Calendar</a></div>
+		      
+					</div></li>
+				<li><a class="dropdown-btn"> <i class="fa fa-file-text"></i><br>
+						<span>Asset Management</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+					<div class="dropdown-container">
+
+						<div>
+							<a href="#" onclick="Andromeda.showCreateGRN();">Create GRN</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showAssetDetails();">Assets
+								Details</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showAssetRequest();">Asset
+								Request</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showAssetRequestList();">Asset
+								Request list</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showAssetInvoiceSubmission();">Asset
+								Invoice Submission</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showGRNList();">GRN List</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showAssetsDetailReport();">Assets
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showFixedAssetsConsolidation();">Fixed
+								Assets consolidation</a>
+						</div>
+						<div>
+							<a href="#" onclick="Andromeda.showPOGRN();">PO GRN</a>
+						</div>
+
+					</div></li>
+					
+					<li><a class="dropdown-btn"> <i class="fa fa-file-text"></i><br>
+						<span>Payroll Management</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+					<div class="dropdown-container">
+
+						<div id="1">
+							<a href="#" onclick="Andromeda.generatepayroll();">Generate Payroll</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.payrollsummary();">Payroll Summary</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.paymentsummary();">Payment Summary</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.bankstatement();">Bank Statement</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.payrollnotefile();">Payroll Note Files</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.payrollreconciliation();">Payroll Reconciliation</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.lopadjustments();">LOP Adjustments</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.employeestopsalary();">Employee Stop Salary</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.deputationemployee();">Deputation Employee</a>
+						</div>
+
+					</div></li>
+				<li><a class="dropdown-btn"> <i class="fa fa-file-text"></i><br>
+						<span>PO Management</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+					<div class="dropdown-container">
+
+						<div id="1">
+							<a href="#" onclick="Andromeda.showCreatePO();">Create PO</a>
+						</div>
+						<div id="2">
+							<a href="#" onclick="Andromeda.showPOList();">Purchase Order
+								List</a>
+						</div>
+
+					</div></li>
+
+
+
+				<li><a class="dropdown-btn"> <i class="fa fa-bank"
+						style="font-size: 24px"></i><br> <span>Finance</span><i
+						class="fa fa-caret-down" style="float: right; padding-right: 5px;">
+					</i></a></li>
+
+
+				<li><a class="dropdown-btn"> <i class="fa fa-user-plus"
+						style="font-size: 24px"></i><br> <span>Employee
+							Self-Services</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+					<div class="dropdown-container">
+						<!-- <div id="1"><a href="#" class="dropdown-btn">Recruitments<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container">
+  					    <div id="1"><a href="#" onclick="Andromeda.showCreateHiringrequest();">Create Hiring Request</a></div>
+  					    <div id="2"><a href="#" onclick="Andromeda.showcandidateregistration();">Candidate Registration</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showHiringrequest();">Hiring Requests</a></div>
+  					   <div id="4"><a href="#" onclick="Andromeda.showApprovals();">Approvals</a></div>
+  					   <div id="5"><a href="#" onclick="Andromeda.showScorecandidate();">Score Candidate</a></div>
+  					   </div>
+  					   </div> -->
+
+
+						<div id="1">
+							<a href="#" onclick="Andromeda.showEmployeedashboard();">Employee
+								Dash Board</a>
+						</div>
+
+						<!-- <div id="3"><a href="#" onclick="Andromeda.showTimeandattendance();">Time & Attendance</a></div> -->
+						<div id="2">
+							<a href="#" class="dropdown-btn">Time & Attendance<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showAttendancepage();">Attendance
+										& Time Sheet</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showTimesheet();">My Time
+										Sheets</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showAttendancesummary();">Attendance
+										Summary Graph</a>
+								</div>
+							</div>
+						</div>
+
+						<!--  <div id="4"><a href="#" onclick="Andromeda.showLeavemanagement();">Leave Management</a></div> -->
+
+						<div id="3">
+							<a href="#" class="dropdown-btn">Leave Management<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showApplyleave();">Apply
+										leave</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showMyleaves();">My Leaves</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showLeavestatus();">Leave
+										Status</a>
+								</div>
+							</div>
+						</div>
+
+						<div id="4">
+							<a href="#" onclick="Andromeda.showOndutyrequest();">On Duty
+								Request</a>
+						</div>
+						<div id="5">
+							<a href="#" onclick="Andromeda.showOntravelrequest();">On
+								Travel Request</a>
+						</div>
+						<div id="6">
+							<a href="#" onclick="Andromeda.showItsavings();">IT
+								Savings(Declarations)</a>
+						</div>
+						<div id="7">
+							<a href="#" onclick="Andromeda.showHelpdesk();">HelpDesk</a>
+						</div>
+						<div id="8">
+							<a href="#" onclick="Andromeda.showHRpolicies();">HR Policies</a>
+						</div>
+						<div id="9">
+							<a href="#" onclick="Andromeda.showEmployeedirectory();">Employee
+								Directory</a>
+						</div>
+						<div id="10">
+							<a href="#" onclick="Andromeda.showViewpayslip();">View
+								Payslip</a>
+						</div>
+						<div id="11">  
+							<a href="#" onclick="Andromeda.showProjectEmployeemappingpage();">Project Employee Mapping</a>
+						</div>
+
+						<!--  <div id="13"><a href="#" onclick="Andromeda.showEexit();">e-Exit</a></div> -->
+
+						<div id="12">
+							<a href="#" class="dropdown-btn">e-Exit<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showIexit();">I Exit</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showExitemployeereport();">Exit
+										Employee Report</a>
+								</div>
+							</div>
+						</div>
+
+						<!-- <div id="14"><a href="#" onclick="Andromeda.showEperform();">e-Perform</a></div> -->
+						<div id="13">
+							<a href="#" class="dropdown-btn">e-Perform<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showPerformancegoals();">Set
+										Performance Goals</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showAppraisalfactors();">Appraisal
+										Factors</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showPerformancerating();">Performance
+										Rating</a>
+								</div>
+								<div id="4">
+									<a href="#" onclick="Andromeda.showFinalrating();">Final
+										Rating</a>
+								</div>
+							</div>
+						</div>
+
+
+
+
+					</div></li>
+
+
+				<li><a class="dropdown-btn"> <i class="fa fa-user"
+						style="font-size: 24px"></i><br> <span>Manager
+							Self-Services</span><i class="fa fa-caret-down"
+						style="float: right; padding-right: 5px;"> </i></a>
+						<div class="dropdown-container">
+				 <div id="1"><a href="#" class="dropdown-btn">Recruitments<i class="fa fa-caret-down" style="float: right;padding-right: 12px;"></i></a>
+  					   <div class="dropdown-container" style="background-color:#337ab7">
+  					    <div id="1"><a href="#" onclick="Andromeda.showMyTeamLeaves();">My Team Leaves</a></div>
+  					   <!--<div id="2"><a href="#" onclick="Andromeda.showHiringrequest();">Hiring Requests</a></div>
+  					   <div id="3"><a href="#" onclick="Andromeda.showcandidateregistration();">Candidate Registration</a></div>
+  					   <div id="4"><a href="#" onclick="Andromeda.showScorecandidate();">Score Candidate</a></div>-->
+  					   </div>
+  					   </div>
+  					   </div>
+  					   </li>
+
+
+				<li><a class="dropdown-btn"> <i class="fa fa-file-text"
+						style="font-size: 24px"></i><br> <span>Admin Controls</span><i
+						class="fa fa-caret-down" style="float: right; padding-right: 5px;">
+					</i></a>
+					<div class="dropdown-container">
+						<div id="1">
+							<a href="#" class="dropdown-btn">HRMS Admin<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" class="dropdown-btn">HRMS Control <i
+										class="fa fa-caret-down"
+										style="float: right; padding-right: 12px;"></i></a>
+									<div class="dropdown-container">
+										<div id="1">
+											<a href="#" onclick="Andromeda.showCreateHiringrequest();">Hiring
+												Request</a>
+										</div>
+										<div id="2">
+											<a href="#" onclick="Andromeda.showHiringrequest();">Round
+												/ Stage Creation</a>
+										</div>
+										<div id="3">
+											<a href="#" onclick="Andromeda.showScorecandidate();">Time
+												slot Creation</a>
+										</div>
+										<div id="4">
+											<a href="#" onclick="Andromeda.showScorecandidate();">Behaviour</a>
+										</div>
+									</div>
+								</div>
+								<div id="2">
+									<a href="#" class="dropdown-btn">Payroll Management Control<i
+										class="fa fa-caret-down"
+										style="float: right; padding-right: 12px;"></i></a>
+									<div class="dropdown-container">
+										<div id="1">
+											<a href="#" onclick="Andromeda.showCreateCTCCal();">Create
+												Letter Head</a>
+										</div>
+										<div id="2">
+											<a href="#" onclick="Andromeda.showctccalculator();">CTC
+												Calculator</a>
+										</div>
+										<div id="3">
+											<a href="#" onclick="Andromeda.showHiringrequest();">Payroll
+												Setting</a>
+										</div>
+									</div>
+								</div>
+								<div id="3">
+									<a href="#" class="dropdown-btn">TDS & Employee Tax
+										Controls<i class="fa fa-caret-down"
+										style="float: right; padding-right: 12px;"></i>
+									</a>
+								</div>
+								<div id="4">
+									<a href="#" class="dropdown-btn">Employee Settings<i
+										class="fa fa-caret-down"
+										style="float: right; padding-right: 12px;"></i></a>
+								</div>
+								<div id="5">
+									<a href="#" class="dropdown-btn">Leave Setting<i
+										class="fa fa-caret-down"
+										style="float: right; padding-right: 12px;"></i></a>
+								</div>
+							</div>
+						</div>
+
+						<div id="2">
+							<a href="#" class="dropdown-btn">Operation Admin<i
+								class="fa fa-caret-down"
+								style="float: right; padding-right: 12px;"></i></a>
+							<div class="dropdown-container">
+								<div id="1">
+									<a href="#" onclick="Andromeda.showcreatesdeigroup();">Create
+										SDEI Group</a>
+								</div>
+								<div id="2">
+									<a href="#" onclick="Andromeda.showcreatescheme();">Create
+										Scheme</a>
+								</div>
+								<div id="3">
+									<a href="#" onclick="Andromeda.showcreatesector();">Create
+										Sector</a>
+								</div>
+								<div id="4">
+									<a href="#" onclick="Andromeda.showcreatesegment();">Create
+										Segment</a>
+								</div>
+								<div id="5">
+									<a href="#" onclick="Andromeda.showcreateproject();">Create
+										Project</a>
+								</div>
+								<div id="6">
+									<a href="#" onclick="Andromeda.showcreateprogram();">Create
+										Program</a>
+								</div>
+								<div id="7">
+									<a href="#" onclick="Andromeda.showHiringrequest();">Mapping
+										Settings</a>
+								</div>
+								<div id="8">
+									<a href="#" onclick="Andromeda.showHiringrequest();">Creation
+										Settings</a>
+								</div>
+							</div>
+
+							<div id="3">
+								<a href="#" class="dropdown-btn">Finance Admin<i
+									class="fa fa-caret-down"
+									style="float: right; padding-right: 12px;"></i></a>
+							</div>
+    
+							<div id="4">
+								<a href="#" class="dropdown-btn">Super Admin<i
+									class="fa fa-caret-down"
+									style="float: right; padding-right: 12px;"></i></a>
+							</div>
+
+						</div>
+					</div></li>
+					
+					<li><a class="dropdown-btn" >    
+		      <i class="fa fa-lock" style="font-size:24px"></i><br>
+		      <span>Admin Controller</span><i class="fa fa-caret-down" style="float: right;padding-right: 5px;">
+		      </i></a> 
+		          
+		      		<div class="dropdown-container">
+		         
+  					  <div id="1"><a href="#" onclick="Andromeda.showPayslip();">Pay Slip</a></div>
+  					     
+		      		</div> 
+		      		    
+  				</li>
+
+				<li><a href="#" onclick="Andromeda.logout();" title=" Logout"
+					class="dropdown-btn"> <i class="fa fa-sign-out"
+						style="font-size: 24px"></i><br>
+					<span> Logout </span></a></li>
+			</ul>
+		</div>
+		<div class="main-content">
+
+
+
+			<div class="swipe-area"></div>
+			<a href="#" data-toggle=".main-content" id="sidebar-toggle"> <span
+				class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+			</a>
+			<div class="content">
+				<div class="large"></div>
+			</div>
+
+		</div>
+	</div>
+	<!-- <div class="clearfix"> </div>
+	  -->
+	<script>
+$(document).ready(function() {
+  $("[data-toggle]").click(function() {
+    var toggle_el = $(this).data("toggle");
+    $(toggle_el).toggleClass("open-sidebar");
+    $('#sidebar').toggleClass("change-sidebar");
+  });
+});
+</script>
+</div>
+
+
+
+
+
+

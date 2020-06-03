@@ -1,0 +1,185 @@
+ <script src="/erp/scripts/general/ondutyrequest.js"></script>
+<!-- <script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script> -->
+ <!-- Bootstrap js -->
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- Propeller textfield js --> 
+<script type="text/javascript" src="dist/js/propeller.min.js"></script>
+<style>
+   /* input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} */
+ input:focus {
+  background-color:#ffe6b3;
+
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+    </style>
+<div id="ondutyreuestId" data-ng-controller="OnDutyController">
+ <br>
+  <div class="panel panel-primary" style="margin-left:19%;margin-top:-11%;margin-right:2%">
+   
+   <div class="panel-heading">Employee On Duty Request<br>
+ Note: To be used for locations where access is available and needs daily Login and Logout</div>
+    <div class="panel-body">
+    
+	 <div class="form-group col-md-4">
+       <label>Start Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" id="date" class="form-control" for="datepicker" id="datepicker" placeholder="Select Start Date" data-ng-model="data.object.needbydate" />
+	</div>	
+	<div class="form-group col-md-4">
+       <label>End Date&nbsp;<b style="color: red">*</b></label>    
+	   <input type="text" id="date1" class="form-control" for="datepicker" id="datepicker1" placeholder="Select End Date" data-ng-model="data.object.needbydate" />
+	</div>
+		<div class="form-group col-md-4">
+       <label>Nature Of Assignment&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Nature Of Assignment" data-ng-model="data.object.needbydate" />
+	</div>
+		
+	<div class="form-group col-md-4">
+       <label>Location&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"placeholder="Enter Location" data-ng-model="data.object.needbydate" />
+	</div>	
+<br><br>
+	<div class="form-group col-md-4">
+	  <label>Project&nbsp;<b style="color: red">*</b></label>       
+	 <input type="text" class="form-control" placeholder="Enter Project" data-ng-model="data.object.podate" />
+	</div>
+	<div class="form-group col-md-4">
+       <label>Reporting To&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" data-ng-model="data.object.needbydate" />
+	</div>	
+	
+	<div class="form-group col-md-4">
+       <label>On Duty Contact&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter Valid Contact Number" data-ng-model="data.object.needbydate" />
+	</div>	<br><br>
+	 <div class="form-group col-md-4">
+      <label>On Duty Reporting To&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" placeholder="Select" data-ng-model="data.object.po#">
+	  <option></option>
+	   <option data-ng-repeat="department in departments"  value="{{department.departmentid}}">{{department.department_name}}</option>
+	  </select>
+	</div><br><br>
+	<div class="form-group col-md-4">
+      <label>Description&nbsp;<b style="color: red">*</b></label>
+	   <textarea cols="30" rows="1" class="form-control" placeholder="Enter Description" data-ng-model="data.object.needbydate"></textarea>
+	</div><br><br><br><br><br>
+	
+	<div class="form-group col-md-4">
+      <label>Upload Documents&nbsp;</label>
+	<button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);">Add Documents</button> 
+   </div><br><br><br>
+   <div>     
+ <center><button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);">SUBMIT</button> </center>
+ </div>
+  </div>
+</div>
+  
+
+
+  <div class="panel panel-primary" style="margin-left:19%;margin-top:1%;margin-right:2%">
+   
+   <div class="panel-heading">On Duty Request List</div>
+    <div class="panel-body"><br><br>
+     <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <button class="button">CSV</button>     
+				        <div class="input-group col-md-4" style="float: right;">
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>  </div> <br>
+
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>S.No</th>
+<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox">
+</th>
+<th style="min-width: 200px;max-width: 200px;">Start Date</th>
+<th style="min-width: 120px;max-width: 120px;"> End Date </th>
+<th style="min-width: 120px;max-width: 120px;"> Location </th>
+<th style="min-width: 120px;max-width: 120px;"> Project</th>
+<th style="min-width: 120px;max-width: 120px;"> Nature Of Assignment </th>
+<th style="min-width: 120px;max-width: 120px;"> Status </th>
+<th style="min-width: 120px;max-width: 120px;"> View Documents </th>
+<th style="min-width: 120px;max-width: 120px;"> Action</th>
+<th style="min-width: 120px;max-width: 120px;"> View Details </th>
+
+</tr>
+</thead>
+ <tr data-ng-repeat="data in filteredResult =(linedetails | filter:search)">   
+        <td>{{data.S.No}}</td> 
+        <td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td> 
+		<td>{{data.Name}}</td>  
+		<td>{{data.Brand}}</td>	 
+		<td>{{data.Installation}}</td>	 
+		<td>{{data.Inst_date}}</td>	 
+		<td>{{data.PO_quantity}}</td>	            
+		<td>{{data.Remaining_Qty}}</td>	 
+		<td>{{data.Received_Qty}}</td>	 
+		<td>{{data.Inspected_Qty}}</td>	 
+		<td>{{data.Rejected_Qty}}</td>	 	 
+	</tr>
+</table>
+</div>
+<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	
+</div>
+ </div>
+  </div>
+   </div>
+  
+    
+
+ 
+ <!-- --------------------------------------------------------------------------------------- -->
+ <!-- Javascript -->
+     <script>
+	// Date picker only
+	$('#datepicker').datepicker({
+		format: 'DD-MM-YYYY'
+	});
+	$('#datepicker1').datepicker({
+		format: 'DD-MM-YYYY'
+	});
+</script>
+ 
+          
+<script>                        
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#ondutyrequestId"), [ 'CreateGrn' ]); 
+	    });
+		
+	</script>
+	

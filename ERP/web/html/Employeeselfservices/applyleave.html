@@ -1,0 +1,271 @@
+<script src="/erp/scripts/leaves/applyleave.js"></script>
+
+
+<style>
+input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+}
+
+input:focus {
+	background-color: #ffe6b3;
+}
+
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;
+	color: black;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #63afdc;
+}
+
+.button {
+	background-color: #63afdc;
+	border: none;
+	color: black;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+#btn {
+	/*  background-color:#63afdc ; */
+	border: none;
+	color: white;
+	padding: 30px 25px;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#btn:hover {
+	background-color: #1A5276;
+}
+</style>
+<h3 style="margin-left: 16%">Apply Leave</h3>
+<div id="applyId" data-ng-controller="applyController">
+	<br>
+
+	<div class="panel panel-primary"
+		style="margin-left: 16%; margin-top: 1%; margin-right: 5%">
+
+		<button class="btn btn-primary" id="btn">Total Credits</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-primary" id="btn">Availed Leaves</button>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-primary" id="btn">Leave Balance</button>
+
+
+		<br>    
+		<div class="panel-body">      
+
+			<div class="form-group col-md-3">
+				<label>Leave Type&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.leave_type">
+					
+					<option data-ng-repeat="leave in leavetypes" value="{{leave.id}}">{{leave.type}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Contact No.while on Leave&nbsp;<b style="color: red">*</b></label>
+				<input type="text" id="date1" class="form-control"
+					placeholder="Enter contact Number"
+					pattern="^[9|7|8|6][0-9]{9}" maxlength="10"
+					data-ng-model="data.object.emergency_number" />
+			</div>
+
+			<br> <br> <br> <br>
+			<div class="form-group col-md-3">
+				<label>From Date&nbsp;<b style="color: red">*</b></label> <input
+					type="date" class="form-control" id="from" name="fromdate"
+					data-ng-model="data.object.from_date" />
+			</div>
+
+			<div class="form-group col-md-3">
+				<label>To Date&nbsp;<b style="color: red">*</b></label> <input
+					type="date" class="form-control" id="to" name="todate"
+					data-ng-model="data.object.to_date" />
+			</div>
+			<br> <br> <br> <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<!-- <button id="getBetween">Get Between Dates</button>
+			<br> <br> <br> <br> -->
+			<div class="form-group col-md-6">
+				<label>Reporting To&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control" placeholder="Enter To"
+					data-ng-model="data.object.reporting_to" disabled />
+			</div>
+			<br> <br> <br> <br>
+			<div class="form-group col-md-6">
+				<label>Reason&nbsp;<b style="color: red">*</b></label>
+				<textarea cols="30" rows="2" class="form-control"
+					placeholder="Enter Description" data-ng-model="data.object.reason"></textarea>
+			</div>
+
+
+			<div data-ng-show="data.object.to_date">
+				<div style="margin-left: 51%; margin-top: -33%;">
+
+					<table class="table table-bordered">
+						<center>
+							<thread>
+							<tr style='background-color: CornflowerBlue'>
+								<th align="left">Date</th>
+								<th align="left">Day</th>
+								<th align="left">Session</th>
+
+
+
+							</tr>
+							<tr>
+
+								<td id="resultdates"></td>
+								
+								<td id="results"></td>
+								<td><input type="radio" name="Session 1"><label>Session1</label>
+									<input type="radio" name="Session 1"><label>Session2</label>
+									<input type="radio" name="Session 1" checked><label>FullDay</label>
+								</td>
+							
+
+
+
+							</tr>
+								
+						</center>
+					</table>
+				</div>
+			</div>
+
+
+
+
+
+			<div class="col-md-10"></div>
+
+
+
+			<div data-ng-show="data.object.leave_type">
+				<div class="form-group row">
+					<div class="col-md-3"></div>
+					<div class="col-md-2">
+						<label>Documents</label>
+						<div class="col-md-2"></div>
+						<input type="file" class="form-control"
+							data-ng-model="data.object.file_name"
+							onchange="angular.element(this).scope().uploadFiles(this)"
+							required value="" data-ng-value=>
+
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="form-group row">
+				<div class="col-md-6">
+					<button type="create" class="btn btn-primary" value="create"
+						style="margin-left: 30%" data-ng-click="insertion(data.object);">Apply
+						Leave</button>
+				</div>
+			</div>
+
+
+      
+
+
+		</div>
+
+
+	</div>
+</div>
+<script>
+	$('input[type="file"]').change(function(e) {
+		var fileName = e.target.files[0].name;
+		alert('The file "' + fileName + '" has been selected.');
+	});
+</script>
+<script>
+	jQuery(document).ready(function() {
+
+		angular.bootstrap(jQuery("#applyId"), [ 'applyleave']);
+	});
+	jQuery("#create").click(function() {
+
+		$("#add").show();
+	});
+</script>
+
+
+
+<script>
+
+	 jQuery(document).click(function() 
+			{
+						var start = new Date(document.getElementById("from").value), 
+								end = new Date(document.getElementById("to").value);
+
+						 var between = getDays(start, end);
+						 $('#results').html(between.join('<br>'));
+						
+						var between1 = getDateArray(start, end);
+						$('#resultdates').html(between1.join('<br>')); 
+						
+						/* document.getElementsByTagName("td")[0].innerHTML=between;
+						document.getElementsByTagName("td")[1].innerHTML=getDateArray(start, end); */
+ 
+
+						
+					});
+ 
+	function getDateArray(start, end) {
+		var resdates = [];
+
+		var datesArray = new Array(), startDate = new Date(start);
+
+		while (startDate <= end) {
+			datesArray.push(new Date(startDate));
+			startDate.setDate(startDate.getDate() + 1);
+		}
+
+		for (var i = 0; i < datesArray.length; i++)
+			resdates.push(datesArray[i].getDate() + '-'
+					+ (datesArray[i].getMonth() + 1) + '-'
+					+ (datesArray[i].getFullYear()));
+
+		return resdates;
+
+	}
+
+	//This function doing days between given dates.
+	function getDays(start, end) {
+		var datesArray = [];
+
+		var res = [];
+		var weekday = new Array(7);
+		weekday[0] = "Sunday";
+		weekday[1] = "Monday";
+		weekday[2] = "Tuesday";
+		weekday[3] = "Wednesday";
+		weekday[4] = "Thursday";
+		weekday[5] = "Friday";
+		weekday[6] = "Saturday";
+
+		var startDate = new Date(start);
+		while (startDate <= end) {
+			datesArray.push(new Date(startDate));
+			startDate.setDate(startDate.getDate() + 1);
+
+		}
+		for (var i = 0; i < datesArray.length; i++) {
+			var n = weekday[datesArray[i].getDay()];
+			res.push(n);
+		}
+		return res;
+	}
+</script>

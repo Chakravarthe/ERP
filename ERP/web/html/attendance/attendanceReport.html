@@ -1,0 +1,327 @@
+<script src="/erp/scripts/general/attendanceReportModule.js"></script>
+
+
+<style>   
+#registrationTab:hover, .previous, .next {
+	cursor: pointer;
+}
+   
+#imgId {  
+	width: 120px;
+}
+   
+
+
+
+.clearfix {   
+	zoom: 1;
+	clear: both;         
+}
+
+::selection {
+	background: #b3d4fc;   
+	text-shadow: none;
+}
+
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+.row {
+ 
+          
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;      
+  
+} 
+/* .panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} */
+
+.panel,.panel-default,.panel-body
+ {  
+  height :260px;       
+  padding-top: 0px;
+  padding-right: 0px;  
+  padding-bottom: 0px;        
+  padding-left:  0px;             
+ 
+} 
+.panel,.panel-default
+{   
+ border-style: solid;
+}
+.card{
+   
+ padding-top: -50px;   
+  padding-right: 0px;
+  padding-bottom: -100px;        
+  padding-left:  0px;   
+                                                                                               
+background-color: white;  
+}  
+.button {
+  background-color:#63afdc;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+ .card-panel
+ {                 
+    padding-top: 0px;   
+  padding-right: 0px;   
+  padding-bottom: 0px;     
+  padding-left:  0px;    
+background-color: white;
+}   
+    
+</style>   
+</head><body>     
+<div id="attendanceReportDiv"  
+	data-ng-controller="attendanceReportController" style="margin-left: 18%;margin-right: 2%; margin-top:-12%;">
+<br>  
+
+<div class="text-left">     
+			<h3>Attendance Report - Login/Logout </h3> 
+		</div>          
+			<br>
+	    <div class="panel-default">    
+       <div class="panel-body">   
+   	<div class="row" id="attendanceReport">   
+					<div class="form-group row">
+						
+						
+						
+						<div class="form-group col-md-3">       
+						<label for="fromdate"><span ><font color="black">*</font></span><font color="black">From Date</font></label></div>
+						<div class="form-group col-md-3">         
+							<input type="date" id="from" class="form-control" name="fromdate" data-ng-model="data.object.from_date">
+							</div> 
+						            
+						<div class="form-group col-md-3">       
+						<label for="todate"><span ><font color="black">*</font></span><font color="black">To Date</font></label></div>
+						<div class="form-group col-md-3">         
+							<input type="date" id="to" class="form-control" name="todate" data-ng-model="data.object.to_date">
+
+							</div>   
+							 
+					                            
+					
+						<div class="form-group col-md-3">       
+						<label for="department">Department</label></div>
+						<div class="form-group col-md-3"> 
+								<select name="department" class="form-control" data-ng-model="departmentid">
+								<option></option>
+								<option data-ng-repeat="department in departments"
+							value="{{department.departmentid}}">{{department.department_name}}</option>
+						        </select>          
+						</div> 
+						      
+						<div class="form-group col-md-3">        
+						<label for="designation">Designation</label></div>
+						<div class="form-group col-md-3">     
+								<select name="designation" class="form-control" data-ng-model="designation_id">
+								<option></option>
+								<option data-ng-repeat="designation in designations"
+										value="{{designation.designation_id}}">{{designation.designation_name}}</option>
+								</select>      
+						</div>
+						       
+					    <div class="form-group col-md-3">      
+					    <label for="stafftype">Staff Type</label></div>   
+						<div class="form-group col-md-3">           
+							      <select name="stafftype" class="form-control" data-ng-model="id">
+								  
+								  <option></option>
+								  <option data-ng-repeat="staff in staffs" value="{{staff.id}}">{{staff.staff_type}}</option>
+								  </select>      
+						</div>       
+					<div class="col-xs-12 col-md-12 text-center">
+				<button class="btn btn-default" style="margin-bottom: 15px;" value="submit" type="submit" id="s1" >Find</button></div>				      
+      </div>
+				  
+
+
+</div>
+</div> 
+</div>  
+		<br><br>		
+		<div class="panel-default" id="display">    
+       <div class="panel-body">
+       
+        
+ 
+
+   <div class="form-group row">
+	<div class="form-group col-md-2">					
+    <label>From Date:</label></div>
+    <div class="form-group col-md-2">{{data.object.from_date | date:"dd-MM-yyyy"}}</div>
+    
+       
+     <div class="form-group col-md-2">  
+    <label>To Date:</label></div>
+    <div class="form-group col-md-2">{{data.object.to_date | date:"dd-MM-yyyy"}}</div>
+    
+    
+   
+  <div class="form-group col-md-2">  
+ <label>Department:</label></div>
+ <div class="form-group col-md-2">{{departmentid}}</div>
+ 
+ 
+<br><br><br> 
+ 
+ <div class="form-group col-md-2">  
+ <label>Designation:</label></div>
+ <div class="form-group col-md-2">{{designation_id}}</div>
+  
+  
+  <div class="form-group col-md-2">  
+ <label>Staff:</label></div>
+ <div class="form-group col-md-2">{{id}}</div>
+ 
+  </div>    
+       	
+       </div>
+       </div>
+       	
+				       
+				    <br>   
+				    <div class="dataTables_length" id="scheduleTimetableList_length" style="margin-left:2%">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="" >
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <button class="button">CSV</button>
+				
+				        
+				   
+				        <div class="input-group col-md-4" style="float: right;margin-right:1%">
+	
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>	    
+			 <br>   
+		<div id="dataDiv" style="margin-left:2%;margin-right:1%">       
+	               
+			<table class="table table-bordered">  
+			<thread> 
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.no</th>           
+					<th align="left">Employee Name</th> 
+					<!-- <th align="left" id="th3">{{data.object.from_date | date:"dd-MM-yyyy"}}</th> 
+					
+					<th align="left" id="th4">{{data.object.to_date | date:"dd-MM-yyyy"}}</th>
+					<th ng-repeat="x in names">{{ x.Name }}</th>-->
+					<th align="left" id="th3"></th>
+					
+					      
+				</tr>     
+				      
+				<tr data-ng-repeat="emp in regdetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td>          
+					 <td align="left">{{emp.first_name}}</td>           
+			  
+				</tr> 
+				</thread>
+				<tbody><tr class="odd">
+				<td valign="top" colspan="2" class="dataTables_empty"><center>No data available in table</center></td>
+				</tr></tbody>                       
+			</table>  
+	</div>
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	
+</div>
+
+<!-- <script>
+$(function() {
+   $( "#datepicker-1" ).datepicker();
+});	              
+</script> -->
+      
+<script>
+jQuery(document).ready(function() {
+	
+	$("#attendance").show();
+	$("#display").hide();
+	$("#th3").hide();
+	
+	
+	/* $("#dataDiv").hide(); */
+	angular.bootstrap(jQuery("#attendanceReportDiv"), [ 'attendanceReportModule' ]);
+	
+});  
+
+                 
+jQuery("#s1").click(function() {
+
+	$("#display").show();
+	$("#th3").show();
+	
+	
+});
+</script>
+ 
+ <script>
+ jQuery(document).click(function() 
+			{
+						var start = new Date(document.getElementById("from").value), 
+					
+								end = new Date(document.getElementById("to").value);
+
+					var between = getDateArray(start, end);
+						$('#th3').html(between.join('&nbsp;&nbsp;'));
+						 
+						
+					});
+
+	function getDateArray(start, end) {
+		var resdates = [];
+
+		var datesArray = new Array(), startDate = new Date(start);
+
+		while (startDate <= end) {
+			datesArray.push(new Date(startDate));
+			startDate.setDate(startDate.getDate() + 1);
+		}
+
+		for (var i = 0; i < datesArray.length; i++)
+			resdates.push(datesArray[i].getDate() + '-'
+					+ (datesArray[i].getMonth() + 1) + '-'
+					+ (datesArray[i].getFullYear()));
+
+		return resdates;
+		
+		
+		
+		
+		
+
+}
+ </script>
+ 
+ 
+</body>

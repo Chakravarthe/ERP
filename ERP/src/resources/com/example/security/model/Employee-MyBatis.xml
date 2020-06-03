@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="EmployeeData">
+      
+    <select id="getCaders" resultType="map">
+		SELECT distinct id, description from hrms.cader_mst;
+	</select> 
+	<select id="getRelations" resultType="map">
+		SELECT distinct id, name from hrms.relation_mst;
+	</select>
+	<select id="getDistricts" resultType="map">  
+		SELECT distinct id as districtid, name from hrms.districts_mst ORDER BY name;
+	</select>  
+	
+	<select id="getEmp" resultType="map">
+		select concat(first_name,' ',middle_name,' ',last_name) AS fullname,empid from hrms.employee_personal_details;
+	</select> 
+	    
+	<select id="getGrades" resultType="map">
+		SELECT distinct id, grade_name from hrms.grades_mst;
+	</select>
+	<select id="getDepartment" resultType="map">
+		SELECT distinct id, department_name from hrms.department_mst;
+	</select>
+	<select id="getDivision" resultType="map">                       
+		SELECT distinct id,name from hrms.division_mst order by name;
+	</select>
+	
+	<select id="getCost_center" resultType="map">      
+		SELECT id, name from hrms.cost_center_mst;
+	</select>
+	<select id="getDesignation" resultType="map">
+		SELECT distinct id, designation_name from hrms.designation_mst; 
+	</select>
+ 	<select id="getDetails" resultType="Employee">
+ 	SELECT a.empid as empid,a.title as title,a.first_name as first_name,a.last_name as last_name,
+		a.middle_name as middle_name,a.mobile as mobile,a.email as email,
+		b.company_email as company_email,
+		c.description as cader,d.grade_name as grade,b.joining_date as joining_date,b.confirmed_date as confirmed_date,
+		b.contract_from as contract_from,b.contract_to as contract_to,b.relieved_date as relieved_date,
+		e.department_name as department,f.designation_name as designation,g.name as division,h.name as cost_center,
+		b.reporting as reporting,b.notice_period as notice_period,b.location as id,i.bank_name as bank_name,i.brach as brach,i.ifsc_code as ifsc_code,
+		i.bank_acno as bank_acno,i.pan_name as pan_name,i.pan_no as pan_no,
+		i.esi_no as esi_no,i.uan_no as uan_no,i.pf_no as pf_no,i.ctc as ctc,i.ctc_calculator as ctc_calculator,i.beneficiary_code as beneficiary_code 
+		FROM hrms.employee_personal_details as a    
+        join hrms.employee_employment_details as b on (a.empid = b.empid)
+        join hrms.cader_mst c on (b.cader = c.id) 
+        join hrms.grades_mst d on (b.grade = d.id)
+        join hrms.department_mst e on (b.department = e.id)
+        join hrms.designation_mst f on (b.designation = f.id)   
+        join hrms.division_mst g on (b.division = g.id)
+        join hrms.cost_center_mst h on (b.cost_center = h.id)
+        join hrms.employee_bank_details i on (b.empid = i.empid) where 
+        a.empid = #{p.empid};  
+	</select>
+	
+	<!-- Inserting Employee Education Details -->    
+    <insert id="Inserteducation" parameterType="map">
+		insert into hrms.employee_educational_details(empid,institute,institute_name,highest_qualification,score,
+		passout_year,cgpa,grades,percentage) values (#{p.empid},#{p.institute},
+		#{p.institute_name},#{p.highest_qualification},#{p.score},#{p.passout_year},#{p.cgpa},#{p.grades},#{p.percentage})     
+    </insert>
+     
+    <!-- Getting table data in education tab in employee profile --> 
+     <select id="getAll" resultType="Employee">    
+		SELECT * from hrms.employee_educational_details;
+	  </select>   
+	     
+	   <select id="getById" resultType="Employee">   
+		SELECT empid,institute,institute_name,highest_qualification,passout_year,cgpa,grades,percentage from hrms.employee_educational_details WHERE empid = #{empid};
+	  </select>
+	
+	
+	<!-- hr profile details -->
+	
+	<select id="gethrDetails" resultType="Employee">
+ 	SELECT a.empid as empid,a.title as title,a.first_name as first_name,a.last_name as last_name,
+		a.middle_name as middle_name,a.mobile as mobile,a.email as email,
+		b.company_email as company_email,
+		c.description as cader,d.grade_name as grade,b.joining_date as joining_date,b.confirmed_date as confirmed_date,
+		b.contract_from as contract_from,b.contract_to as contract_to,b.relieved_date as relieved_date,
+		e.department_name as department,f.designation_name as designation,g.name as division,h.name as cost_center,
+		b.reporting_to as reporting_to,b.notice_period as notice_period,i.bank_name as bank_name,i.brach as brach,i.ifsc_code as ifsc_code,
+		i.bank_acno as bank_acno,i.pan_name as pan_name,i.pan_no as pan_no,
+		i.esi_no as esi_no,i.uan_no as uan_no,i.pf_no as pf_no,i.ctc as ctc,i.ctc_calculator as ctc_calculator,i.beneficiary_code as beneficiary_code 
+		FROM hrms.employee_personal_details as a    
+        join hrms.employee_employment_details as b on (a.empid = b.empid)
+        join hrms.cader_mst c on (b.cader = c.id) 
+        join hrms.grades_mst d on (b.grade = d.id)
+        join hrms.department_mst e on (b.department = e.id)
+        join hrms.designation_mst f on (b.designation = f.id)
+        join hrms.division_mst g on (b.division = g.id)
+        join hrms.cost_center_mst h on (b.cost_center = h.id)
+        join hrms.employee_bank_details i on (b.empid = i.empid) where 
+        a.empid = #{p.empid};  
+	</select>
+	
+	<!-- updating hr profile details in HR login -->
+	
+	<!-- updating details of hr profile -->
+	
+	<update id="Updatehr" parameterType="map">
+		update hrms.employee_personal_details set title = #{p.title},first_name = #{p.first_name},middle_name = #{p.middle_name},
+		last_name = #{p.last_name},mobile = #{p.mobile},alternate_mobile = #{p.alternate_mobile},dob = #{p.dob},
+		gender = #{p.gender},email = #{p.email},aadhaar = #{p.aadhaar},passport = #{p.passport},nativity = #{p.nativity},
+		nationality = #{p.nationality},caste = #{p.caste},sub_caste = #{p.sub_caste},blood_group = #{p.blood_group},
+		emergency_name = #{p.emergency_name},emergency_contact = #{p.emergency_contact},
+		relation = #{p.relation} where empid = #{p.empid}
+    </update>
+    
+    <insert id="Inserthr1" parameterType="map">
+		insert into hrms.employee_communication_details(pincode,dno,street,village,mandal,districtid,
+		state,empid) values (#{p.pincode},#{p.dno},#{p.street},
+		#{p.village},#{p.mandal},#{p.districtid},#{p.state},#{p.empid})       
+    </insert>
+    
+	<update id="Updatehr1" parameterType="map">
+		update hrms.employee_employment_details set company_email = #{p.company_email},cader = #{p.caderid},
+		grade = #{p.gradeid},joining_date = #{p.joining_date},confirmed_date = #{p.confirmed_date},
+		contract_from = #{p.contract_from},contract_to = #{p.contract_to},relieved_date = #{p.relieved_date},
+		department = #{p.departmentid},designation = #{p.designationid},division = #{p.divisionid},
+		cost_center = #{p.cost_centerid},reporting_to = #{p.reporting_to},notice_period = #{p.notice_period}
+		where empid = #{p.empid}
+		<!--,created_by,created_date  #{p.created_by},current_timestamp  ,employee_type ,,,,,,,,,,,,#{p.employee_type}, -->   
+    </update>
+         
+    <insert id="Inserthr2" parameterType="map">
+		insert into hrms.employee_professional_details(empid,company_name,
+		designation,from_date,to_date,document_name,consent) values
+		 (#{p.empid},#{p.company_name},#{p.designation},
+		#{p.from_date},#{p.to_date},#{p.document_name},#{p.consent})     
+    </insert> 
+       
+    <insert id="Inserthr3" parameterType="map">
+		insert into hrms.employee_family_details(empid,name,dob,relation) values (#{p.empid},#{p.name},#{p.dob1},#{p.relationid})       
+    </insert>
+	
+	
+	
+    <update id="Update" parameterType="map">
+		update hrms.employee_personal_details set title = #{p.title},first_name = #{p.first_name},middle_name = #{p.middle_name},
+		last_name = #{p.last_name},mobile = #{p.mobile},alternate_mobile = #{p.alternate_mobile},dob = #{p.dob},
+		gender = #{p.gender},email = #{p.email},aadhaar = #{p.aadhaar},passport = #{p.passport},nativity = #{p.nativity},
+		nationality = #{p.nationality},caste = #{p.caste},sub_caste = #{p.sub_caste},blood_group = #{p.blood_group},
+		emergency_name = #{p.emergency_name},emergency_contact = #{p.emergency_contact},
+		relation = #{p.relation} where empid = #{p.empid}
+    </update>
+                                     
+    <insert id="Insert1" parameterType="map">
+		insert into hrms.employee_communication_details(pincode,dno,street,village,mandal,districtid,
+		state,empid) values (#{p.pincode},#{p.dno},#{p.street},
+		#{p.village},#{p.mandal},#{p.districtid},#{p.state},#{p.empid})       
+    </insert> 
+    
+    <update id="Update1" parameterType="map">
+		update hrms.employee_employment_details set company_email = #{p.company_email},cader = #{p.caderid},
+		grade = #{p.gradeid},joining_date = #{p.joining_date},confirmed_date = #{p.confirmed_date},
+		contract_from = #{p.contract_from},contract_to = #{p.contract_to},relieved_date = #{p.relieved_date},
+		department = #{p.departmentid},designation = #{p.designationid},division = #{p.divisionid},
+		cost_center = #{p.cost_centerid},reporting_to = #{p.reporting_to},notice_period = #{p.notice_period}
+		where empid = #{p.empid}
+		<!--,created_by,created_date  #{p.created_by},current_timestamp  ,employee_type ,,,,,,,,,,,,#{p.employee_type}, -->   
+    </update>       
+    
+    <insert id="Insert3" parameterType="map">
+		insert into hrms.employee_bank_details(empid,bank_name,
+		brach,ifsc_code,bank_acno,pan_name,pan_no,esi_no,uan_no,pf_no,         
+		created_date) values (#{p.empid},#{p.bank_name},#{p.brach},
+		#{p.ifsc_code},#{p.bank_acno},#{p.pan_name},#{p.pan_no},#{p.esi_no},#{p.uan_no},
+		#{p.pf_no},current_timestamp)     
+    </insert>    
+     
+    <insert id="Insert4" parameterType="map">
+		insert into hrms.employee_professional_details(empid,company_name,
+		designation,from_date,to_date,document_name,consent) values
+		 (#{p.empid},#{p.company_name},#{p.designation},
+		#{p.from_date},#{p.to_date},#{p.document_name},#{p.consent})     
+    </insert>  
+    
+     <insert id="Insert5" parameterType="map">   
+		insert into hrms.employee_family_details(empid,name,   
+		dob,relation) values       
+		 (#{p.empid},#{p.name},#{p.dob1},#{p.relationid})       
+    </insert>  
+    
+      <select id="getYear" resultType="java.lang.Integer">
+		SELECT (cast(split_part(cast(EXTRACT(year FROM CURRENT_TIMESTAMP) as varchar), '0', 2) as integer)) as year;
+	  </select>
+     
+     <select id="getCount" resultType="java.lang.Integer">
+		SELECT count(id)+1 as count from hrms.employee_personal_details;
+	</select>
+	       
+  <!--  <insert id="Insert6"  parameterType="map">       
+		insert into hrms.employee_personal_details(empid,title,first_name,last_name,middle_name,mobile,
+		email,created_date,iscreated) values (('AO07' || '' || #{year} || '' ||lpad(CAST( #{id} AS character varying ),5,'0')),
+		#{p.title},#{p.first_name},#{p.last_name},#{p.middle_name},#{p.mobile},#{p.email}, current_timestamp,'no');
+    </insert>  -->
+     
+     <!-- For Bank Details -->
+     
+     <insert id="Insert9" parameterType="map">
+		insert into hrms.employee_bank_details(empid,bank_name,
+		brach,ifsc_code,bank_acno,pan_name,pan_no,esi_no,uan_no,pf_no,         
+		created_date,ctc,ctc_calculator,payment_mode,beneficiary_code) values (('AO09' || '' || #{year} || '' ||lpad(CAST( #{id} AS character varying ),5,'0')),#{p.bank_name},#{p.brach},
+		#{p.ifsc_code},#{p.bank_acno},#{p.pan_name},#{p.pan_no},#{p.esi_no},#{p.uan_no},
+		#{p.pf_no},current_timestamp,#{p.ctc},#{p.ctc_calculator},#{p.payment_mode},#{p.beneficiary_code})     
+    </insert>    
+     
+     <insert id="Insert8"  parameterType="map">       
+		insert into hrms.employee_personal_details(empid,title,first_name,last_name,middle_name,mobile,
+		email) values (('AO09' || '' || #{year} || '' ||lpad(CAST( #{id} AS character varying ),5,'0')),
+		#{p.title},#{p.first_name},#{p.last_name},#{p.middle_name},#{p.mobile},#{p.email});   
+    </insert>         
+              
+     <select id="getEmployeeID" resultType="java.lang.String">   
+		 SELECT  empid as employeeid,first_name,last_name,middle_name  from hrms.employee_personal_details 
+		 where first_name = #{p.first_name} AND last_name = #{p.last_name} AND middle_name = #{p.middle_name};   
+	</select>  
+         
+	<insert id="Insert7" parameterType="map">  
+		insert into hrms.employee_employment_details(empid,company_email,cader,grade,joining_date,
+		confirmed_date,contract_from,contract_to,relieved_date,department,designation,division,cost_center,
+		reporting,notice_period,location) values (('AO09' || '' || #{year} || '' ||lpad(CAST( #{id} AS character varying ),5,'0')),#{p.company_email},#{p.caderid},#{p.gradeid},
+		#{p.joining_date},#{p.confirmed_date},#{p.contract_from},#{p.contract_to},#{p.relieved_date},#{p.departmentid},
+		#{p.designationid},#{p.divisionid},#{p.cost_centerid},#{p.reporting_to},#{p.notice_period},#{p.id})
+    </insert>
+       
+    <!-- Scheme, projects and sector -->     
+    
+    <select id="getSchemes" resultType="Employee">  
+		SELECT distinct scheme_id, scheme_name from procurements.scheme_mst ORDER BY scheme_id;
+	</select>
+
+	<select id="getProjects" parameterType="map" resultType="Employee">
+		select project_id, project_name from procurements.project_mst where scheme_id = #{scheme_id}  order by project_name;
+	</select>
+	
+	<select id="getSectors" resultType="Employee">  
+		SELECT distinct sector_id, sector_name from procurements.sector_mst ORDER BY sector_id;
+	</select>
+	
+	<!-- <select id="getSectors" resultType="map">
+		SELECT distinct sector_id, sector_name from procurements.sector_mst;
+	</select> -->  
+	  
+	<!-- <select id="getProjects" resultType="map">
+		SELECT distinct project_id, project_name from hrms.project_mst ORDER BY project_id;
+	</select>  -->  
+	
+	<!-- <select id="getSectors" parameterType="map" resultType="Employee">
+		select sector_id, sector_name from hrms.sector_mst where project_id = #{project_id}  order by sector_name;
+	</select> -->
+	
+	
+	<!-- education and branch in candidate registration -->
+	
+	<select id="getEducations" resultType="Employee">
+		SELECT distinct education_id, education_name from hrms.education_mst ORDER BY education_id;
+	</select>   
+	
+	<select id="getBranches" parameterType="map" resultType="Employee">
+		select branch_id, branch_name from hrms.branch_mst where education_id = #{education_id}  order by branch_name;
+	</select>
+	
+	<!-- Institute and qualification in update employee education tab(Employee login) -->   
+	
+	<select id="getInstitutes" resultType="Employee">
+		SELECT distinct institute_id, institute_name from hrms.institute_mst ORDER BY institute_id;
+	</select>
+	<select id="getQualifications" parameterType="map" resultType="Employee">
+		select qualification_id, qualification_name from hrms.highest_qualification_mst where institute_id = #{institute_id}  order by qualification_name;
+	</select>
+	
+     <!-- Insert data from attendance and time sheet -->
+    
+    <insert id="Insertdata" parameterType="map">
+		insert into	hrms.employee_timesheet(empid,timesheet_date,location,task,description,start_time,end_time)
+		values(#{p.empid},#{p.timesheet_date},#{p.location},#{p.task},#{p.description},#{p.start_time},#{p.end_time});
+	</insert>
+	
+	<!-- Getting Locations -->
+    	<select id="getLocations" resultType="map">
+		SELECT distinct id,location_name from hrms.location_mst ORDER BY id;
+	</select>
+	
+	<!-- Getting Projects -->
+	<select id="getprojects" resultType="map">
+		SELECT distinct project,project_name from hrms.project_mst ORDER BY project;
+	</select>   
+	
+	<!-- Getting Reporting manager -->
+	<select id="getReporting" resultType="map">
+		SELECT distinct reporting,reporting_to from hrms.reporting_mst ORDER BY reporting;
+	</select>
+
+	<!-- getting data in project employee data tables -->
+	
+	<select id="getprojectdata" resultType="Employee" parameterType="map">
+	<!-- select concat(first_name,' ',last_name) as name,a.mobile,a.email,e.designation_name as designation,d.grade_name as grade,c.description as cader,h.project_name,f.project,f.status,g.location_name as location from (select * from hrms.employee_personal_details) a inner join (select * from hrms.employee_employment_details where location=#{p.id}) b on (a.empid=b.empid) 
+	inner join (select * from hrms.cader_mst) c on (b.cader=c.id) inner join (select * from hrms.grades_mst) d on (b.grade=d.id) inner join(select * from hrms.designation_mst) e on (b.designation=e.id) inner join (select * from hrms.location_mst) g on (g.id=b.location) inner join (select empid,project,status from hrms.employee_project where project=#{p.project}) f on (f.empid=b.empid) inner join (select project,project_name from hrms.project_mst) h on (h.project=f.project) -->
+	
+	select concat(first_name,' ',last_name) as name,e.project_name as projectname,d.location_name as locationname,c.status from (select empid,first_name,last_name from hrms.employee_personal_details) a inner join (select empid,location,reporting from hrms.employee_employment_details) b on (a.empid=b.empid) inner join (select * from hrms.employee_project where project=#{p.project}) c on (c.empid=b.empid) 
+		inner join (select * from hrms.location_mst) d on (d.id=b.location) inner join (select * from hrms.project_mst) e on (e.project=c.project)
+	
+	</select>   
+	
+	 
+	<!-- getting data of all employees based on selected location -->
+	<select id="getallemployees" resultType="Employee" parameterType="map">
+	
+	select concat(first_name,' ',last_name) as full_name,a.email as email_id,a.mobile as phone,c.description as cader_name,d.grade_name as grade_name,e.designation_name as designation_name from (select empid,first_name,last_name,mobile,email from hrms.employee_personal_details) a inner join (select * from  hrms.employee_employment_details where location=#{p.id}) b on (a.empid=b.empid)
+	inner join (select * from hrms.cader_mst) c on (c.id=b.cader) inner join (select * from hrms.grades_mst) d on (d.id=b.grade) inner join (select * from hrms.designation_mst) e on (b.designation=e.id)
+	
+	</select>
+	
+	<!-- getting data in employee project mapping -->
+	 <select id="getempprojectdata" resultType="Employee" parameterType="map">
+		select a.project_name,c.location_name as location,d.reporting_to,b.from_date,b.to_date from 
+			(select * from hrms.project_mst where project=#{p.project} AND reporting=#{p.reporting} AND location=#{p.id}) a inner join (select * from procurements.createproject_mst) b on (b.project_name=a.project_name) inner join (select * from hrms.location_mst) c on (c.id=a.location) inner join (select * from hrms.reporting_mst) d on (d.reporting=a.reporting)	
+	 </select>
+	 
+	 <!-- getting data in pop up based on project name -->
+	 
+	 <select id="getByproject" resultType="Employee">
+		
+	  select a.project as project,c.id as id,d.reporting as reporting from (select * from hrms.project_mst where project_name=#{project_name}) a inner join (select * from procurements.createproject_mst) b on (b.project_name=a.project_name) inner join (select * from hrms.location_mst) c on (c.id=a.location) 
+			inner join (select * from hrms.reporting_mst) d on (d.reporting=a.reporting)
+	  </select>
+	  
+	  <!-- update data in employee project mapping based on project_name -->
+	  
+	  <update id="updateprojectdata1"  parameterType="map">  
+		update hrms.project_mst SET location=#{p.id},reporting=#{p.reporting} WHERE project=#{p.project};
+	  </update>
+    
+</mapper>         

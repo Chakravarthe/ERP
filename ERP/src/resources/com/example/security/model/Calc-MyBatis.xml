@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Calc">
+
+
+<select id="getAll" resultType="Calc">
+			<!-- select a.name,b.cader_name,c.grade_name from hrms.ctc_calculator_mst as a
+	 inner join(select id,cader_name from hrms.cader_mst)  as b on (a.id =  b.id)
+	 inner join(select id,grade_name from hrms.grades_mst)  as c on (b.id =  c.id)
+	;
+ -->
+
+select a.name,d.years,b.cader_name,c.grade_name from hrms.ctc_calculator_mst as a
+
+	 inner join(select id,years from procurements.years_mst)  as d on (a.id =  d.id)
+	 inner join(select id,cader_name from hrms.cader_mst)  as b on (d.id =  b.id)
+	 inner join(select id,grade_name from hrms.grades_mst)  as c on (b.id =  c.id)
+	
+	 
+	;
+	</select>  	
+	
+	
+	<!-- <select id="getAll1" resultType="Calc">
+			select pname from hrms.payslip_heads_mst where title = "Deductions";
+	
+      
+	</select>   -->
+
+	
+	   
+	  <select id="getById" resultType="Calc">   
+		SELECT * from hrms.ctc_calculator_mst where name=#{name};
+	  </select>
+	                             
+	        
+	  
+	
+	  <!-- <select id="getPayname" resultType="Calc">
+		SELECT pname from hrms.payslip_heads_mst;
+	  </select>      
+
+	     -->
+	     
+	    
+
+
+
+	<select id="getYears" resultType="map">
+		SELECT distinct yearid,years
+		from procurements.years_mst;    
+	</select>
+
+	<select id="getCaders" resultType="map">
+		SELECT distinct id as caderid,
+		cader_name from hrms.cader_mst;   
+	</select>
+
+	<select id="getGrades" resultType="map">
+		SELECT distinct id as gradeid,
+		grade_name from hrms.grades_mst;
+	</select>
+    
+
+	<insert id="Insert" parameterType="map">
+		insert into hrms.ctc_calculator_mst (name,financial_year,gradeid,caderid,basicvalue,hravalue,cavalue,mavalue,ltavalue,grossvalue,deductions)
+		values (#{p.name},#{p.financial_year},#{p.gradeid},#{p.caderid},#{p.basicvalue},#{p.hravalue},#{p.cavalue},#{p.mavalue},#{p.ltavalue},#{p.grossvalue},
+		#{p.deductions});
+		
+	</insert>
+
+	
+       
+</mapper>

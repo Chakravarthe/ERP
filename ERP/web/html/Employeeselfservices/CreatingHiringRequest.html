@@ -1,0 +1,403 @@
+<script src="/erp/scripts/general/createhiringrequest.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<!-- <style>
+input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+}   
+
+input:focus {
+	background-color: #ffe6b3;
+}
+           
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;
+	color: black;
+	border-width: 1px;  
+	border-style: solid;
+	border-color: #63afdc;
+}
+
+.button {
+	background-color: #63afdc;
+	border: none;
+	color: black;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+.but {
+	padding: 5px 10px;
+	font-size: 15px;
+	text-align: center;
+	cursor: pointer;
+	outline: none;
+	color: #fff;
+	background-color: #1E565A;
+	border: none;
+	border-radius: 15px;
+	box-shadow: 0 7px #999;
+}
+
+.but:hover {
+	background-color: #1E565A
+}
+
+.but:active {
+	background-color: 1E565A;
+	box-shadow: 0 3px #666;
+	transform: translateY(3px);
+}
+</style> -->
+
+<!-- <style>
+	panel-default .panel-heading {
+    color: #ffffff !important;
+    background: linear-gradient(180deg, #699c68, #3b614e) !important;
+    border-color: #fff !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.02em !important;
+}
+	.panel-heading h4 {
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-transform: inherit;
+    margin-bottom: 2px !important;
+}
+	.accordion-toggle {
+    margin: 0;
+    padding: 0;
+}
+	[role="button"] {
+    cursor: pointer;
+}
+	.panel-heading h4 {
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 15px !important;
+    text-transform: inherit;
+    margin-bottom: 2px !important;
+}
+	@media (min-width: 992px)
+	.col-md-12 {
+    width: 100%;
+}
+	.form-group {
+    margin-bottom: 15px;
+}
+	label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+	input, option {
+    padding: 2px 9px !important;
+}
+	input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+	div {
+    display: block;
+}
+	.cndRegs {
+    background: #fff;    
+    padding: 10px;
+    clear: both;
+}
+    
+</style> -->
+
+
+<div id="hiringid" data-ng-controller="hiringrequest">
+	<br>
+	<form data-ng-signup="add()" name="myForm" class="form-signin">
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -11%; margin-right: 3%">
+
+		<div class="panel-heading"><b>HiringRequest</b></div>
+		<div class="panel-body">
+
+			<div class="form-group col-md-4">
+				<label style="margin-right:20px; float:left" class="form-label"><b>As Per AOP</b></label>
+				<input id="asperAOP" class="checkbox" type="checkbox" value="true"></b>
+				</div><br><br>
+				<div class="form-group col-md-4">
+				<label>Scheme&nbsp;<b style="color: red">*</b></label>
+				<select class="form-control"
+								data-ng-model="data.object.scheme_id" data-ng-change="getProjects(data.object);">
+								<option></option>
+								<option data-ng-repeat="scheme in schemes"
+								value="{{scheme.scheme_id}}">{{scheme.scheme_name}}</option>
+					</select>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label>Project&nbsp;<b style="color: red">*</b></label> 				
+				<select class="form-control" data-ng-model="data.object.project_id">
+						<option></option>
+						<option data-ng-repeat="project in projects"
+						value="{{project.project_id}}">{{project.project_name}}</option>
+				</select>
+											
+			</div>
+
+			<div class="form-group col-md-4">
+				<label>Sector&nbsp;<b style="color: red">*</b></label>
+				
+				<select class="form-control"
+						data-ng-model="data.object.sector_id">
+						<option></option>
+						<option data-ng-repeat="sector in sectors"
+							value="{{sector.sector_id}}">{{sector.sector_name}}</option>
+				</select>
+				
+				 <!-- <select class="form-control" data-ng-model="data.object.sector_id">
+					<option></option>
+					<option data-ng-repeat="sector in sectors" 
+					value="{{sector.sector_id}}">{{sector.sector_name}}</option>
+				</select> -->
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+	<!--  ---------------------------------------------vendor comment-------------------------- ------------------------>
+
+
+
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: 1%; margin-right: 3%">
+		<div class="panel-heading"><b>Remaining AOP Head Count</b></div>
+		
+		
+		<!-- <div style="margin-top:15px" class="cndRegs">
+		<div class>
+		<div class="col-md-12">
+			<div class="form-group">
+				<label style="margin-right:20px; float:left" class="form-label">As Per AOP</label>
+				<input id="asperAOP" name="manpowerRequisition.asPerAOP" tabindex="1" onclick="makeProjectsNotMandatory()" class="checkbox"
+					type="checkbox" value="true">
+					<input type="hidden" name="_manpowerRequisition.asPerAOP" value="on">
+			</div>
+		</div>
+		<div class="row">
+		<div style="margin-bottom:12px !important;" class="intsvTitl panel panel-default">
+		<div class="panel-heading">
+		<h4 class="panel-title">
+		<span data-target="#income" class="accordion-toggle collapsed" role="button" data-parent="#accordion" data-toggle="collapse" aria-expanded="false">
+			<h4 id="projectName">Remaining AOP Head Count</h4>
+		</span>
+		</h4>
+		</div>
+		<div class="panel-collapse panel-body collapse in" id="income" aria-expanded="true" style>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">Head Count</div>
+								<div class="panel-body cc-nopad">
+									<table class="table table-bordered table-striped dataTable no-margin no-footer" id="hiringSlotsList">
+										<thead>
+											<tr>
+												<th class="text-center">S.NO</th>
+												<th class="text-center">Cader</th>
+												<th class="text-center">Grade</th>
+												<th class="text-center">Balence Head Count</th>
+											</tr>
+										</thead>
+										<tbody id="remainingcandidatesList">
+											<tr>
+												<td class="text-center" colspan="4">No Data Available</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						</div>
+						
+						<div class="col-md-6">
+							<div class="panel panel-default">
+								<div class="panel-heading">Head Count</div>
+								<div class="panel-body cc-nopad">
+									<table class="table table-bordered table-striped dataTable no-margin no-footer" id="hiringSlotsList">
+										<thead>
+											<tr>
+												<th class="text-center">S.NO</th>
+												<th class="text-center">Cader</th>
+												<th class="text-center">Grade</th>
+												<th class="text-center">Balence Head Count</th>
+											</tr>
+										</thead>
+										<tbody id="closedcandidatesList">
+											<tr>
+												<td class="text-center" colspan="4">No Data Available</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>  
+					</div>
+				</div>
+			</div>
+		</div> 
+		</div>
+		</div>
+		</div> -->
+		
+		
+		
+		<div class="panel-body">
+			<div class="form-group col-md-3">
+				<label>Department&nbsp;<b style="color: red">*</b></label>
+				<select class="form-control"
+					data-ng-model="data.object.departmentid">
+					<option></option>
+					<option data-ng-repeat="department in departments"
+						value="{{department.departmentid}}">{{department.department_name}}</option>
+				</select>
+
+			</div>
+			<div class="form-group col-md-3">
+				<label>Cadre&nbsp;<b style="color: red">*</b></label>
+				 <select class="form-control"
+						data-ng-model="data.object.caderid">
+						<!-- <option></option> -->
+						<option data-ng-repeat="cader in caders"
+							value="{{cader.caderid}}">{{cader.description}}</option>
+					</select>
+			</div>
+
+			<div class="form-group col-md-3">
+				<label>Grade&nbsp;<b style="color: red">*</b></label> 
+				<select class="form-control"
+						data-ng-model="data.object.gradeid">
+						<option></option>
+						<option data-ng-repeat="grade in grades"
+							value="{{grade.gradeid}}">{{grade.grade_name}}</option>
+					</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>ReportsTo&nbsp;<b style="color: red">*</b></label> 
+				<select class="form-control"
+						data-ng-model="data.object.designation_id">  
+						<option></option>
+						<option data-ng-repeat="designation in designations"
+							value="{{designation.designation_id}}">{{designation.designation_name}}</option>
+					</select>    
+			</div>
+			<div class="form-group col-md-3">   
+				<label>RequiredPosition&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.position"
+					placeholder="Enter RecquiredPosition" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>No.of Position&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.position_number" placeholder="0" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>Required For Division&nbsp;<b style="color: red">*</b></label>
+				<select class="form-control" data-ng-model="data.object.divisionid">
+					<option></option>
+					<option data-ng-repeat="division in divisions"
+						value="{{division.id}}">{{division.name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>TotlaExperience&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.total_experience"
+					placeholder="Enter TotlaExperience" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>ReleventExperience&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.relevent_experience"
+					placeholder="Enter ReleventExperience" />
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- ----------------------------------------------------------------------------- -->
+	<h4 style="margin-left: 19%">
+		Job Description&nbsp;<b style="color: red">*</b>
+	</h4>
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: 1%; margin-right: 3%">
+
+		<div class="panel-heading"></div>
+		<div class="panel-body">
+			<div class="panel-body">
+			</div>
+		</div>
+
+	</div>
+	<!-- <-------------------->
+	<h4 style="margin-left: 19%">
+		Key Accountabilities&nbsp;<b style="color: red">*</b>
+	</h4>
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: 1%; margin-right: 3%">
+
+		<div class="panel-heading"></div>
+		<div class="panel-body">
+			<div class="panel-body"></div>
+		</div>
+
+	</div>
+
+	<button type="button" class="btn btn-primary" id="create"
+		data-ng-click="insertion(data.object);" style="margin-left: 50%">Create</button>
+		<br>
+		<br>
+		</form>
+	</div>	
+
+	<script>
+		jQuery(document).ready(function() {
+			
+			angular.bootstrap(jQuery("#hiringid"), [ 'createhiringrequest' ]); 
+		});
+		jQuery("#create").click(function(){   
+			$("#add").show();
+		});
+	</script>
+<!-- 	<script>  
+		<script>
+		function openCity(cityName, elmnt, color) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablink");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].style.backgroundColor = "";
+			}
+			document.getElementById(cityName).style.display = "block";
+			elmnt.style.backgroundColor = color;
+
+		}
+		// Get the element with id="defaultOpen" and click on it
+		document.getElementById("defaultOpen").click();
+	</script> -->

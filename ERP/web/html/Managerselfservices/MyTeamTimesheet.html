@@ -1,0 +1,251 @@
+<script src="/erp/scripts/general/MyTeamTimesheets.js"></script>
+
+<style>
+          
+.btn-search {       
+	  background: #63afdc;           
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	            
+	}
+.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+} 
+.scroll{
+  overflow:auto;
+  whitespace:nowrap;
+}    
+    </style>
+    <div id="ramya" data-ng-controller="sheetsController" >
+    <h4 style="margin-left:17%;position:absolute;top:210px;">My Team Time Sheets</h4>
+    <div id="main1"    style="margin-left:17%;position:absolute;width:1000px;top:250px;">
+    <input type="radio" id="attendance"  value="attendance" name="timesheet">
+  <label for="attendance">Attendance</label>
+  <input type="radio" id="timesheet"  value="timesheet" name="timesheet">
+  <label for="timesheet">Timesheet</label></div>
+ <div id="timeDiv1"   style="margin-left:10%;top:160px;width:1000px;position:absolute;">
+ <div class="panel panel-primary" style="margin-left:10%;top:160px;width:1000px;position:absolute;">
+<div class="panel-body">
+	                           <div class="form-group col-md-4">
+									<label>FromDate <b style="color: red">*</b></label> <input
+										class="form-control" type="date" id="fromdate"
+										data-ng-model="data.object.from_date" placeholder="" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>ToDate<b style="color: red">*</b></label> <input
+										class="form-control" type="date" id="todate"   
+										data-ng-model="data.object.to_date" placeholder="" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>Select Employee&nbsp;<b style="color: red">*</b></label>
+	                                 <select class="form-control"  data-ng-model="data.object.id">
+	                                <option>All</option>
+	                              <option data-ng-repeat="reporting in reportings"  value="{{reporting.id}}">{{reporting.reporting_to}}</option>
+	                              </select>
+								</div> 
+								<div style="margin-left:45%;margin-top:13%;"> 
+<button type="button" class="btn btn-primary" id="submit" data-ng-click="getTeamSheets(data.object);">Submit</button> 
+</div> 
+								  
+</div>   </div>  
+</div>                       
+ <!-- <div style="margin-left:45%;margin-top:25%;"> 
+<button type="button" class="btn btn-primary" id="submit" data-ng-click="getTeamSheets(data.object);">Submit</button> 
+</div>  -->
+<br><br><br>
+     
+<div class="panel panel-primary" id="report" style="margin-left:16%;top:600px;width:1000px;position:absolute;padding:0px;">
+<div class="panel-heading"> </div>
+		<div class="panel-body">
+		
+ <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+ <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	  <div class="input-group col-md-4" style="float: right;">
+	   <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+             </div>
+	</div>	    
+			 <br>   
+		   <div id="dataDiv" class="scroll">          
+			<table class="table table-bordered"> 
+			 <thread> 
+			   <tr style='background-color:CornflowerBlue'>        
+					<th align="left">S.no</th>
+					<th align="left">EmployeeName</th>     
+					<th align="left">Date</th>
+				    <th align="left">StartTime</th>  
+				    <th align="left">EndTime</th>
+				    <th align="left">Task</th>     
+				    <th align="left">Description</th>
+				    <th align="left">Status</th> 
+				     <th align="left">Approve</th> 
+				     <th align="left">Rejects</th> 
+				                       
+				</tr>     	      
+				<tr data-ng-repeat="emp in empdetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td> 
+				     <td align="left">{{emp.employeename}}</td> 
+					 <td align="left">{{emp.timesheetdate}}</td>    
+					 <td align="left">{{emp.login_time}}</td> 
+					 <td align="left">{{emp.logout_time}}</td>
+					 <td align="left">{{emp.task}}</td> 
+					 <td align="left">{{emp.description}}</td> 
+					 <td align="left">{{emp.status}}</td> 
+					 <td>&nbsp;&nbsp;&nbsp;
+						<button type="button" id="editData" data-ng-click="getById(empdata.task)"
+							class="btn btn-success btn-md" data-toggle="modal"
+							data-target="#myModal">Approved
+						</button> &nbsp;&nbsp;&nbsp;</td>
+						<td><button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(userdata.task)">Rejects
+						</button>
+					</td>
+					              
+				</tr>        
+				</thread>
+				                    
+			</table> 
+			</div> </div>   
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	</div> 
+	
+	
+	<div id="att" style="margin-left:10%;top:160px;width:1000px;position:absolute;">
+ <div class="panel panel-primary" style="margin-left:10%;top:160px;width:1000px;position:absolute;">
+<div class="panel-body">
+	                           <div class="form-group col-md-4">
+									<label>FromDate <b style="color: red">*</b></label> <input
+										class="form-control" type="date" id="fromdate"
+										data-ng-model="data.object.from_date" placeholder="" />
+								</div>
+								<div class="form-group col-md-4">
+									<label>ToDate<b style="color: red">*</b></label> <input
+										class="form-control" type="date" id="todate"
+										data-ng-model="data.object.to_date" placeholder="" />
+								</div>
+							 <div style="margin-left:45%;margin-top:13%;"> 
+<button type="button" class="btn btn-primary" id="submit2" data-ng-click="getAttSheets(data.object);">Submit</button> 
+</div> 	
+								  
+</div>   </div>       
+<div class="panel panel-primary" id="report2" style="margin-left:10%;top:500px;width:1000px;position:absolute;padding:0px;">
+<div class="panel-heading"> </div>
+		<div class="panel-body">	
+ <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+ <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" >
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	  <div class="input-group col-md-4" style="float: right;">
+	   <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+             </div>
+	</div>	    
+			 <br>   
+		   <div id="dataDiv" class="scroll">          
+			<table class="table table-bordered"> 
+			 <thread> 
+			   <tr style='background-color:CornflowerBlue'>        
+					<th align="left">S.no</th>
+					<th align="left">EmployeeName</th>     
+					<th align="left">Date</th>
+				  				                       
+				</tr>     	      
+				<tr data-ng-repeat="emp in attdetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td>                  
+				     <td align="left">{{emp.employeename}}</td> 
+					 <td align="left">{{emp.timesheetdate}}</td>
+				</tr>        
+				</thread>
+				                    
+			</table> 
+			</div> </div>   
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	</div> 
+	</div>       
+<script> 
+jQuery(document).ready(function() { 
+	$("#timesheet").show();
+	$("#attendance").show();
+	$("#main1").show();
+	$("#timeDiv1").hide();
+	$("#submit").hide();
+	$("#att").show();
+	$("#submit2").show();
+    $("#report").hide();
+	$("#report2").hide();
+});
+jQuery("#timesheet").click(function(){
+	$("#main1").show();
+	$("#timesheet").show();
+	$("#attendance").show();
+	$("#timeDiv1").show();
+	$("#submit").show();
+	$("#att").hide();  
+	$("#report").hide();
+	$("#report2").hide();
+	$("#submit2").hide();
+	
+});
+jQuery("#attendance").click(function(){
+	$("#main1").show();
+	$("#timesheet").show();
+	$("#attendance").show();
+	$("#att").show();
+	$("#submit2").show();
+	$("#report2").hide();
+	$("#timeDiv1").hide();
+	$("#report").hide();
+	$("#submit").hide();
+	
+});
+jQuery("#submit").click(function(){
+	$("#main1").show();
+	$("#timesheet").show();
+	$("#attendance").show();
+	$("#timeDiv1").show(); 
+	$("#report").show();
+	$("#submit").show();
+	$("#att").hide();    
+	$("#report2").hide();            
+	$("#submit2").hide();
+});         
+        
+jQuery("#submit2").click(function(){
+	$("#main1").show();
+	$("#timesheet").show();
+	$("#attendance").show();
+	$("#att").show();
+	$("#report2").show();
+	$("#submit2").show();           
+	$("#timeDiv1").hide(); 
+	$("#report").hide();
+	$("#submit").hide();
+	angular.bootstrap(jQuery("#ramya"), [ 'sheetsModule' ]);
+});
+  </script>

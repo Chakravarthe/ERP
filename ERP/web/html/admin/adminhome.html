@@ -1,0 +1,93 @@
+<link rel="stylesheet"
+href="/andromeda/css/general/font-awesome.min.css">
+<script src="/erp/scripts/js/main.js"></script>
+<!-- <script src="/erp/scripts/general/employeeRegister.js"></script>
+       -->
+
+<!-- <script>
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+  this.classList.toggle("active");
+  var dropdownContent = this.nextElementSibling;
+  if (dropdownContent.style.display == "block") {
+  dropdownContent.style.display = "none";
+  } else {
+  dropdownContent.style.display = "block";
+  }
+  });    
+}  
+</script> -->
+
+<!-- <style type="text/css">
+ #date .ui-datepicker .ui-datepicker-title
+
+.ui-widget-header{
+
+border: 1px solid #0044cc;
+    background: #83c174 ;
+}
+
+ .ui-datepicker .ui-datepicker-prev .ui-datepicker-next{
+ background:#83c174;
+
+}
+
+
+.dropdown-btn {
+  padding: 6px 8px 10px 16px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  border: none; 
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: hand;
+  outline: none;
+} 
+
+.active, {
+  color: orange;
+}
+
+.dropdown-container {
+  display: none;
+  background-color:#f7f9fb;
+  padding-left: 10px;
+}      
+ </style> -->
+
+<div class="page-container" >
+<div class="#" style="position:sticky;z-index:100; top:0;">	
+<img  src="/andromeda/images/Banner.png" style=" background-color:white;width:100%; padding-left: 0%;"height="90px" class="img img-responsive">
+				</div>    
+	                  	
+
+				<div id="replaceDiv" style="margin-top:10%;">
+				</div>      
+</div>
+
+   <div class="sidebar-menu" style="position:fixed;margin-top:9%;overflow-y:scroll;overflow-x:hidden" id="button">
+		     <div class="menu">
+		      <ul id="menu" >      
+		    
+		          
+		       <li><a href = "#"  onclick="Andromeda.showlogincredentialsPage();">      
+		      <i class="fa fa-user-plus"></i>               
+		      <span>Login Creation</span></a>
+  				</li>          
+		 
+		           
+		         
+		             <li><a  onclick="Andromeda.logout();" title=" Logout">
+		             <i class="fa fa-sign-out"></i><span> Logout </span></a></li>
+		      </ul> 
+		    </div>
+	 <div class="clearfix"> </div>
+	
+	 </div> 
+	
+               

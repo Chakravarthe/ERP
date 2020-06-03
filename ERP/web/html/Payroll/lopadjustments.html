@@ -1,0 +1,288 @@
+
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;        
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	                                    
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.but {
+  padding: 5px 10px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #1E565A;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #999;
+}
+
+.but:hover {background-color: #1E565A}
+
+.but:active {
+  background-color: 1E565A;
+  box-shadow: 0 3px #666;
+  transform: translateY(3px);
+}
+  </style>
+<div id="grnId" data-ng-controller="CreateGrnController">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 16%;position:absolute;top:210px;width:1000px">
+
+		<div class="panel-heading">LOP Adjustments</div>
+		<div class="panel-body">                            
+			<div class="form-group col-md-4">
+				<label>Financial Year&nbsp;<b style="color: red">*</b></label> <select
+          class="form-control" data-ng-model="data.object.po#">
+          <option>Select</option>
+          <option>2019-2020</option> 
+          <option>2018-2019</option>
+          <option>2017-2018</option>
+          <option>2016-2017</option>
+          <option>2015-2016</option>
+          <option>2014-2015</option>
+           </select>
+			</div>    
+
+
+			<div class="form-group col-md-4">
+				<label>Month&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					                   <option>January</option>  
+                                       <option>February</option>
+                                       <option>March</option>
+                                       <option>April</option>
+                                       <option>May</option>
+                                       <option>June</option>
+                                       <option>July</option>
+                                       <option>August</option>
+                                       <option>September</option>
+                                       <option>October</option>
+                                       <option>November</option>
+                                       <option>December</option>
+
+				</select>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label>Employee&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					
+				</select>
+			</div>
+
+               <div class="form-group col-md-4">
+				<label>LOP Count&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					
+				</select>
+			</div>
+
+		</div>
+	</div>
+                     
+		<div style="margin-top:12%;margin-left:45%;">
+				  <button type="button" class="btn btn-primary" id="removebtn" data-toggle="modal"data-ng-click="getsearch(data.object);" >Get</button> 
+			 </div>
+
+                  
+
+	<!--  ---------------------------------------------vendor comment-------------------------- ------------------------>
+
+
+
+	<div class="panel panel-primary"
+		style="margin-left: 16%;position:absolute;top:540px;width:1000px">
+
+		<div class="panel-heading"> Remaining AOP Head Count</div>
+		<div class="panel-body">
+			<div class="form-group col-md-3">
+				<label>Department&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					<option>operations</option>
+					<option>HumanResources</option>
+					<option>Finance&Accounts</option>
+					<option>CorparateConnect</option>
+
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>Cadre&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					<option>L</option>
+					<option>S</option>       
+					<option>M</option>
+					<option>J</option>
+					<option>F</option>    
+					<option>others</option>
+				</select>
+			</div>
+
+			<div class="form-group col-md-3">
+				<label>Grade&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>ReportsTo&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					<option>Chief Excutive Officer</option>
+					<option>Deputy Chief Excutive officer</option>
+					<option>Chief operating officer</option>
+					<option>Head Hr</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>RequiredPosition&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.needbydate"
+					placeholder="Enter RecquiredPosition" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>No.of Position&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.needbydate" placeholder="0" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>Required For Division&nbsp;<b style="color: red">*</b></label>
+				<select class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+					<option>APSSDC Head Office</option>
+					<option>PMDC</option>
+					<option>TOT</option>    
+					<option>Vijaynagaram</option>
+				</select>
+			</div>
+			<div class="form-group col-md-3">
+				<label>TotlaExperience&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.needbydate"
+					placeholder="Enter TotlaExperience" />
+			</div>
+			<div class="form-group col-md-3">
+				<label>ReleventExperience&nbsp;<b style="color: red">*</b></label> <input
+					type="text" class="form-control"
+					data-ng-model="data.object.needbydate"
+					placeholder="Enter ReleventExperience" />
+			</div>
+		</div>
+	</div>
+
+	
+
+	<!-- ----------------------------------------------------------------------------- -->
+	<div class="panel panel-primary"
+		style="margin-left: 16%;position:absolute;top:920px;width:1000px">
+
+		<div class="panel-heading">Job Description</div>
+		<div class="panel-body">
+		<div class="form-group col-md-4">
+		
+				<label>Financial Year&nbsp;<b style="color: red">*</b></label> <select
+          class="form-control" data-ng-model="data.object.po#">
+          <option>Select</option>
+          <option>2019-2020</option> 
+          <option>2018-2019</option>
+          <option>2017-2018</option>
+          <option>2016-2017</option>
+          <option>2015-2016</option>
+          <option>2014-2015</option>
+           </select>
+			</div>    
+
+
+			<div class="form-group col-md-4">
+				<label>Month&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+
+				</select>
+			</div>
+		
+			</div>
+			</div>
+
+		<div style="margin-top:59%;margin-left:45%;">
+			<button type="button"   
+				class="btn btn-primary btn-md" data-toggle="modal"data-ng-click="">                                    
+				Submit    
+			</button>
+				</div>   
+   
+
+
+	
+	<!-- <button type="button" class="but" id="but"
+		data-ng-click="getsearch(data.object);" style="margin-left: 45%">Create</button> -->
+	<script>
+		jQuery(document).ready(function() {
+			$("#add").hide();
+			$("#update").hide();
+			angular.bootstrap(jQuery("#grnId"), [ 'CreateGrn' ]);
+		});
+		jQuery("#register").click(function() {
+			$("#update").hide();
+			$("#add").show();
+		});
+		jQuery(document).on('click', "#editData", function() {
+			$("#update").show();
+			$("#add").hide();
+		});
+	</script>
+	<script>
+		<script>
+		function openCity(cityName, elmnt, color) {
+			var i, tabcontent, tablinks;
+			tabcontent = document.getElementsByClassName("tabcontent");
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			tablinks = document.getElementsByClassName("tablink");
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].style.backgroundColor = "";
+			}
+			document.getElementById(cityName).style.display = "block";
+			elmnt.style.backgroundColor = color;
+   
+		}
+		// Get the element with id="defaultOpen" and click on it           
+		document.getElementById("defaultOpen").click();
+	</script>
+	                 
+	              

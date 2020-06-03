@@ -1,0 +1,92 @@
+<script src="/erp/scripts/employeeemployeeselfservieces/myleaves.js"></script>
+<!-- <script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script> -->
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {                                   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+    </style>
+    
+<div id="myleave" data-ng-controller="MyLeaves"  style="margin-left:4%;margin-top:1%;margin-right:-4%">
+<h3 style="margin-left:16%">My Leave Tracker</h3>
+ <br>          
+  <div class="panel panel-primary" style="margin-left:16%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Leave Graph Report (Please select Leave Type)</div>
+    <div class="panel-body">
+  </div>
+</div>   
+  
+
+
+  <div class="panel panel-primary" style="margin-left:16%;margin-top:1%;margin-right:7%"> 
+   <div class="panel-heading">Leaves List (Please select Leave Type)</div>
+    <div class="panel-body"><br><br>    
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th style="min-width: 200px;max-width: 200px;">From Date</th>
+<th style="min-width: 120px;max-width: 120px;">To Date </th>
+<th style="min-width: 120px;max-width: 120px;"> No.Of Days </th>
+<th style="min-width: 120px;max-width: 120px;">Status</th>
+<th style="min-width: 120px;max-width: 120px;"> Reason </th>
+<th style="min-width: 120px;max-width: 120px;"> Request Raised Date</th>
+<th style="min-width: 120px;max-width: 120px;"> Approved/Rejected Date </th>
+<th style="min-width: 120px;max-width: 120px;"> Action</th>
+</tr>
+</thead>
+ <tr>   
+		<td>{{data.Name}}</td>  
+		<td>{{data.Brand}}</td>	 
+		<td>{{data.Installation}}</td>	 
+		<td>{{data.Inst_date}}</td>	 
+		<td>{{data.PO_quantity}}</td>	            
+		<td>{{data.Remaining_Qty}}</td>	 
+		<td>{{data.Received_Qty}}</td>	 
+		<td>{{data.Inspected_Qty}}</td>	 
+		
+	</tr>
+</table>
+</div>
+<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	
+</div>
+ </div>
+  </div>
+  
+ <!-- --------------------------------------------------------------------------------------- -->
+           
+<script>                        
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#myleave"), [ 'myleaves' ]); 
+	    });
+		
+	</script>
+	

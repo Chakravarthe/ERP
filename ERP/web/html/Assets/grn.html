@@ -1,0 +1,286 @@
+ <script src="/erp/scripts/general/CreateGrn.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script>
+
+<div id="grnId" data-ng-controller="CreateGrnController" style="margin-left:6%;margin-top:-12%">
+ <br>
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Create GRN</div>
+    <div class="panel-body">
+    
+	 <div class="form-group col-md-3">
+      <label>PO#&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" data-ng-model="data.object.po_id">
+	  <option></option>
+	   <option data-ng-repeat="asset in assdetails" value="{{asset.po_id}}">{{asset.po_id}}</option>
+	  </select>
+	</div>
+	
+	<div class="form-group col-md-2"> 
+	   <button type="button" class="btn btn-primary" id="removebtn" data-ng-click="" style="margin-left:-10%;margin-top:18%">PO Details</button> 
+	</div>
+	
+	<div class="form-group col-md-3">
+	   <label>Vendor Invoice #&nbsp;<b style="color: red">*</b></label>
+	    <select class="form-control" data-ng-model="data.object.Invoice">
+	    <option></option>
+	    <option data-ng-repeat="cader in caders" value="{{cader.caderid}}">{{cader.description}}</option>
+		</select>
+	</div>
+	
+	<div class="form-group col-md-4">
+	  <label>PO Date&nbsp;<b style="color: red">*</b></label>       
+	 <input id="dateid" type="text" class="form-control" data-ng-model="data.object.podate" />
+	</div>
+	<div class="form-group col-md-3">
+       <label>Need by date&nbsp;<b style="color: red">*</b></label>
+	   <input id="needdate" type="text" class="form-control" data-ng-model="data.object.needbydate" />
+	</div>	
+	
+	<div class="form-group col-md-3">
+       <label>Vender&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" data-ng-model="data.object.needbydate" />
+	</div>	
+	
+	 <div class="form-group col-md-3">
+      <label>District&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" data-ng-model="data.object.id">
+	  <option></option>
+	   <option data-ng-repeat="district in districts" value="{{district.id}}">{{district.name}}</option>
+	  </select>
+	</div>
+	
+	 <div class="form-group col-md-3">
+      <label>Draft GRNs&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" data-ng-model="data.object.po">
+	  <option></option>
+	   <option data-ng-repeat="department in departments" value="{{department.departmentid}}">{{department.department_name}}</option>
+	  </select>
+	</div>
+	
+   </div>
+  
+</div>
+  
+ <button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);" style="margin-left:45%">Get Details</button> 
+ 
+  
+<!--  ---------------------------------------------vendor comment-------------------------- ------------------------>
+
+
+
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Vendor Comment</div>
+    <div class="panel-body">
+	 <div class="form-group col-md-3">
+      <label>Comment&nbsp;<b style="color: red">*</b></label>
+	   <textarea rows="" cols=""></textarea>
+	</div>
+	<div class="form-group col-md-9">
+     <table  class="table  display table-striped table-bordered">
+      <thead>
+       <tr>               
+       <th >S.No</th>                
+       <th>Documents</th>
+       <th >Download</th>
+      </tr>
+     </thead>
+     <tr data-ng-repeat="data in filteredResult =(vendordetails | filter:search)">   
+		<td align="right">{{$index+1}}</td>   
+		<td>{{data.Documents}}</td>  
+		<td>{{data.Download}}</td>	 
+	</tr>
+   </table>       
+  </div>
+  </div>
+ </div>
+
+
+<!-- ----------------------------------------------------------------------------- -->
+
+
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Line Items</div>
+   <div>
+   <button type="button" id="register"   
+				class="btn btn-primary pull-right"  data-toggle="modal"
+				data-target="#myModal" data-ng-click="">                                    
+				+
+				<!-- <span class="glyphicon glyphicon-plus"></span> -->    
+			</button></div>
+    <div class="panel-body">
+    
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>S.No</th>
+<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox">
+</th>
+<th style="min-width: 200px;max-width: 200px;">Name</th>
+<th style="min-width: 120px;max-width: 120px;"> Brand </th>
+<th style="min-width: 120px;max-width: 120px;"> Installation </th>
+<th style="min-width: 120px;max-width: 120px;"> Inst. Date </th>
+<th style="min-width: 120px;max-width: 120px;"> PO Quantity </th>
+<th style="min-width: 120px;max-width: 120px;"> Remaining Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Received Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Inspected Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Rejected Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> QC okay Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Location </th>
+<th style="min-width: 120px;max-width: 120px;"> Documents </th>
+</tr>
+</thead>
+ <tr data-ng-repeat="data in filteredResult =(linedetails | filter:search)">   
+        <td>{{data.S.No}}</td> 
+        <td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td> 
+		<td>{{data.Name}}</td>  
+		<td>{{data.Brand}}</td>	 
+		<td>{{data.Installation}}</td>	 
+		<td>{{data.Inst_date}}</td>	 
+		<td>{{data.PO_quantity}}</td>	            
+		<td>{{data.Remaining_Qty}}</td>	 
+		<td>{{data.Received_Qty}}</td>	 
+		<td>{{data.Inspected_Qty}}</td>	 
+		<td>{{data.Rejected_Qty}}</td>	 
+		<td>{{data.QC_okay_Qty}}</td>
+		<td>{{data.Location}}</td>	 	 
+		<td>{{data.Documents}}</td>	 
+			 
+	</tr>
+</table>
+</div>
+ </div>
+  </div>
+
+
+<!-- -------------------------------------------------------------------------------------------- -->
+
+
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Saved Line Items</div>
+    <div class="panel-body">
+    
+<div class=" table-responsive">
+<table id="savedItemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>S.No</th><th>
+<input onclick="selectAllDraftGRNLineItems(this)" id="selectAll" type="checkbox"></th>
+<th style="min-width: 200px;max-width: 200px;">Name</th>
+<th style="min-width: 120px;max-width: 120px;"> Brand </th>
+<th style="min-width: 120px;max-width: 120px;"> Inst.Status </th>
+<th style="min-width: 120px;max-width: 120px;"> Inst.Date </th>
+<th style="min-width: 120px;max-width: 120px;"> PO Quantity </th>
+<th style="min-width: 120px;max-width: 120px;"> Remaining Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Received Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Inspected Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Rejected Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> QC okay Qty </th>
+<th style="min-width: 120px;max-width: 120px;"> Submitted By </th>
+<th style="min-width: 120px;max-width: 120px;"> Location </th>
+<th style="min-width: 120px;max-width: 120px;"> Documents </th>
+</tr>
+</thead>
+<tbody>
+<tr data-ng-repeat="data in filteredResult =(slinedetails | filter:search)">   
+        <td>{{data.S.No}}</td> 
+        <td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td> 
+		<td>{{data.Name}}</td>  
+		<td>{{data.Brand}}</td>	 
+		<td>{{data.Inst.Status}}</td>	 
+		<td>{{data.Inst_date}}</td>	 
+		<td>{{data.PO_quantity}}</td>	             
+		<td>{{data.Remaining_Qty}}</td>	 
+		<td>{{data.Received_Qty}}</td>	 
+		<td>{{data.Inspected_Qty}}</td>	                     
+		<td>{{data.Rejected_Qty}}</td>	 
+		<td>{{data.QC_okay_Qty}}</td>
+		<td>{{data.Submitted_By}}</td>	 
+		<td>{{data.Location}}</td>	 	 
+		<td>{{data.Documents}}</td>	 
+			 
+	</tr>
+</tbody>
+</table>
+</div>
+ </div>
+  </div>
+
+
+<!-- ------------------------------------------------------------------------ -->
+
+
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+  
+    <div class="panel-body">
+  <div class="form-group col-md-3">
+      <label>Checked By :&nbsp;<b style="color: red">*</b></label>
+	  <select class="form-control" data-ng-model="data.object.po#">
+	  <option></option>
+	   <option data-ng-repeat="department in departments" value="{{department.departmentid}}">{{department.department_name}}</option>
+	  </select>
+	</div>
+	 <div class="form-group col-md-3">
+      <label>Comments&nbsp;<b style="color: red">*</b></label>
+	  <textarea rows="" cols=""></textarea>
+	</div>   
+  </div>
+  </div>
+
+ <button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);" style="margin-left:45%">Save GRN</button>
+ 
+ <!-- --------------------------------------------------------------------------------------- -->
+ 
+
+  <div class="panel panel-primary" style="margin-left:14%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Associated GRN's</div>
+    <div class="panel-body">
+    
+<table  class="table  display table-striped table-bordered">
+<thead>
+<tr>               
+<th width="7%">S.No</th>                
+<th>GRN ID</th>
+<th width="15%">GRN DATE</th>
+<th>COMMENTS</th>
+<th>VIEW</th>
+</tr>
+</thead>
+<tr data-ng-repeat="data in filteredResult =(assdetails | filter:search)">   
+        <td>{{data.S_No}}</td> 
+		<td>{{data.GRN_ID}}</td>  
+		<td>{{data.GRN_DATE}}</td>	 
+		<td>{{data.COMMENTS}}</td>	 
+		
+	</tr>
+</table>
+ </div>
+  </div>
+
+</div>
+          
+<script> 
+
+		jQuery(document).ready(function() {         
+			 $("#add").hide();
+			$("#update").hide(); 
+  			 angular.bootstrap(jQuery("#grnId"), [ 'CreateGrn' ]); 
+	    });
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  
+		
+</script>
+	

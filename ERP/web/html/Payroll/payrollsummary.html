@@ -1,0 +1,143 @@
+
+<!-- <script src="/erp/scripts/general/CreateGrn.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<script src="/erp/scripts/js/angular.js"></script> -->
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;        
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.but {
+  padding: 5px 10px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #1E565A;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 7px #999;
+}
+
+.but:hover {background-color: #1E565A}
+
+.but:active {
+  background-color: 1E565A;
+  box-shadow: 0 3px #666;
+  transform: translateY(3px);
+}
+  </style>
+<div id="grnId" data-ng-controller="CreateGrnController">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 18%;position:absolute;top:210px;width:800px">
+
+		<div class="panel-heading">Payroll Summary</div>
+		<div class="panel-body">                            
+			<div class="form-group col-md-2">
+				<label>Financial Year&nbsp;<b style="color: red">*</b></label> <select
+          class="form-control" data-ng-model="data.object.po#">
+          <option>Select</option>
+          <option>2019-2020</option> 
+          <option>2018-2019</option>
+          <option>2017-2018</option>
+          <option>2016-2017</option>
+          <option>2015-2016</option>
+          <option>2014-2015</option>
+           </select>
+			</div>    
+
+
+			<div class="form-group col-md-4">
+				<label>Month&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+				</select>
+			</div> 
+			
+			
+			<div class="form-group col-md-4">
+			   <label>Employee Type&nbsp;<b style="color: red">*</b></label>
+                  <input type="radio" name="one value="staff"> Staff
+                   <input type="radio" name="two" value="others"> Others
+                   <br>
+                        Deptutaions
+              </div> 
+			
+			<div class="panel panel-primary"
+			style="margin-left: 0%;position:absolute;top:210px;width:800px">
+<div class="panel-heading">Employee Start Statement For February</div>
+		<div class="panel-body">
+   <div class="dataTables_length" id="scheduleTimetableList_length"><br><br>
+				    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>                  
+				    <option value="-1">all</option>    
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	    		         
+				        <div class="input-group col-md-4" style="float: right;">
+	         
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search">     
+</div>
+			 </div>	    
+			 <br>   
+			 
+		<div id="dataDiv">       
+			<table class="table table-bordered"> 
+			<center>
+			<thread> 
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">EmplyoeeName</th>           
+					<th align="left">BASIC&#40;&#43;&#41;&#40;&#x20B9;&#41;</th>  
+				    <th align="left">HRA&#40;&#43;&#41;&#40;&#x20B9;&#41;</th>  
+				    <th align="left">CONVEYANCE&#40;&#43;&#41;&#40;&#x20B9;&#41;</th>    
+				</tr>        
+				<tr data-ng-repeat="emp in empDetails | filter:search"> 
+				</tr>        
+				</thread>
+				<tbody><tr class="odd">
+	
+				</tr></tbody>        
+				</center>                      
+			</table>    
+			</div>    
+			        
+	            
+	
+	
+	</div>     
+</div>
+		            	         
+			
+			        

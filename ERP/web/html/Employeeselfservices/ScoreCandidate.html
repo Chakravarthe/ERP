@@ -1,0 +1,39 @@
+<script src="/erp/scripts/general/scorecandidate.js"></script>
+<!-- <script src="/erp/scripts/js/jquery.min.js"></script>-->
+<script src="/erp/scripts/js/angular.js"></script>  
+<div id="scorecandi" data-ng-controller="scorecandidatecontroller">      
+	<br>
+	<div class="panel panel-primary" style="margin-left: 19%; margin-top: -11%; margin-right: 3%">
+
+		<div class="panel-heading">Score Candidate</div>
+		<div class="panel-body">
+
+			<div class="form-group col-md-4">
+				<label>HiringRequest&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data2.object.position">  
+					<option>Select</option>
+					<option data-ng-repeat="position in positions"
+						value="{{position.id}}">{{position.position}}</option>    
+				</select>
+			</div>
+
+			<div class="form-group col-md-4">
+				<label>Round&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					<option>Select</option>
+                     <option>All</option>
+				</select>  
+				  </div><br>
+				 <div class="form-group col-md-4"> 
+				  <button type="button" class="btn btn-primary" id="removebtn" data-ng-click="getsearch(data.object);" >Get</button> 
+			</div>   
+		</div>    
+	</div>    
+</div>  
+
+<script>
+jQuery(document).ready(function() {     
+	angular.bootstrap(jQuery("#scorecandi"), [ 'scorecandidate' ]); 
+});
+</script>   
+

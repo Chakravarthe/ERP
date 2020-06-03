@@ -1,0 +1,113 @@
+<script src="/erp/scripts/leaves/myleaves.js"></script>
+<style>
+#button5 {
+ /*  background-color:#eb7d34; */
+  background-color:#eb9f34;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+#button:hover {
+  background-color: #f1f1f1;
+}
+</style>
+<style>
+    input[type=text] {
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+    </style>
+    <h3 style="margin-left:16%">My Leave Tracker</h3>
+<div id="myleaveId" data-ng-controller="myleaveController">
+ <br>
+  <div class="panel panel-primary" style="margin-left:16%;margin-top:1%;margin-right:7%">
+   
+   <div class="panel-heading">Leave Graph Report (Please select Leave Type)</div>
+    <div class="panel-body">
+  </div>
+</div>   
+  
+
+
+  <div class="panel panel-primary" style="margin-left:16%;margin-top:1%;margin-right:7%"> 
+   <div class="panel-heading">Leaves List (Please select Leave Type)</div>
+    <div class="panel-body"><br><br>    
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>From Date</th>
+<th>To Date </th>
+<th> No.Of Days </th>
+<th> Reason </th>
+<th> Request Raised Date</th>
+<th> Approved/Rejected Date </th>
+<th>Status</th>
+</tr>
+</thead>
+ <tr data-ng-repeat="data in leavesdetails">   
+		<td>{{data.from_date | date:"dd-MM-yyyy"}}</td>  
+		<td>{{data.to_date | date:"dd-MM-yyyy"}}</td>	 
+		<td align="center">{{data.no_days}}</td>	  
+		<td>{{data.reason}}</td>	            
+		<td>{{data.created_date | date:"dd-MM-yyyy HH:mm:ss"}}</td>	 
+		<td>{{data.Received_Qty}}</td>	 
+		<td><button class="button" id="button5">Pending</button></td>	 
+		
+	</tr>
+</table>
+</div>
+<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	
+</div>
+ </div>
+  </div>
+  
+  
+    
+
+ 
+ <!-- --------------------------------------------------------------------------------------- -->
+ 
+
+ 
+          
+<script>                        
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#myleaveId"), [ 'myleave' ]); 
+	    });
+		
+	</script>
+	

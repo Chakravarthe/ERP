@@ -1,0 +1,47 @@
+<script src="/erp/scripts/general/assetdet.js"></script>
+<script src="/erp/js/jquery.min.js"></script>
+<div class="panel panel-primary"  id="lb6b" data-ng-controller="assetdetcontroller" style="margin-left:18%;padding-bottom:3%;margin-top:-10%">    
+		<div class="panel-heading">                  
+		          <div class="text-center">     
+		<b style="font-size: large;">Location Wise Report</b>
+					</div>
+		</div>
+		 
+			
+			<br>
+			<div class="form-group col-md-2" >
+						<label>Location Name<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-3">
+			<select class="form-control"
+						data-ng-model="data.object.id">
+						<option></option>
+						<option data-ng-repeat="loc in locations"
+							value="{{loc.id}}">{{loc.location_name}}</option>
+					</select>
+			</div>
+			
+			
+			<input type="radio" value="Summary" name="s">Summary &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="radio" value="Detailed" name="s">detailed
+			<br>
+			<div style="margin-top:3%;margin-left:35%;">
+			<button type="button"   
+				class="btn btn-primary btn-md" data-toggle="modal"data-ng-click="">                                    
+				Submit    
+			</button>
+				</div>		
+				</div>
+				  <script>
+				jQuery(document).ready(function() {     
+			 $("#searchrow").hide();
+  			 angular.bootstrap(jQuery("#lb6b"), [ 'assetdet' ]); 
+	    }); 
+		jQuery("#register").click(function(){
+			$("#add").show();
+			$("#update").hide();
+		
+		});
+		</script>
+				

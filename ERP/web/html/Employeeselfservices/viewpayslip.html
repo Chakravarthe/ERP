@@ -1,0 +1,100 @@
+ <style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+.btn1{
+  background-color: #ffcc80;
+  border: none;
+  color: white;
+  padding: 7px 20px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* Darker background on mouse-over */
+.btn1:hover {
+  background-color: #ffad33;
+}
+.btn{
+  background-color:#ffad33;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: green;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <div id="hrpoliciesId" data-ng-controller="CreateGrnController">
+ <h3 style="margin-left:19%;margin-top:-9.5%;font-size:20px;">Payslip for the month of</h3>
+  <div class="panel panel-primary" style="margin-left:19%;padding:0px;margin-right:10%;position:absolute;top:210px;width:400px"> 
+   <div class="panel-heading">
+   <img src="images/pay.png" class="rounded-circle" alt="Cinque Terre" width="70" height="70" >
+   <br>Name:
+ Emp Id:
+Joining Date:
+   </div>
+    <div class="panel-body">
+    <table style= "width:350px">
+  <tr>
+    <th>Bank A/C No.</th>
+    <td>Jill</td>
+  </tr>
+  <tr> 
+    <th>Bank Name</th>
+    <td>50</td>
+  </tr>
+  <tr> 
+    <th>UAN No</th>
+    <td>50</td>
+  </tr>
+<tr> 
+    <th>Days In Month</th>
+    <td>50</td>
+  </tr>
+  <tr> 
+    <th>Effective Work Days</th>
+    <td>50</td>
+  </tr>
+  <tr> 
+    <th>LOP Days</th>
+    <td>50</td>
+  </tr>
+  
+</table>
+   
+    </div>  
+  </div>
+  
+   <div class="panel panel-primary" style="margin-left:50%;padding:0px;margin-right:10%;position:absolute;top:210px;width:640px">
+   <!-- <button type="button" class="btn">GET</button> -->
+        <button class="btn1"><i class="fa fa-download"></i> Download</button>
+        <div class="panel-heading">Earnings</div>
+        <div class="panel-body"></div>
+    </div> 
+</div>  
+
+<script>                        
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#hrpoliciesId"), [ 'CreateGrn' ]); 
+	    });
+		
+	</script>
+	

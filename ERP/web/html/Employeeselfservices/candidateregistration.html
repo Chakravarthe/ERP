@@ -1,0 +1,427 @@
+<script src="/erp/scripts/general/candidateregistration.js"></script>
+
+<style type="text/css">
+ #date .ui-datepicker .ui-datepicker-title
+     
+.ui-widget-header{
+     
+border: 1px solid #0044cc;     
+    background: #83c174 ;
+}
+
+ .ui-datepicker .ui-datepicker-prev .ui-datepicker-next{
+ background:#83c174;
+
+}
+
+.table>tbody>tr>td{   
+    padding:6px; 
+}   
+
+.dropdown-btn {
+  padding: 6px 8px 10px 16px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  border: none; 
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: hand;
+  outline: none;
+  
+} 
+   
+.active, {
+  color: orange;
+}
+
+.dropdown-container {
+  display: none;
+  /* background-color:#f7f9fb; */
+  /* padding-left: 10px; */
+}    
+ 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+/* .dropdown:hover .dropdown-content {
+  display: block;
+}
+ */
+div ul li a{
+color:#337ab7;
+ /*  background-color:#f9f9f9; */
+ /* background-color:#61AA00;
+ */
+ font-size:19px;  
+
+}
+</style>
+<div>
+<div id="instructions"  style="padding-left:2%;margin-right:12%">         
+     <div id="mainhome" >
+<div class="container" style="margin-top:-9%;margin-right:15%; margin-left:15%;" id="candidatereg"  data-ng-controller="candidateregistration">
+<h3><b>Candidate Registration</b></h3>
+<br>
+		<ul class="nav nav-tabs"style="position:fixed;  background-color:white; width: 85%;z-index:100;"  >    
+			<li class="active"><a data-toggle="tab" href="#person"><b>Candidate Registration</b><i aria-hidden="true" ></i></a></li>
+			<li><a data-toggle="tab" href="#com"><b>All Candidates</b></a></li>
+		 	<li><a data-toggle="tab" href="#empt"><b>Selected Candidates</b><i aria-hidden="true"></i></a></li>    
+		</ul>   
+		
+		<div class="tab-content">         
+			<div id="person" class="tab-pane fade in active"
+				style="width: 100%; margin-left: 0%;margin-right:10%">        
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form data-ng-signup="add1()" name="myForm" class="form-signin">   
+					<div class="form-group row">        
+					      
+						<div class="form-group col-md-4">
+							<label>Required Position<b style="color: red">*</b></label> 
+									<select class="form-control" data-ng-model="data.object.position">
+									<!-- <option>Select</option> -->
+								<option data-ng-repeat="position in positions"
+									value="{{position.id}}">{{position.position}}</option>    
+							</select>
+						</div> 
+						
+						<div class="form-group col-md-4">
+							<label>Candidate Type<b style="color: red">*</b></label> <!-- <label
+			 				class="form-control" style="font-weight: 100;">{{student.title}}</label> -->
+									<!-- <input type="text" class="form-control" data-ng-model="data2.object.title" placeholder="Enter Title name"/> -->
+									<select class="form-control" data-ng-model="data.object.candidate_type">
+									<!-- <option>Select</option> -->
+									<option value="new">New Candidate</option>
+									<option value="existed">Existed Candidate</option>
+									<option value="internal">Internal Employee</option>  
+							</select>								
+							</div>													
+						</div>
+						<br><br>
+						
+						<div data-ng-show="data.object.candidate_type == 'new'">
+						<div class="form-group row">  
+							<div class="form-group col-md-4">
+							<label>Candidate Name:<b style="color: red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.candidate_name"
+										placeholder="Enter Candidate Name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Mobile Number:<b style="color:red">*</b></label>
+								<input type="number" class="form-control" data-ng-model="data.object.mobile"
+										placeholder="Enter Mobile Number" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Email:<b style="color:red">*</b></label>
+								<input type="email" class="form-control" data-ng-model="data.object.email"
+										placeholder="Enter Email" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Qualification:<b style="color:red">*</b></label>
+								<select class="form-control"
+								data-ng-model="data.object.education_id" data-ng-change="getBranches(data.object);">
+								<option>select</option>
+								<option data-ng-repeat="education in educations"
+								value="{{education.education_id}}">{{education.education_name}}</option>
+								</select>
+										</div>
+							<div class="form-group col-md-4">
+								<label>Branch:<b style="color:red">*</b></label>
+								<select class="form-control" data-ng-model="data.object.branch_id">
+											<option></option>
+											<option data-ng-repeat="branch in branches"
+											value="{{branch.branch_id}}">{{branch.branch_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Pass Out Year:<b style="color:red">*</b></label>   
+								<input type="number" class="form-control" data-ng-model="data.object.passout_year"
+										placeholder="Enter Pass Out Year" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Experience:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.experience"
+										placeholder="Enter Experience" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Relevant Experience:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.relevent_experience"
+										placeholder="Enter Relevant Experience" />
+							</div>
+							<div class="form-group col-md-4">
+							
+								<label>Notice Period:<b style="color:red">*</b></label>
+								<input type="number" class="form-control" data-ng-model="data.object.notice_period"
+										placeholder="Enter Notice Period" />
+							</div>  
+						</div>
+
+								</div>
+						
+						<!-- existed candidate -->
+						
+						<div data-ng-show="data.object.candidate_type == 'existed'">
+						<div class="form-group row">  
+							<div class="form-group col-md-4">
+							<label>Candidate Name:<b style="color: red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.candidate_name"
+										placeholder="Enter Candidate Name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Mobile Number:<b style="color:red">*</b></label>
+								<input type="number" class="form-control" data-ng-model="data.object.mobile"
+										placeholder="Enter Mobile Number" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Email:<b style="color:red">*</b></label>
+								<input type="email" class="form-control" data-ng-model="data.object.email"
+										placeholder="Enter Email" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Qualification:<b style="color:red">*</b></label>
+								<select class="form-control"
+								data-ng-model="data.object.education_id" data-ng-change="getBranches(data.object);">
+								<option>select</option>
+								<option data-ng-repeat="education in educations"
+								value="{{education.education_id}}">{{education.education_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Branch:<b style="color:red">*</b></label>   
+								<select class="form-control" data-ng-model="data.object.branch_id">
+											<option></option>
+											<option data-ng-repeat="branch in branches"
+											value="{{branch.branch_id}}">{{branch.branch_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Pass Out Year:<b style="color:red">*</b></label>
+								<input type="number" class="form-control" data-ng-model="data.object.passout_year"
+										placeholder="Enter Pass Out Year" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Experience:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.experience"
+										placeholder="Enter Experience" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Relevant Experience:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.relevent_experience"
+										placeholder="Enter Relevant Experience" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Notice Period:<b style="color:red">*</b></label>
+								<input type="number" class="form-control" data-ng-model="data.object.notice_period"
+										placeholder="Enter Notice Period" />
+							</div>  
+						</div>	
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Cooling-Off Period:<b style="color: red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.coolingoff_period"
+										placeholder="Enter Cooling-off period" />
+							</div>
+						</div>					
+						</div>
+						
+						<!-- Internal Employee -->
+						
+						<div data-ng-show="data.object.candidate_type == 'internal'">
+						<div class="form-group row">  
+							<div class="form-group col-md-4">
+							<label>Candidate Name:<b style="color: red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.candidate_name"
+										placeholder="Enter Candidate Name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Mobile Number:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.mobile"
+										placeholder="Enter Mobile Number" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Email:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.email"
+										placeholder="Enter Email" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Qualification:<b style="color:red">*</b></label>
+								<select class="form-control"
+								data-ng-model="data.object.education_id" data-ng-change="getBranches(data.object);">
+								<option>select</option>
+								<option data-ng-repeat="education in educations"
+								value="{{education.education_id}}">{{education.education_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Branch:<b style="color:red">*</b></label>
+								<select class="form-control" data-ng-model="data.object.branch_id">
+											<option></option>
+											<option data-ng-repeat="branch in branches"
+											value="{{branch.branch_id}}">{{branch.branch_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Designation:<b style="color:red">*</b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.designation"
+										placeholder="Enter Designation" />
+							</div>
+						</div>
+						   
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Joining Date:<b style="color:red">*</b></label>
+								<input type="date" class="form-control" data-ng-model="data.object.joining_date"
+										placeholder="Enter Experience" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Contract End Date:<b style="color:red">*</b></label>
+								<input type="date" class="form-control" data-ng-model="data.object.contract_end_date"
+										placeholder="Enter Contract End Date" />
+							</div>   
+						</div>					
+						</div>
+								
+						<button type="button" class="btn btn-primary" id="register" data-ng-click="register(data.object);" style="margin-left: 50%">Register</button>
+						 
+						</div>
+		</form>
+		</div>
+			
+			 <div id="com" class="tab-pane fade"
+				style="width: 100%; margin-left: 2%;">  
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<table class="table table-bordered">
+				<tr style='background-color: ghostwhite'>
+					<th>S.No</th>
+					<th>Candidate Name</th>
+					<th>Candidate Type</th>
+					<th>Experience</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>Status</th>
+					<th>Comments</th>
+					</tr>
+				
+			</table>				
+				</form>
+				</div>
+			</div>
+
+			 <div id="empt" class="tab-pane fade"
+				style="width: 100%; margin-left: 2%;">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+				<form class="form" data-role="form">
+					<table class="table table-bordered">
+				<tr style='background-color: ghostwhite'>
+					<th>S.No</th>
+					<th>Candidate Name</th>
+					<th>Candidate Type</th>
+					<th>Experience</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>Status</th>
+					<th>Comments</th>  
+				</tr>
+				
+			</table>				
+				</form>
+				</div>
+			</div>
+			 
+			</div>
+		</div>  
+	
+	</div>
+	</div>
+	
+<!-- <script>  
+$(function() {
+	$(".datePick").datepicker({
+		 changeMonth : true,         
+		changeYear : true, 
+		dateFormat : 'dd-mm-yy',   
+		 yearRange : '-50:+5' 
+	}); 
+});
+         
+jQuery("#personalin,#comin,#emptin,#bankin,#profin,#eduin,#famin").click(function() {
+	$('.nav-tabs > .active').next('li').find('a').trigger('click');
+});
+jQuery("#comip,#emptip,#bankip,#profip,#eduip,#famip").click(function() {
+	$('.nav-tabs > .active').prev('li').find('a').trigger('click');
+});
+
+jQuery(document).ready(function() {  
+	$("#button").show();
+	
+	angular.bootstrap(jQuery("#empDiv"), [ 'employeeRegister' ]);
+});
+
+
+jQuery("#submit").click(function(){
+	$("#button").show();   
+	$("#change").hide();
+	$("#instructions").show();  
+	$("#replaceDiv").show();       
+});
+
+
+</script> -->
+<!-- <script>
+$(".nav li").on("click",function(){
+	$(".nav li").removeClass("active");
+	$(this).addClass("active");
+});
+</script> -->
+<!-- <script type="text/javascript">
+$("a").click(function(){
+	$("a").css("background-color","");
+	$(this).css("background-color","#4095D1");
+});
+</script> -->
+<script>
+jQuery(document).ready(function() {  
+	$("#button").show();
+	
+	jQuery("#create").click(function(){   
+		$("#add").show();
+	});
+	
+	angular.bootstrap(jQuery("#candidatereg"), [ 'candidateregistration' ]);
+});
+
+</script>
+</div>

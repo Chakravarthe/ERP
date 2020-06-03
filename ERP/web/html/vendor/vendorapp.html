@@ -1,0 +1,271 @@
+ <script src="/erp/scripts/general/VendorAppModule.js"></script>
+ <!--<script src="/erp/scripts/lib/xlsx-model.js"></script>  -->
+
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+               
+<div id="vendorApp" data-ng-controller="VendorAppController">
+			
+  
+<div class="panel panel-default"  id="lb6b" style="padding-left:18%;margin-top:-11%">    
+		<div class="panel-heading">                  
+		          <div class="text-center">     
+		<b style="font-size: large;">Vendor Approvals</b>
+					</div>    
+		    
+			</div>
+			<button   type ="button" class = "btn btn-xs btn-success pull-right" 
+            data-ng-click ="toggle('searchrow');"   
+            style = "margin-right:3% ;color:">      
+            <span class = "glyphicon glyphicon-search"></span></button>  
+			<br>
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row">                 
+			<table class="table table-bordered" id="example">        
+				<tr style='background-color: CornflowerBlue '>   
+				<th>S.no</th>                          
+				   <th>Vendor ID</th>
+				   <th>Vendor Name</th>    
+				    <th>Phone Number</th>         
+				   <th>Email</th>       
+				   
+				   
+				   <th>Edit</th>   
+				</tr>
+				
+				<tr id="searchrow">
+				<th></th>
+				<th><input data-ng-model= "search.vendor_id" class = "form-control"></th>
+				<th><input data-ng-model= "search.name" class = "form-control"></th>
+				<th></th>
+				<th></th>   
+				    </tr>    
+				
+				    
+				
+                  <tr data-ng-repeat="data in filteredResult=(regdetails | filter:search)" >   
+				     <td align="right">{{$index+1}}</td>   
+					<td><a data-ng-click="getIdWiseData(data)">{{data.vendor_id}}</a></td>
+					<td><a data-ng-click="getNameWiseData(data)">{{data.name}}</a></td>   
+					<td>{{data.phone}}</td>
+					<td>{{data.email}}</td>   
+				
+				
+				
+			<!-- 	<tr data-ng-repeat="data in regdetails">   
+				     <td align="right">{{$index+1}}</td>   
+					<td><a data-ng-click="getIdWiseData(data)">{{data.vendor_id}}</a></td>
+					<td><a data-ng-click="getNameWiseData(data)">{{data.name}}</a></td>   
+					<td>{{data.phone}}</td>
+					<td>{{data.email}}</td> 
+					  -->
+				
+					<td align="center">&nbsp;&nbsp;&nbsp;
+					 
+					 <button type="button" id="viewdata"
+				class="btn btn-primary btn-md pull-right" style='background-color:#1E90FF;padding-left:5px'; data-toggle="modal"  
+				data-target="#myModal" data-ng-click="getById(data.vendor_id)">                                    
+				View
+			
+			</button>
+					 <!-- <button type="button" id="editData"            
+					 data-ng-click="getById(data.vendor_id)"
+					 class="btn btn-primary btn-md" data-toggle="modal"
+					 data-target="#myModal">
+					 <span class="glyphicon glyphicon-pencil"></span>
+					 </button>   
+					  &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(data.branch)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button> -->     
+					</td>
+				</tr>
+				     
+			</table>
+			
+			</div>
+			</div></div>    
+			
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Vendor Details </h4>
+						</div>
+						<div class="modal-body">
+						<!-- <div class="panel panel-success"> 
+								 <div class="panel-body">   -->
+								 <div class="container" style="padding-left:10%">
+								<label>Vendor Information&nbsp;<b></b></label>  
+										<table>
+										   
+											<tr><td>
+							                      <label>Vendor type&nbsp;<b style="color: red">*</b></label>
+							                     <select class="form-control" data-ng-model="data.object.vendor_type" id="vendortype">
+								                   <option value="domestic">Domestic</option>
+								                   <option value="international">International</option>
+							                      </select>
+						                      </td>
+																									
+											  
+										   
+											<td>
+				              					<label for="vendorname"><b>Vendor Name<b style="color:red">*</b></b></label>
+												<input type="text"  required 
+														data-ng-model="data.object.name" class="form-control"
+														placeholder="Enter Your Name" >
+			  									</td>
+											   
+											<td>
+								<label class="control-label">Mobile Number&nbsp;<b style="color: red">*</b></label>
+			   					<input type="text" class="form-control" data-ng-model="data.object.mobile" placeholder="Enter Mobile no" />
+					
+								</td></tr>
+					
+							<tr>
+								<td>
+								<label class="control-label">Phone Number&nbsp;<b></b></label>
+									<input type="text" class="form-control" data-ng-model="data.object.phone" placeholder="Enter Phone no" />
+									</td>
+									<td>
+									<label class="control-label">Phone Number&nbsp;<b></b></label>
+									<input type="text" class="form-control" data-ng-model="data.object.phone" placeholder="Enter Phone no" />
+									</td>
+									<td>
+									<label class="control-label">Email&nbsp;<b style="color: red;">*</b></label>
+							<input type="email" class="form-control" data-ng-model="data.object.email" placeholder="Enter Email"
+								required="required" pattern="^[A-Za-z0-9.$]*[@][a-z]{3,7}.(com|gov|org|office|co.in|edu|in|ac.in|edu.in)">
+								</td></tr>
+								<tr><td>
+								  <label for="website"><b>Website :<b style="color:red">*</b></b></label>
+				      					 
+									<input type="text"  required id="village" class="form-control"
+									data-ng-model="data.object.web_site"
+						   			placeholder="Enter website URL" />  </td>  
+						   			<td>
+						   			  <label for="village"><b>Address :<b style="color:red">*</b></b></label>
+				      						<input type="text"  required id="village" class="form-control"
+										data-ng-model="data.object.address"
+						   				placeholder="Enter your address" />   
+						   				</td>
+						   				<td>
+						   				<label for="mandal"><b>Name of Authorized Representative:<b style="color:red">*</b></b></label>
+												
+											<input type="text"  required id="mandal" class="form-control"
+											data-ng-model="data.object.contact_person_name"
+											placeholder="Enter Name" /></td></tr>
+											<tr><td>
+											 <label for="district"><b>Authorized Person Designation:<b style="color:red">*</b></b></label>
+				               <select class="form-control" data-ng-model="data.object.contact_person_designation">
+								 <option value="domestic">MTech</option>
+								 <option value="international">BTech</option>
+							         </select></td>
+							         <td>
+							           <label>Authorized Person Phone no&nbsp;<b style="color: red">*</b></label>
+							      <input type="text" class="form-control" data-ng-model="data.object.contact_person_mobile" placeholder="Enter Phone no" />
+							      </td>
+							      <td><label class="control-label">Authorized Person Email&nbsp;<b style="color: red;">*</b></label>
+							  <input type="email" class="form-control" data-ng-model="data.object.contact_person_mail"
+								required="required" pattern="^[A-Za-z0-9.$]*[@][a-z]{3,7}.(com|gov|org|office|co.in|edu|in|ac.in|edu.in)">
+								</td></tr>
+								<tr><td>
+								<label for="district"><b>Status Of Person(Income Tax):<b style="color:red">*</b></b></label>
+								<input type="text" class="form-control" data-ng-model="data.object.income_status"/>
+							     </td>
+							     <td>   
+							     <label for="district"><b>Status Of Person(Service Tax):<b style="color:red">*</b></b></label>  
+							     	<input type="text" class="form-control" data-ng-model="data.object.service_status"/>          
+									</td>
+									<td>
+									<label class="control-label">Name of Registering Authority&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.registering_authority"/>	
+							</td></tr>
+							<tr><td>
+							<label class="control-label">Registration No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.registration_no"
+								required="required"></td>
+								<td>
+								<label class="control-label">Date of Registration&nbsp;<b style="color: red;">*</b></label>
+							<input type="date" class="form-control" data-ng-model="data.object.date_of_registration"
+								required="required"></td>
+								<td>
+								<label class="control-label">Place of Registration&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.place_of_registration"
+								required="required"></td></tr>
+								<tr><td>
+								<label class="control-label">No Of Years of Experience&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.experience"
+								required="required">  </td>
+								<td>
+								<label class="control-label">Annual TurnOver&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.annual_turnover"
+								required="required"></td>
+								<td>
+								<label class="control-label">NSDC Affiliation No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.nsdc_number"
+				  				required="required"></td></tr>
+				  				<tr><td>
+				  				<label class="control-label">SSC Affiliation No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.ssc_number"
+								required="required"></td>
+								<td>
+								<label class="control-label">PAN No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.pan_no"
+								required="required"></td>
+								<td>
+									<label class="control-label">TAN No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.tan_no"
+								required="required"></td><tr>
+								<tr><td>
+								<label class="control-label">Service tax No&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.service_tax"
+								required="required"></td>
+								<td>
+								<label class="control-label">GST No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.gst_no"
+								required="required"></td>
+								<td><label class="control-label">GST Registered Date&nbsp;<b style="color: red;">*</b></label>
+							<input type="date" class="form-control" data-ng-model="data.object.gst_reg_date"
+								required="required"></td></tr>
+								<tr>
+								<td>	
+								<label class="control-label">Nature of Services&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.nature_of_service"
+								required="required"></td></tr>
+							
+						</table>    
+						<label>Bank Details&nbsp;<b ></b></label>				
+								<table>
+						<tr><td><label class="control-label">Bank Account No&nbsp;<b style="color: red;">*</b></label>
+							<input class="form-control" data-ng-model="data.object.account_no"
+								required="required"></td>
+								<td>
+								<label class="control-label">IFSC No&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.ifsc"
+								required="required"></td>
+								<td>
+								<label class="control-label">Bank Name&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.bank_name"
+								required="required"></td></tr>
+								<tr><td>
+								<label class="control-label">Branch&nbsp;<b style="color: red;">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.branch"
+								required="required"></td></tr>
+						
+						
+						
+						
+						</table>
+						
+						</div></div></div></div></div>
+			
+			
+			</div>
+<script>
+jQuery(document).ready(function() {     
+	$("#searchrow").hide();
+		 angular.bootstrap(jQuery("#vendorApp"), [ 'VendorAppModule' ]); 
+});
+</script>

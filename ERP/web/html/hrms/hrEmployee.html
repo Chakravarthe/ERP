@@ -1,0 +1,380 @@
+<style>
+
+</style>
+<div>
+	<script src="/erp/scripts/general/hremployee.js"></script>
+    
+
+	<div class="container"
+		style="margin-top: -11%; width: 100%;padding-left: 12%;"
+		id="employeeDiv" data-ng-controller="hrController" >
+		<ul class="nav nav-tabs"
+			style="position: fixed; width: 100%;background:#80b57d; z-index: 100;">
+			<li class="active"><a data-toggle="tab" href="#person" style="color:blue">Personal
+					<i class="fa fa-info-circle  " aria-hidden="true"></i>
+			</a></li>
+
+			<li><a data-toggle="tab" href="#empt" style="color:blue">Employment <i
+					class="fa fa-user" aria-hidden="true"></i></a></li>
+					
+			<li><a data-toggle="tab" href="#bank" style="color:blue">Bank Details <i
+					class="fa fa-bank" aria-hidden="true"></i></a></li>
+
+		</ul>
+
+		<div class="tab-content">
+			<div id="person" class="tab-pane fade in active"
+				style="width: 100%; margin-left: 5%;">
+				<br /> <br />
+				<div
+					style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<div class="form-group row">
+
+							<div class="form-group col-md-4">
+								<label>Title <b style="color: red">*</b></label>
+								<!-- <label
+			 				class="form-control" style="font-weight: 100;">{{student.title}}</label> -->
+								<input type="text" class="form-control"
+									data-ng-model="data.object.title" placeholder="Enter title" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">First Name <b
+									style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.first_name"
+									placeholder="Enter first name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Middle Name</label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.middle_name"
+									placeholder="Enter middle name" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Last Name <b style="color: red">*</b></label>
+								<!-- <label
+								class="form-control" style="font-weight: 100;">{{student.last_name}}</label> -->
+								<input type="text" class="form-control"
+									data-ng-model="data.object.last_name"
+									placeholder="Enter last name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Phone Number <b
+									style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.mobile"
+									placeholder="Enter mobile number" />
+							</div>
+
+							<div class="form-group col-md-4">
+								<label>Email <b style="color: red">*</b></label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.email" placeholder="Enter email" />
+							</div>
+						</div>
+
+
+
+						<ul class="pager">
+							<li class="next" id="personalin" style="cursor:pointer"><a>Next</a></li>
+						</ul>
+
+
+					</form>
+				</div>
+			</div>
+
+
+
+			<div id="empt" class="tab-pane fade"
+				style="width: 100%; margin-left: 5%;">
+				<br /> <br />
+				<div
+					style="border-radius: 9px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Company Email <b style="color: red">*</b></label> <input
+									class="form-control" type="text" id="pincodeId"
+									data-ng-model="data.object.company_email"
+									placeholder="Enter company email" />
+							</div>
+							<!-- data-ng-blur="getPincodeDetails(data.object);" -->
+							<div class="form-group col-md-4">    
+								<label>Cader <b style="color: red">*</b></label> <select
+									class="form-control" data-ng-model="data.object.caderid">
+									<option></option>
+									<option data-ng-repeat="cader in caders" value="{{cader.id}}">{{cader.description}}</option>
+								</select>
+
+								<!-- <input class="form-control" type="text" data-ng-model="data.object.cader" placeholder="Enter house / door number" /> -->
+							</div>
+							<div class="form-group col-md-4">   
+								<label>Grade <b style="color: red">*</b></label> <select
+									class="form-control" data-ng-model="data.object.gradeid">
+									<option></option>
+									<option data-ng-repeat="grade in grades" value="{{grade.id}}">{{grade.grade_name}}</option>
+								</select>
+								<!-- <input class="form-control" type="text" data-ng-model="data.object.grade" placeholder="Enter street name" /> -->
+							</div>   
+						</div>
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Joining Date <b style="color: red">*</b></label> <input
+									class="form-control" type="date"
+									data-ng-model="data.object.joining_date" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Confirmed Date <b style="color: red">*</b></label> <input
+									class="form-control" type="date"
+									data-ng-model="data.object.confirmed_date" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Contract From <b style="color: red">*</b></label> <input
+									class="form-control" type="date"
+									data-ng-model="data.object.contract_from" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Contract To <b style="color: red">*</b></label> <input
+									class="form-control" type="date"
+									data-ng-model="data.object.contract_to" placeholder= />
+							</div>
+							<!-- <div class="form-group col-md-4">
+								<label>Relieved Date <b style="color: red">*</b></label> <input
+									class="form-control" type="date"
+									data-ng-model="data.object.relieved_date" placeholder= />
+							</div> -->
+							<div class="form-group col-md-4">
+								<label>Department <b style="color: red">*</b></label> <select
+									class="form-control" data-ng-model="data.object.departmentid">
+									<option></option>
+									<option data-ng-repeat="department in departments"
+										value="{{department.id}}">{{department.department_name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Designation <b style="color: red">*</b></label> <select
+									class="form-control" data-ng-model="data.object.designationid">
+									<option></option>
+									<option data-ng-repeat="designation in designations"
+										value="{{designation.id}}">{{designation.designation_name}}</option>
+								</select>
+								<!-- <input class="form-control phoneId" type="text" data-ng-model="data.object.designation" /> -->
+
+							</div>
+						</div>
+						<div class="form-group row">    
+							<div class="form-group col-md-4">
+								<label>Division <b style="color: red">*</b></label> 
+								<select	class="form-control" data-ng-model="data.object.divisionid">
+									<option></option>
+									<option data-ng-repeat="division in divisions"
+										value="{{division.id}}">{{division.name}}</option>
+								</select>
+								<!-- <input class="form-control" type="text" data-ng-model="data.object.division" placeholder="Enter state name" /> -->
+							</div>
+							<div class="form-group col-md-4">
+								<label>Cost Center <b style="color: red">*</b></label> <select
+									class="form-control" data-ng-model="data.object.cost_centerid">
+									<option></option>
+									<option data-ng-repeat="cost_center in cost_centers"
+										value="{{cost_center.id}}">{{cost_center.name}}</option>
+								</select>
+							</div>
+							<div class="form-group col-md-4">
+								<label>Reporting To <b style="color: red">*</b></label> 
+								<select class="form-control"    
+										data-ng-model="data.object.reporting">    
+										<option></option>   
+										<option data-ng-repeat="report in reporting"
+										value="{{report.reporting}}">{{report.reporting_to}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">   
+							<div class="form-group col-md-4">
+								<label>Notice Period <b style="color: red">*</b></label> <input
+									class="form-control" type="text"
+									data-ng-model="data.object.notice_period"
+									placeholder="Enter Notice period" required="required" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Location <b style="color: red">*</b></label>
+				 				<select class="form-control" data-ng-model="data.object.id">
+									<option></option>   
+									<option data-ng-repeat="loc in locations"
+											value="{{loc.id}}">{{loc.location_name}}</option>       
+								</select>       
+							</div>  
+						</div>
+						<ul class="pager" style="width: 85%; margin-left: 5%;">
+								<li class="previous" id="emptip" style="cursor:pointer"><a>previous</a></li>
+								
+								<li class="next" id="personalin" style="cursor:pointer"><a>Next</a></li>
+							</ul>
+					</form>
+				</div>
+			</div>
+			
+			<div id="bank" class="tab-pane fade"
+				style="width: 100%; margin-left: 5%;">
+				<br /> <br />
+				<div
+					style="border-radius: 7px; border: 1px solid #ddd; padding: 2%;">
+					<form class="form" data-role="form">
+						<div class="form-group row">
+
+							<div class="form-group col-md-4">
+								<label>Bank Account Number <b style="color: red">*</b></label>
+								<input type="text" class="form-control"
+									data-ng-model="data.object.bank_acno" placeholder="Enter Bank Account Number" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Bank Name <b
+									style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.bank_name"
+									placeholder="Enter Bank Name" />
+							</div>
+							<div class="form-group col-md-4">
+								<label>Branch</label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.brach"
+									placeholder="Enter Branch" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>IFSC Code <b style="color: red">*</b></label>
+								<input type="text" class="form-control"
+									data-ng-model="data.object.ifsc_code"
+									placeholder="Enter IFSC Code" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Name as in PAN Card 
+								<b style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.pan_name"
+									placeholder="Enter Name As in PAN card" />
+							</div>
+
+							<div class="form-group col-md-4">
+								<label>PAN Number <b style="color: red">*</b></label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.pan_no" placeholder="Enter PAN Number" />
+							</div>    
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>Payment Mode<b style="color: red">*</b></label>
+								<input type="text" class="form-control"
+									data-ng-model="data.object.payment_mode"
+									placeholder="Enter Payment Mode" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">ESI Number <b
+									style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.esi_no"
+									placeholder="Enter ESI Number" />
+							</div>
+
+							<div class="form-group col-md-4">
+								<label>UAN Number <b style="color: red">*</b></label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.uan_no" placeholder="Enter UAN Number" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>PF Number<b style="color: red">*</b></label>
+								<input type="text" class="form-control"
+									data-ng-model="data.object.pf_no"
+									placeholder="Enter PF Number" />
+							</div>
+							<div class="form-group col-md-4">
+								<label class="control-label">Beneficiary Code <b
+									style="color: red">*</b></label> <input type="text"
+									class="form-control" data-ng-model="data.object.beneficiary_code"
+									placeholder="Enter Beneficiary Code" />
+							</div>
+
+							<div class="form-group col-md-4">
+								<label>CTC<b style="color: red">*</b></label> <input
+									type="text" class="form-control"
+									data-ng-model="data.object.ctc" placeholder="Enter CTC per Annum" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<div class="form-group col-md-4">
+								<label>CTC Calculator<b style="color: red">*</b></label>
+								<input type="text" class="form-control"
+									data-ng-model="data.object.ctc_calculator"
+									placeholder="Enter CTC Calculator" />
+							</div>
+						</div>
+
+						<ul class="pager">
+							<li class="previous" id="emptip" style="cursor:pointer"><a>previous</a></li>
+							<li class="next" id="emptin"
+									data-ng-click="hrdata(data.object);" style="cursor:pointer"><a>Register</a></li>
+						</ul>
+
+
+					</form>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<script>
+		$(function() {
+			$(".datePick").datepicker({
+				changeMonth : true,
+				changeYear : true,
+				dateFormat : 'dd-mm-yy',
+				yearRange : '-50:+5'
+			});
+		});
+
+		jQuery("#personalin,#comin,#emptin,#bankin,#profin,#eduin,#famin")
+				.click(
+						function() {
+							$('.nav-tabs > .active').next('li').find('a')
+									.trigger('click');
+						});
+
+		jQuery("#comip,#emptip,#bankip,#profip,#eduip,#famip").click(
+				function() {
+					$('.nav-tabs > .active').prev('li').find('a').trigger(
+							'click');
+				});
+
+		jQuery(document).ready(function() {
+			$("#button").show();
+
+			angular.bootstrap(jQuery("#employeeDiv"), [ 'hremployee' ]);
+		});
+
+		jQuery("#submit").click(function() {
+			$("#button").show();
+			$("#change").hide();
+			$("#instructions").show();
+			$("#replaceDiv").show();
+		});
+	</script>
+</div>
+
+

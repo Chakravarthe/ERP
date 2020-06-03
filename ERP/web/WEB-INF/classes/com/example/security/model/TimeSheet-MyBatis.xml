@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TimeSheet">
+
+	<insert id="Insert" parameterType="map">
+		insert into	hrms.worklog_mst       
+(timesheetdate,location,task,description)
+		values(#{p.timesheetdate},#{p.location},#{p.task},#{p.description})
+	</insert>                     
+	   <select id="getById" resultType="TimeSheetModel">
+		SELECT timesheetdate,location,duration,description from hrms.worklog_mst WHERE task = #{task};
+	  </select>
+
+	<delete id="deleteData" parameterType="java.lang.String">
+		delete from hrms.worklog_mst where task = #{task};
+	</delete>
+	 <select id="getReportings" resultType="map">
+		select empid,reporting_to from hrms.employee_employment_details
+	</select> 
+	
+	<select id="getTeamSheets" resultType="TimeSheetModel" parameterType="map">
+	select
+		a.empid,a.employeename,b.reporting_to,c.timesheetdate,c.task,c.description,c.location,c.duration
+		from
+		(select empid,concat(first_name,'',last_name) as employeename from
+		hrms.employee_personal_details)a inner join 
+		(select empid,reporting_to from hrms.employee_employment_details)b on a.empid=b.empid
+		inner join
+		(select empid,timesheetdate,task,description,location,duration
+		from hrms.worklog_mst)c on b.empid=c.empid  where
+		c.timesheetdate>=#{p.from_date} and
+		#{p.to_date}>=c.timesheetdate <!-- and b.reporting_to=#{b.reporting_to}  -->
+    </select>
+    <select id="getSheets1" resultType="TimeSheetModel" parameterType="map">
+	select
+		a.empid,a.employeename,b.reporting_to,c.timesheetdate,c.task,c.description,c.location,c.duration
+		from
+		(select empid,concat(first_name,'',last_name) as employeename from
+		hrms.employee_personal_details)a inner join (select     
+		empid,reporting_to from
+		hrms.employee_employment_details)b on a.empid=b.empid
+		inner join
+		(select
+		empid,timesheetdate,task,description,location,duration
+		from hrms.worklog_mst)c on b.empid=c.empid  where
+		c.timesheetdate>=#{p.from_date} and
+		#{p.to_date}>=c.timesheetdate
+    </select>
+	<select id="getAttSheets" resultType="TimeSheetModel" parameterType="map">
+	select
+		a.empid,a.employeename,c.timesheetdate,c.duration
+		from
+		(select empid,concat(first_name,'',last_name) as employeename from
+		hrms.employee_personal_details)a inner join 
+		(select
+		empid,timesheetdate,duration
+		from hrms.worklog_mst)c on a.empid=c.empid  where
+		c.timesheetdate>=#{p.from_date} and
+		#{p.to_date}>=c.timesheetdate
+    </select>
+</mapper>	

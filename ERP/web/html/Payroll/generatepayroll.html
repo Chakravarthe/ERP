@@ -1,0 +1,316 @@
+
+
+ 
+<style>
+ .horizontal{
+ margin-left:14%;
+ 
+ }
+ #foryear{
+ margin-left:14%;
+ }
+     ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333; 
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+    /*  nav{
+         height:42px;
+         background-color:Silver ;
+     }
+     
+     nav ul{
+         list-style:none;
+     } 
+     nav ul li button{
+     float:left;
+     text-decoration:none;
+     color:White ;
+     padding:0px 40px;
+     text-align:center;
+     line-height:42px;   
+     height:42px;
+     background-color:#4169E1;
+     cursor:pointer;
+     }       */ 
+     
+    #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 20%;
+   margin-left:16%;
+   margin-top:3%;
+   display: flex;
+
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:#3358FF ;
+  color: white;
+} 
+     
+    #register{
+   margin-top:2%;
+   margin-left:1%;
+   }  
+      
+     
+     #register1{
+   margin-top:2%;
+   } 
+     
+     
+     
+     
+     
+     
+           
+</style>       
+      
+<div  id="regid" data-ng-controller="Registrationcontroller">  
+      
+        <ul class="horizontal">
+         <li><a class="active" href="#home">January</a></li>
+  <li><a href="#news">February</a></li>
+  <li><a href="#contact">March</a></li>
+  <li><a href="#about">April</a></li>
+    <li><a href="#contact">MAy</a></li>
+  <li><a href="#about">June</a></li>
+    <li><a href="#contact">July</a></li>
+  <li><a href="#about">August</a></li>  
+    <li><a href="#contact">September</a></li>
+  <li><a href="#about">October</a></li>
+    <li><a href="#contact">November</a></li>
+  <li><a href="#about">December</a></li>
+  </ul>
+      
+                
+        
+        <div class="panel panel-primary"
+		style="margin-left: 14%;position:absolute;top:920px;width:1000px">
+		</div>
+		
+		    
+                 <button class="btn"><i class="fa fa-info-circle" style="font-size:40px;color:DarkOrange"></i></button>
+		
+		  
+       <button type="button" id="register"
+				class="btn btn-primary btn-md pull-right" style='background-color:MediumSeaGreen;top-padding:5% ' data-toggle="modal"
+				data-target="#myModal" data-ng-click="">                                    
+				Process payroll
+				    
+			</button>
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+			
+			<button type="button" id="register1"
+				class="btn btn-primary btn-md pull-right" style='background-color:MediumSeaGreen;top-padding:5% ' data-toggle="modal"
+				data-target="#myModal" data-ng-click="">                                    
+				Validate payroll
+				    
+			</button> 
+	     
+		
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   
+		
+		<div class="panel-body">
+		<div class="form-group col-md-4" id=foryear>
+		
+				<label>Financial Year&nbsp;<b style="color: red">*</b></label> 
+				<select
+          class="form-control" data-ng-model="data.object.po#">
+          <option>Select</option>
+          <option>2019-2020</option> 
+          <option>2018-2019</option>
+          <option>2017-2018</option>
+          <option>2016-2017</option>
+          <option>2015-2016</option>
+          <option>2014-2015</option>       
+           </select>
+			</div>    
+
+
+			<div class="form-group col-md-4">
+				<label>Month&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.Invoice">
+					                   <option>January</option>  
+                                       <option>February</option>
+                                       <option>March</option>
+                                       <option>April</option>
+                                       <option>May</option>
+                                       <option>June</option>
+                                       <option>July</option>
+                                       <option>August</option>
+                                       <option>September</option>
+                                       <option>October</option>
+                                       <option>November</option>
+                                       <option>December</option>
+
+				</select>
+			</div>
+		
+			</div>    
+	<!-- 		
+			
+		<div class=linetable><div>	<table id="customers" >
+  <tr>
+    <th>Company</th>
+    
+  </tr>
+  <tr>
+    <td>Gross Pay</td>
+    <td>Rs.134456</td>
+  </tr>
+ 
+  <tr>
+    <td>Deductions</td>
+    <td>Rs.134456</td>
+   
+  </tr>
+  <tr>
+    <td>Net Payout</td>
+    <td>Rs.134456</td>
+   
+  </tr>
+  
+</table>
+</div>
+
+<div style=margin-left:32%; margin-bottom:25%	>
+<table id="customers">
+  
+  <tr><td>Gross Pay</td></tr>
+ <tr><td>Deductions</td></tr>
+  <tr><td>Net Payout</td> </tr> 
+  </table>
+  
+    </div>   
+    
+    <div>
+<table id="customers">
+  
+  <tr><td>Gross Pay</td></tr>
+ <tr><td>Deductions</td></tr>
+  <tr><td>Net Payout</td> </tr> 
+  </table>
+  
+    </div> 
+    
+   </div> -->
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<style>
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.floatLeft { width: 30%; 
+float: left; 
+margin-left:20%;
+}
+.floatRight {width: 30%; float: right; }
+.floatRight {width: 30%; float: right; }
+
+.container { overflow: hidden; 
+}
+</style><div class="container">
+<div class="floatLeft">
+<table>
+<tr><td class="box3_t">Gross Pay</td>
+<td>Rs:987543522.42</td>
+<tr>
+<tr><td class="box3_b">Deductions</td><td>Rs:987543522.42</td></tr>
+<tr><td class="box3_b">Net payout</td><td>Rs:987543522.42</td></tr>
+</table>
+</div>
+
+<div class="floatRight">
+<tr><table>
+<tr><td class="box4_t">Payroll Inputs</td><td><button>Release</button>&nbsp;<button>Hold</button></td>
+<tr><td class="box4_b">Employee View Release</td><td><button>Release</button>&nbsp;<button>Hold</button></td></tr>
+<tr><td class="box4_b">IT Statement Employee View</td><td><button>Release</button>&nbsp;<button>Hold</button></td></tr>
+<tr><td class="box4_b">Payroll</td><td><button>Unlock</button>&nbsp;<button>Lock</button></td></tr>
+</td></tr></table>
+</div>
+<div class="floatRight1">
+<tr><table>
+<tr><td class="box4_t">New Joiners</td><td></td>
+<tr><td class="box4_b">Stop Salary</td><td></td></tr>
+<tr><td class="box4_b">Relieving Employees</td><td></td></tr>
+<tr><td class="box4_b">Salary Revision</td><td></td></tr>
+</td></tr></table>
+</div>
+</div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+			
+        </div>          
+              
+    <div id="mainDiv">        
+    <script>
+    jQuery(document).ready(function() {           
+    	Andromeda.showhomePage();  
+    });
+    </script>  
+     </div>                 
+                 
+
+       
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                                             

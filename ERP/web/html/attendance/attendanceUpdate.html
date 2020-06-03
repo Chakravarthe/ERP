@@ -1,0 +1,190 @@
+<script src="/erp/scripts/general/attendanceUpdateModule.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+
+<style>
+#registrationTab:hover, .previous, .next {   
+	cursor: pointer;
+}
+   
+#imgId {  
+	width: 120px;
+}
+   
+.clearfix {    
+	zoom: 1;
+	clear: both;      
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;    
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+
+.row {
+ 
+          
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;         
+  
+} 
+/* .panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} */
+.card{
+   
+padding-top :10px;
+}
+ .panel,.panel-default,.panel-body
+ {         
+    padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;        
+  padding-left:  30px;               
+ 
+} 
+.panel,.panel-default
+{           
+ border-style: solid;
+}
+</style>   
+</head><body>
+<div id="attendanceDiv"  
+	data-ng-controller="attendanceController" style="margin-left: 18%;margin-right: 2%;margin-top:-12%"">
+<br>
+
+
+<div class="text-left">     
+			<h3>Employee Attendance Update  </h3> 
+		</div>          
+			<br>
+	        
+      <div class="panel-default">  
+       <div class="panel-body">          
+   	<div class="row" id="attendance">               
+   	    
+     <h4>Attendance Date:</h4>      
+                 
+        <br>                  
+            
+                         
+							<div class="input-field col-md-6"> 
+						<input type="text" name="selectedDate"
+						class="datepicker form-control" data-ng-model="selectedDate" placeholder="Select Date" />	
+						</div>   
+						<button class="btn waves-effect waves-light btn-large gen-btn primary"
+				type="submit" name="theme_submit"
+				data-ng-click="searchAttendance(selectedDate);">Search</button>             
+				   </div>    
+				</div>    
+				</div>      
+			      
+			  
+				    <br>       
+		<div id="dataDiv">   
+		<div class="panel-group">
+		 <div class="text-left">   
+		  <div class="card-panel">   
+		 
+			<h3>Absentees as on:{{selectedDate}}</h3>  
+		      
+		</div>          
+			 <br>   
+			  <div class="input-group col-md-4" style="float: right;">
+	
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+<br><br><br><br>
+			                
+			<table class="table table-bordered">   
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.no</th>
+					<th><input type="checkbox" data-ng-model="empAttendance"
+						data-ng-true-value="true" data-ng-false-value="false"
+						data-ng-click="employeeAttendance(empAttendance);">&nbsp;Select
+					</th>       
+					<th align="left">Employee Id</th>              
+					<th align="left">Employee Name</th>  
+					<th align="left">Department</th>         
+					<th align="left">Cadre</th>   
+					<th align="left">Grade</th>       
+				</tr>     
+				
+				<tr data-ng-repeat="emp in empDetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td>          
+					 <td><input type="checkbox"
+						data-ng-model="studentsEnggPresentArr[data.id]"></td>   
+					 <td align="left">{{emp.employeeid}}</td>     
+					 <td align="left">{{emp.employeename}}</td>           
+					 <td align="left">{{emp.department}}</td>
+					 <td align="left">{{emp.cadre}}</td>
+					 <td align="center">{{emp.grade}}</td>
+					
+					          
+					     
+				</tr>                       
+			</table> 
+		<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+			<br>
+			<center><button type="button" class="btn btn-primary"   
+				type="submit" name="theme_submit"
+				data-ng-click="updateAttendance(selectedDate);">Update</button> </center>   		
+	
+</div>   
+     
+</div>	   
+</div>	     
+
+</div>                
+
+     
+<script>
+jQuery(document).ready(function() {
+	
+	$("#attendance").show();
+	/* $("#dataDiv").hide(); */
+	angular.bootstrap(jQuery("#attendanceDiv"), [ 'attendanceUpdateModule' ]);
+	
+});   
+                 
+	
+$(function() {
+	$(".datepicker").datepicker({
+		/* minDate : new Date,
+		changeMonth : true,
+		changeYear : true, */
+		dateFormat : 'dd-mm-yy'
+	});
+});    
+	              
+</script>
+</body>

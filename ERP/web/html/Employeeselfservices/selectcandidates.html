@@ -1,0 +1,75 @@
+<script src="/erp/scripts/general/selectcandidate.js"></script>
+
+<div>
+	<div id="instructions" style="padding-left: 2%;">
+		<div id="mainhome">
+			<div class="container"
+				style="margin-top: -10%; margin-right: 15%; margin-left: 15%;"
+				id="selectcan" data-ng-controller="selectcandidatecontroller">
+				<h3>
+					<b>Select Candidates</b>
+				</h3>
+				<div class="tab-content">
+					<div>
+						<div
+							style="border-radius: 7px; border: 1px solid #ddd; padding: 2%; margin-top: 0%; margin-right: 5%; margin-left: -2%;">
+							<form class="form" data-role="form">
+								<div class="form-group row">
+
+									<div class="form-group col-md-4">
+										<label><b>Hiring Request</b><b style="color: red">*</b></label>
+										<select class="form-control"
+											data-ng-model="data2.object.position">
+											<option>Select</option>
+											<option data-ng-repeat="position in positions"
+												value="{{position.id}}">{{position.position}}</option>
+										</select>
+									</div>
+								</div>
+								<center>
+									<button class="btn btn-primary" id="sdfkj" data-ng-click="personaldata(data2.object);" style="cursor: pointer">Get</button>
+								</center>
+
+								<div class="panel-body" id="six-b">
+									<div class="form-group row">
+										<table class="table table-bordered">
+											<tr style='background-color: CornflowerBlue'>
+												<th>S.no</th>
+												<th>Candidate Type</th>
+												<th>Candidate Name</th>
+												<th>Mobile Number</th>
+												<th>Email</th>
+												<th>Action</th>
+
+											</tr>
+											<tr
+												data-ng-repeat="data in filteredResult =(regdetails | filter:search)">
+												<td align="right">{{$index+1}}</td>
+												<td>{{data.candidate_type}}</td>
+												<td>{{data.candidate_name}}</td>
+												<td>{{data.mobile}}</td>
+												<td>{{data.email}}</td>
+												<td></td>
+											</tr>
+
+										</table>
+									</div>
+								</div>
+
+
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<script>
+jQuery(document).ready(function() {     
+	angular.bootstrap(jQuery("#selectcan"), [ 'selectcandidate' ]); 
+});
+</script>

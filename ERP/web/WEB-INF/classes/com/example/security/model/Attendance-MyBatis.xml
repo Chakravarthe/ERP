@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Attendance">
+
+<select id="checkAttendance" parameterType="Login"   
+		resultType="java.lang.Integer">   
+		SELECT count(*) FROM hrms.employee_login_details WHERE
+		empid=#{empid} AND login_date=to_char(CURRENT_TIMESTAMP,'dd-MM-yyyy')::date; 
+	</select>          
+    <insert id="savePresentEmployees" parameterType="Login">
+		INSERT INTO hrms.employee_login_details(empid,login_date,login_time,login_latitude,login_longitude,login_ip)
+		VALUES (#{employeeid},to_char(CURRENT_TIMESTAMP,'dd-MM-yyyy')::date,to_char(CURRENT_TIMESTAMP,'HH24:MI:SS')::time,#{login_latitude},
+		#{login_longitude},#{login_ipAddress});
+	</insert>    
+	<update id="updatePresentEmployees" parameterType="Login">
+		UPDATE hrms.employee_login_details   
+		SET logout_time=to_char(CURRENT_TIMESTAMP,'HH24:MI:SS')::time
+		
+		WHERE empid=#{employeeid} AND login_date=to_char(CURRENT_TIMESTAMP,'dd-MM-yyyy')::date;
+		
+</update>
+<select id="getdashboard" resultType="Login">
+		SELECT * from hrms.employee_login_details where empid=#{employeeid} and login_date=to_char(CURRENT_TIMESTAMP,'dd-MM-yyyy')::date;
+	</select>
+	
+	<select id="getLogin" parameterType="Login" resultType="Login">
+		SELECT empid as employeeid, * from hrms.employee_login_details where empid=#{employeeid} and login_date=to_char(CURRENT_TIMESTAMP,'dd-MM-yyyy')::date;
+	</select>	
+	<select id="getLeavesDetails" resultType="map">
+		SELECT from_date,to_date,reason,created_date,(to_date-from_date+1) as no_days from hrms.leaves;
+	</select>
+	
+	<select id="getStaff" resultType="map">
+		SELECT distinct id,staff_type from hrms.staff_mst;
+	</select>
+	
+	
+	<select id="getMyTeamDetails" resultType="Attendance" parameterType="map">
+		select a.first_name,b.cader,b.grade,b.designation,b.department,c.leave_type,c.from_date,c.to_date,c.leave_nature,c.approval_by ,c.reason,c.created_date from(select empid,first_name from hrms.employee_personal_details)a 
+inner join (select empid,cader,department,grade,designation from hrms.employee_employment_details)b on a.empid=b.empid 
+inner join (select empid,leave_type,from_date,to_date,leave_nature,approval_by,reason,created_date from hrms.leaves  where created_date::date>=#{p.from_date} and #{p.to_date}>=created_date::date and leave_type=#{p.leave_type})c on b.empid=c.empid
+	
+	   
+	</select>   
+	
+	<!-- get year-->
+	<select id="getyears" resultType="map">
+		SELECT year_id,year from hrms.year_mst;
+	</select>
+	
+	
+	<insert id="Insert" parameterType="map">
+		insert into	hrms.calendar_mst(holiday_type,year,holiday_name,from_date,to_date,day)
+		                     values(#{p.holiday_type},#{p.year_id},#{p.holiday_name},#{p.from_date},#{p.to_date},#{p.day});
+	</insert>
+	      
+</mapper>     

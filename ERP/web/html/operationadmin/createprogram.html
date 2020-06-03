@@ -1,0 +1,385 @@
+ <script src="/erp/scripts/general/program.js"></script>
+
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+    input[type=text] {            
+    border: none;
+    border-bottom: 1px solid #ffeecc;  
+} 
+input:focus {
+  background-color:#ffe6b3;
+} 
+.btn-search {
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;   
+	  border-width: 1px;       
+	  border-style: solid;
+	  border-color: #63afdc;
+	  
+	}
+	.button {   
+  background-color:#63afdc ;
+  border: none;
+  color: black;
+  padding: 10px 20px;   
+  text-align: center;   
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+    </style>
+<div id="programId" data-ng-controller="programController">
+ <br>
+  <div class="panel panel-primary" style="margin-left: 16%;position:absolute;top:220px;width:1000px">
+   
+   <div class="panel-heading">Create Program</div>
+    <div class="panel-body">
+	 <div class="form-group col-md-4">
+       <label>Program Name&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Program Name" data-ng-model="data.object.program_name" />
+	</div>
+	<div class="form-group col-md-4">
+       <label>Project&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.project_id">
+							<option>--Select --</option>
+								<option data-ng-repeat="project in projects" value="{{project.project_id}}">{{project.project_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>District&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.district_id">
+							<option>--Select --</option>
+								<option data-ng-repeat="district in districts"
+							value="{{district.id}}">{{district.name}}</option>
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>Sector&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.sector_id">
+							<option>--Select --</option>
+								<option data-ng-repeat="sector in sectors" value="{{sector.sector_id}}">{{sector.sector_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>Segment&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.segment_id">
+							<option>--Select --</option>
+								<option data-ng-repeat="segment in segments" value="{{segment.segment_id}}">{{segment.segment_name}}</option>	
+							</select>
+	</div>
+		<div class="form-group col-md-4">
+       <label>Other&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Other" data-ng-model="data.object.other" />
+	</div>					
+	
+	<div class="form-group col-md-4">
+      <label>CAPEX Budget Value&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter CAPEX Budget Value" data-ng-model="data.object.capex_budgetvalue"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>OPEX Budget Value&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter OPEX Budget Value" data-ng-model="data.object.opex_budgetvalue"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>From Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="date" class="form-control" placeholder="Select Date" data-ng-model="data.object.from_date"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>To Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="date" class="form-control" placeholder="Select Date" data-ng-model="data.object.to_date"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Head Count&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter Head Count" data-ng-model="data.object.headcount"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Description&nbsp;<b style="color: red">*</b></label>
+	   <textarea cols="5" rows="2" class="form-control" placeholder="Enter Description" data-ng-model="data.object.description"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Physical Outcome&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter Physical Outcome" data-ng-model="data.object.physical_outcome"/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Payment Term Group&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.paymentgroup_id">
+							<option>--Select --</option>
+								 <option data-ng-repeat="group in groups" value="{{group.id}}">{{group.group_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Secondary Responsibility&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.secondary_responsibility">
+							<option>--Select--</option>
+								<option data-ng-repeat="name in names" value="{{name.id}}">{{name.first_name}}</option>	
+							</select>
+	</div>
+	 <button type="button" class="btn btn-primary"  data-ng-click="registration(data.object);" style="margin-left:35%">SUBMIT</button> 
+	
+	
+   
+  </div>
+</div>
+  <div class="panel panel-primary" style="margin-left: 16%;position:absolute;top:730px;width:1000px">
+   <div class="panel-heading">Documents</div>
+    <div class="panel-body">
+    <table style="width:100%">
+  <tr>
+    <th>Document Name</th>
+    <th>File</th> 
+    <th>Delete</th>
+   
+  </tr>
+  <tr>
+    <td><input type="text" placeholder="Document Name"/></td>
+    <td><input type="file"/></td>
+    <td></td>
+     
+  </tr>
+             
+</table>
+    </div>   
+    </div>
+     
+
+ 
+ <div class="panel panel-primary" style="margin-left:16%;position:absolute;top:1020px;width:1000px">
+   <div class="panel-heading"></div>
+    <div class="panel-body"><br><br>
+     <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <!--    <button class="button">CSV</button>    -->  
+				        <div class="input-group col-md-4" style="float: right;">
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>  </div> <br>
+
+<div class=" table-responsive">
+<table id="itemsTable" class="table table-hover table-bordered table-striped ">
+<thead>
+<tr>
+<th>S.No</th>
+<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox">
+</th>
+<th style="min-width: 200px;max-width: 200px;">Program Name</th>
+<th style="min-width: 120px;max-width: 120px;">Project</th>
+<th style="min-width: 120px;max-width: 120px;"> District </th>
+<th style="min-width: 200px;max-width: 200px;">Sector</th>
+<th style="min-width: 120px;max-width: 120px;">Segment </th>
+<th style="min-width: 120px;max-width: 120px;"> Other </th>
+<th style="min-width: 120px;max-width: 120px;"> CAPEX Budget Value</th>
+<th style="min-width: 120px;max-width: 120px;"> OPEX Budget Value </th>
+<th style="min-width: 120px;max-width: 120px;"> From Date </th>
+<th style="min-width: 120px;max-width: 120px;">To Date</th>
+<th style="min-width: 120px;max-width: 120px;">Head Count </th>
+<th style="min-width: 120px;max-width: 120px;">Description</th>
+<th style="min-width: 120px;max-width: 120px;">Physical Outcome</th>
+<th style="min-width: 120px;max-width: 120px;">Payment Term Group </th>
+<th style="min-width: 120px;max-width: 120px;"> Secondary Responsibility</th>
+<th style="min-width: 120px;max-width: 120px;">Documents</th>
+<th style="min-width: 120px;max-width: 120px;">Status</th>
+<th style="min-width: 120px;max-width: 120px;">Action</th>
+<th style="min-width: 120px;max-width: 120px;">Delete/Update</th>
+        
+
+
+</tr>
+</thead>
+ <tr data-ng-repeat="userdata in filteredResult =(userdetails | filter:search)">   
+        <td>{{userdata.S.No}}</td> 
+        
+       <td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td> 
+		<td>{{userdata.program_name}}</td>	
+		<td>{{userdata.project_id}}</td>  
+		<td>{{userdata.district_id}}</td>	 
+		<td>{{userdata.sector_id}}</td>	 
+		<td>{{userdata.segement_id}}</td>	
+		<td>{{userdata.other}}</td>	 
+		<td>{{userdata.capex_budgetvalue}}</td>	            
+		<td>{{userdata.opex_budgetvalue}}</td>	 
+		<td>{{userdata.from_date }}</td>	 
+		<td>{{userdata.to_date}}</td>
+		<td>{{userdata.headcount}}</td>	
+		<td>{{userdata.description}}</td>
+		<td>{{userdata.physical_outcome}}</td>		 	 
+			<td>{{userdata.paymentgroup_id}}</td>
+		<td>{{userdata.secondary_responsibility}}</td>	             
+		<td>{{userdata.documents}}</td>	 
+		 	<!-- <td>{{userdata.status}}</td> -->	
+		 	<td>&nbsp;&nbsp;&nbsp;
+						<button type="button" id="editData" data-ng-click="getById(userdata.program_name)"
+							class="btn btn-success btn-md" data-toggle="modal"
+							data-target="#myModal">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button> &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(userdata.program_name)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td> 
+	</tr>
+</table>
+<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">   
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Update
+								Form</h4>
+						</div>
+						<div class="modal-body">
+							<div class="panel panel-success">
+								<div class="panel-body">
+								<form>
+								<br>
+								<div class="form-group col-md-4">
+       <label>Program Name&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Program Name" data-ng-model="data.object.program_name" disabled />
+	</div>
+	<div class="form-group col-md-4">
+       <label>Project&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.project_id" disabled>
+							<option>--Select --</option>
+								<option data-ng-repeat="project in projects" value="{{project.project_id}}">{{project.project_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>District&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.district_id" disabled>
+							<option>--Select --</option>
+								<option data-ng-repeat="district in districts"
+							value="{{district.id}}">{{district.name}}</option>
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>Sector&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.sector_id" disabled>
+							<option>--Select --</option>
+								<option data-ng-repeat="sector in sectors" value="{{sector.sector_id}}">{{sector.sector_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+       <label>Segment&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.segment_id" disabled>
+							<option>--Select --</option>
+								<option data-ng-repeat="segment in segments" value="{{segment.segment_id}}">{{segment.segment_name}}</option>	
+							</select>
+	</div>
+		<div class="form-group col-md-4">
+       <label>Other&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control"  placeholder="Enter Other" data-ng-model="data.object.other" disabled/>
+	</div>					
+	
+	<div class="form-group col-md-4">
+      <label>CAPEX Budget Value&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter CAPEX Budget Value" data-ng-model="data.object.capex_budgetvalue" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>OPEX Budget Value&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter OPEX Budget Value" data-ng-model="data.object.opex_budgetvalue" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>From Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="date" class="form-control" placeholder="Select Date" data-ng-model="data.object.from_date" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>To Date&nbsp;<b style="color: red">*</b></label>
+	   <input type="date" class="form-control" placeholder="Select Date" data-ng-model="data.object.to_date" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Head Count&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter Head Count" data-ng-model="data.object.headcount" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Description&nbsp;<b style="color: red">*</b></label>
+	   <textarea cols="5" rows="2" class="form-control" placeholder="Enter Description" data-ng-model="data.object.description" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Physical Outcome&nbsp;<b style="color: red">*</b></label>
+	   <input type="text" class="form-control" placeholder="Enter Physical Outcome" data-ng-model="data.object.physical_outcome" disabled/>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Payment Term Group&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.paymentgroup_id">
+							<option>--Select --</option>
+								 <option data-ng-repeat="group in groups" value="{{group.id}}">{{group.group_name}}</option>	
+							</select>
+	</div>
+	<div class="form-group col-md-4">
+      <label>Secondary Responsibility&nbsp;<b style="color: red">*</b></label>
+	   <select class="form-control" data-ng-model="data.object.secondary_responsibility">
+							<option>--Select--</option>
+								<option data-ng-repeat="name in names" value="{{name.id}}">{{name.first_name}}</option>	
+							</select>
+	</div>
+	
+								
+								</form>
+</div></div></div>
+<div class="modal-footer">
+							<button type="button" id="update" class="btn btn-primary"
+								data-ng-click="updateData(data.object)" data-dismiss="modal"
+								style="width: 100px">Update</button>
+							<button type="button" class="btn btn-warning"
+								style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+						</div>
+						</div>
+						</div>
+						</div></div>
+<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries
+<nav style="margin-left:72%">
+  <ul class="pagination">
+    <li class="prev">
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a>
+    </li>
+    <li><a href="#">2</a>
+    </li>
+    <li><a href="#">3</a>
+    </li>
+    <li><a href="#">4</a>
+    </li>
+    <li><a href="#">5</a>
+    </li>
+    <li class="next">
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
+	
+</div>
+ </div>
+  </div>
+  
+
+  
+     
+                 
+
+<script>
+		jQuery(document).ready(function() {         
+			
+  			 angular.bootstrap(jQuery("#programId"), [ 'programModule' ]); 
+	    });
+		
+	</script>
+	

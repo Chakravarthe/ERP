@@ -1,0 +1,329 @@
+<script src="/erp/scripts/general/leavesReportModule.js"></script>
+ <!-- <script src="/erp/scripts/js/jquery.min.js"></script> 
+<script src="/erp/scripts/js/angular.js"></script>  
+<script src="/erp/scripts/js/datepicker/bootstrap-datepicker.js"></script> -->
+<style>   
+#registrationTab:hover, .previous, .next {
+	cursor: pointer;
+}    
+#imgId {                                
+	width:120px;                        
+}                           
+.btn-search {           
+	  background: #63afdc;
+	  border-radius: 0;
+	  color: black;
+	  border-width: 1px;    
+	  border-style: solid;                             
+	  border-color: #63afdc; 
+	}
+.clearfix {   
+	zoom: 1;   
+	clear: both;         
+}
+
+::selection {
+	background: #b3d4fc;   
+	text-shadow: none;
+}
+.controls span {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	font-size: 0px;
+	background: #1fc8db;
+	text-align: center;
+	position: relative;
+	z-index: 2;
+}  
+.row {
+  padding-top: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  padding-left: 30px;      
+} 
+/* .panel  {
+  background-color: light blue;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px; 
+} */
+.panel,.panel-default,.panel-body
+ {  
+  height :260px;       
+  padding-top: 0px;
+  padding-right: 0px;  
+  padding-bottom: 0px;        
+  padding-left:  0px;             
+} 
+.panel,.panel-default
+{   
+  border-style: solid;
+}
+.table{
+  overflow-x: auto;
+  width :40px;
+}
+.card{ 
+  padding-top: -50px;   
+  padding-right: 0px;
+  padding-bottom: -100px;        
+  padding-left:  0px;                                                                                                
+  background-color: white;  
+}  
+.button {
+  background-color:#63afdc;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;  
+  cursor: pointer;
+  border-radius: 10px;
+}    
+ .card-panel
+ {                 
+  padding-top: 0px;   
+  padding-right: 0px;   
+  padding-bottom: 0px;     
+  padding-left:  0px;    
+  background-color: white;
+}  
+.scroll{
+  overflow:auto;
+  whitespace:nowrap;
+} 
+</style>   
+</head>
+<div id="leavesReportDiv" data-ng-controller="leavesReportController" style="margin-left: 18%;margin-right: 2%;margin-top:-12%;">
+<br>  
+<div class="text-left">     
+			<h3>Team Leave Report </h3> 
+		</div>                 
+			<br>
+	    <div class="panel-default">    
+       <div class="panel-body">   
+   	<div class="row" id="attendanceReport">   
+					<div class="form-group row">   
+						<div class="form-group col-md-3">  <label
+								for="fromdate"><font color="black">From Date</font><span><font color="red">*</font></span></label></div>
+						<div class="form-group col-md-3">         
+							<input class="form-control" id="fromdate" name="fromdate" type="date"  data-ng-model="data.object.from_date" placeholder="Enter From Date">
+							</div>          
+						<div class="form-group col-md-3">       
+						<label for="todate"><font color="black">To Date</font><span><font color="red">*</font></span></label></div>
+						<div class="form-group col-md-3">         
+							<input class="form-control" id="todate" name="todate" type="date" data-ng-model="data.object.to_date" placeholder="Enter to Date">
+							</div>       
+						<div class="form-group col-md-3">                
+						<label>Leave Type&nbsp;<b style="color: red">*</b></label> 
+						<select class="form-control" data-ng-model="data.object.leave_type">
+					<option data-ng-repeat="leave in leaves" value="{{leave.id}}">{{leave.type}}</option>
+				</select>        
+						</div>   
+      <div class="form-group col-md-3">                
+						<label>view&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.view">
+					<option value="Detailed">Detailed</option>
+					<option value="Summary">Summary</option>
+				</select>        
+						</div>
+				  </div>	 
+				
+      </div>            <br><br>
+						<div data-ng-show="data.object.view=='Detailed'"> 
+						<center>
+						<div><button type="button" class="btn btn-primary" style="margin-bottom: 15px;" value="submit" type="submit" data-ng-click="getleavesDetailedReport(data.object);">Submit</button> </div>
+						</center>				                                                  
+			  <br>   
+		  		    <br> 
+				        <div class="card-panel" id="maintable">   
+			<h3>Detailed Leaves Report from {{emp.from_date}} to {{emp.to_date}} </h3>  
+		</div>    <br><br>
+				    <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <button class="button">CSV</button>
+				        <div class="input-group col-md-4" style="float: right;">
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>	    
+			 <br>  
+			 <div class="sidebar-menu" style="position:fixed;overflow-y:scroll;overflow-x:hidden" id="button">
+		  	<div class="logo"> <a href="#" class="sidebar-icon btn-primary"> <span class="fa fa-bars">
+		  	</span> </a> <a href="#"> <span id="logo"></span> 
+			  </a> </div>		 
+	 </div> 
+		<div id="leaveDiv" class="scroll">       
+			<table class="table table-bordered">    
+			<thread> 
+			<tr id="searchemployee">   
+                <th></th>
+                  <th><input type="text" data-ng-model='search.employeename' class="form-control"></th>
+                    <th><input type="text" data-ng-model='search.department' class="form-control"></th>
+                    <th><input type="text" data-ng-model='search.designation' class="form-control"></th>
+  					<th><input type="text" data-ng-model='search.cadre' class="form-control"></th>
+					<th><input type="text" data-ng-model='search.grade' class="form-control"></th>
+					<th><input type="text" data-ng-model='search.reporting_to' class="form-control"></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+                </tr>     
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">S.No</th>  
+					<th align="left">Employee Name</th>  
+					<th align="left">Department Name</th>  
+					<th align="left">Designation Name</th>  
+					<th align="left">Cadre</th>  
+					<th align="left">Grade</th>  
+					<th align="left">Reporting To</th>    
+					<th align="left">Leave Type</th>  
+					<th align="left">Leave Nature</th>  
+					<th align="left">From Date</th>  
+					<th align="left">To Date</th>  
+					<th align="left">Compensation Off Date</th>  
+					<th align="left">Approved By</th>  
+				<th align="left">Reason</th> 
+					<th align="left">Leave Status</th>
+				</tr>                  
+				<tr data-ng-repeat="emp in empdetails | filter:search"> 
+				     <td align="left">{{$index+1}}</td>
+					 <td align="left">{{emp.employeename}}</td>    
+					 <td align="left">{{emp.department}}</td> 
+					 <td align="left">{{emp.designation}}</td> 
+					 <td align="left">{{emp.cader}}</td> 
+					 <td align="left">{{emp.grade}}</td> 
+					 <td align="left">{{emp.reporting_to}}</td> 
+					 <td align="left">{{emp.leave_type}}</td> 
+					 <td align="left">{{emp.leave_nature}}</td> 
+					 <td align="left">{{emp.from_date}}</td> 
+					 <td align="left">{{emp.to_date}}</td> 
+					 <td align="left">{{emp.comp_date}}</td>    
+					 <td align="left">{{emp.approval_by}}</td> 
+					 <td align="left">{{emp.reason}}</td>  
+					 <td align="left">{{emp.leavestatus}}</td>             
+				</tr> 
+				</thread>
+				<tbody>                   
+			</table>  
+	</div>
+						      </div> <br><br>   
+<div data-ng-show="data.object.view=='Summary'"> 
+ <center>
+<div><button type="button" class="btn btn-primary" style="margin-bottom: 15px;" value="submit" type="submit" data-ng-click="getSummary1(data.object);">Submit</button></div>
+</center>
+			<div class="card-panel" id="maintable">        
+			<h3>Summary Leaves Report from {{emp.from_date}} to {{emp.to_date}} </h3>  
+		</div>    <br><br>
+				    <div class="dataTables_length" id="scheduleTimetableList_length">
+				    <label>Show <select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    <option value="10">10</option>
+				    <option value="25">25 </option>
+				    <option value="50">50 </option>           
+				    <option value="-1">all</option>
+				    </select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				    <button class="button">CSV</button>
+				        <div class="input-group col-md-4" style="float: right;">
+      <span class="input-group-btn">
+        <button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i> Search</button>
+      </span>  
+      <input type="text" class="form-control" placeholder="Search Records">     
+</div>
+			 </div>    
+						     <div id="leaveSummaryDiv">       
+			<table class="table table-bordered" style=" width: 80%; margin-left: 8%;">    
+				<tr style='background-color: CornflowerBlue'>        
+					<th align="left">Leave Type</th> 
+					<th align="left">No.of Leaves Applied</th>  
+					<th align="left">No.of Employees Applied</th>  
+					<th align="left">Total No.of Pendings</th>  
+					<th align="left">Total No.of Approvals</th>  
+					<th align="left">Total No.of Rejects</th>    
+					<th align="left">Total No.of Cancelled</th>  
+				</tr>      
+				<tr data-ng-repeat="user in userdetails | filter:search"> 
+					 <td align="left">{{user.leave_type}}</td>    
+					 <td align="left">{{user.count}}</td> 
+					 <td align="left">{{user.empid1}}</td> 
+					 <td align="left">{{user.pendings}}</td>   
+					 <td align="left">{{user.approvals}}</td>  
+					 <td align="left">{{user.rejects}}</td>  
+					 <td align="left">{{user.cancel}}</td>
+				     <!-- <tr><td>Compensatory Off</td>            
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>
+					   <td></td>              
+					   <td></td>
+					   <td></td>   
+				</tr> 
+					<tr> 
+				      <tr><td>Flexi Holiday</td>                      
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>
+					   <td></td>
+					   <td></td>
+					   <td></td>   
+				</tr> 
+				<tr> 
+				      <tr><td>Maternity Leave</td>            
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>
+					   <td></td>
+					   <td></td>
+					   <td></td>  
+				</tr> 
+				<tr> 
+				      <tr><td>PaternityLeave</td>            
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>
+					   <td></td>
+					   <td></td>
+					   <td></td>  
+				</tr> 
+				<tr> 
+				      <tr><td>Personal Leave</td>            
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>
+					   <td></td>
+					   <td></td> 
+					   <td></td> 
+				</tr> 
+					<tr> 
+				      <tr><td>Transfer Leave</td>            
+					   <td>{{user.count}}</td>
+					   <td>{{user.empid1}}</td>
+					   <td></td>        
+					   <td></td>
+					   <td></td>     
+					   <td></td>              
+				</tr>--> </tr>     
+			</table>  
+	</div>
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+</div>					
+ </div> </div>
+    <script>
+    jQuery(document).ready(function() {
+    	angular.bootstrap(jQuery("#leavesReportDiv"), [ 'leavesReportModule' ]);	
+    });   
+    </script>  

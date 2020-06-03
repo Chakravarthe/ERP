@@ -1,0 +1,413 @@
+<link rel="stylesheet"
+href="/andromeda/css/general/font-awesome.min.css">
+<script src="/erp/scripts/general/CreatePOModule.js"></script> 
+<script src="/erp/scripts/js/main.js"></script>
+<script src="/erp/js/jquery.min.js"></script>
+ 
+                 
+
+<style type="text/css">
+ #date .ui-datepicker .ui-datepicker-title
+
+.ui-widget-header{  
+
+border: 1px solid #0044cc;
+    background: #83c174 ;        
+}
+  
+ .ui-datepicker .ui-datepicker-prev .ui-datepicker-next{
+ background:#83c174;
+
+}
+
+
+.dropdown-btn {
+  padding: 6px 8px 10px 16px;
+  text-decoration: none;
+  color: #818181;
+  display: block;
+  border: none; 
+  background: none;
+  width: 100%;
+  text-align: center;
+  cursor: hand;
+  outline: none;
+} 
+
+.active, {
+  color: orange;
+}
+
+.dropdown-container {
+  display: none;
+  /* background-color:#f7f9fb; */
+  padding-left: 10px;
+}      
+ </style>
+ <div id="createpo" data-ng-controller="createPOController" style="margin-left:7%;margin-top:-10%;padding-right:5%">
+ <div style="padding-left:15%"><h2>Create Purchase Order</h2></div>
+
+		<div class="panel panel-default"  id="lb6b" style="padding-left:14%;margin-top:3%">    
+		<div class="panel-heading">                  
+		          <div class="text-center">     
+		<b style="font-size: large;">Program Details</b>
+					</div>
+		<h4></h4>
+		        
+			<button type="button" id="register"
+				class="btn btn-primary btn-md pull-right" style='background-color:MediumSeaGreen ' data-toggle="modal"
+				data-target="#myModal" data-ng-click="">                                    
+				add items
+				<!-- <span class="glyphicon glyphicon-plus"></span> -->    
+			</button>
+			
+			</div>
+			<br>
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row" style="padding-left:5%;overflow-x:scroll;">             
+			<table class="table table-bordered">
+				<tr style='background-color: CornflowerBlue '>   
+				<th>S.no</th>                       
+				   <th> Consumables / Assets</th>
+				   <th>Quality/No</th>
+				    <th>Rate</th>     
+				   <th>Value</th>  
+				   <th>Brand</th> 
+				   <th>Specifications</th> 
+				   <th>Loaction</th> 
+				   <th>Installation Status</th>  
+				   <th>Installation Cost(Per Unit)</th>       
+				 
+				   <th>Edit</th>   
+				</tr>
+				  
+                  <tr data-ng-repeat="data in regdetails" >   
+				     <td align="right">{{$index+1}}</td>   
+					<td>{{data.asset_name}}</td>
+					<td>{{data.qty}}</td>   
+					<td>{{data.rate}}</td>
+					<td>{{data.value}}</td>  
+					 <td>{{data.brand}}</td>  
+					<td>{{data.specifications}}</td>
+					<td>{{data.location}}</td>   
+					<td>{{data.installation_status}}</td>
+					<td>{{data.installation_cost }}</td>   
+				
+					<td>&nbsp;&nbsp;&nbsp;
+					 <button type="button" id="editData"       
+					 data-ng-click="getById(data.asset_name)"
+					 class="btn btn-primary btn-md" data-toggle="modal"
+					 data-target="#myModal">
+					 <span class="glyphicon glyphicon-pencil"></span>
+					 </button>   
+					 <!--  &nbsp;&nbsp;&nbsp;
+						<button type="button" class="btn btn-danger" id="removebtn"
+							data-ng-click="removeData(data.branch)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button> -->     
+					</td>
+				</tr>
+				
+			</table>
+			</div>
+			</div>
+			</div>
+			
+							
+			<div class="modal fade" id="myModal" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" style="margin-left: 370px;">Add items </h4>
+						</div>
+						<div class="modal-body">
+						<!-- <div class="panel panel-success"> 
+								 <div class="panel-body">   -->
+								 <div class="container" style="padding-right:8%">
+										<div class="row">  
+										 <div class="col-md-3"  >
+							                      <label>Consumable/Assets&nbsp;<b style="color: red">*</b></label>
+							                    <select class="form-control" data-ng-model="data.object.asset_name">
+							           <option>--Select --</option>
+								        <option data-ng-repeat="asset in assets" value="{{asset.asset_name}}">{{asset.asset_name}}</option>	
+							           </select>
+						                           </div>
+						                           
+											<div class="col-md-3" >
+				                       <label for="vendorname"><b>Quality/No<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.qty" class="form-control">
+											
+											</div> 
+											<div class="col-md-3" >
+				                       <label for="vendorname"><b>Rate(in rupees)<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.rate" class="form-control">
+											
+											</div>
+											</div>
+											<div class="row">
+											<div class="col-md-3" >
+				                       <label for="vendorname"><b>Value(in rupees)<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.value" class="form-control">
+											
+											</div> 
+											   
+											<div class="col-md-3" >
+				                       <label for="vendorname"><b>Brand<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.brand" class="form-control">
+											
+											</div>
+												       
+											<div class="col-md-3" >
+				                       <label for="vendorname"><b>Specifications<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.specifications" class="form-control">
+											
+											</div> 
+											</div>
+											<div class="row"> 
+											
+								<div class="col-md-3"  >
+							        <label>Locations&nbsp;<b style="color: red">*</b></label>
+							               <select class="form-control" data-ng-model="data.object.location">
+							           <option>--Select --</option>
+								        <option data-ng-repeat="location in locations" value="{{location.id}}">{{location.location_name}}</option>	
+							           </select>
+						               </div>
+						               
+						                           <div class="col-md-3"  >
+							                      <label>Installation Status&nbsp;<b style="color: red">*</b></label>
+							                     <select class="form-control" data-ng-model="data.object.installation_status" id="vendortype">
+								                   <option value="Not Applicable">Not Applicable</option>
+								                   <option value="Applicable">Applicable</option>
+							                      </select>
+						                           </div>
+						                          
+						                           <div class="col-md-3" >
+				                       <label for="vendorname"><b>Installation Cost<b style="color:red">*</b></b></label><input type="text"  required 
+														data-ng-model="data.object.installation_cost " class="form-control">
+														</div>
+											
+											</div>  
+						                        
+						                           </div>
+						              </div>
+											
+											 	      
+											       
+											<div class="modal-footer">
+							<button type="button" id="add" class="btn btn-primary" data-dismiss="modal"
+				            style="width: 100px" data-ng-click="save(data.object);">Save</button>                                  
+							<button type="button" id="update" class="btn btn-primary"
+							data-ng-click="updateData(data.object)" data-dismiss="modal"
+							style="width: 100px">Update</button>
+									<button type="button" class="btn btn-warning" id="close"
+						  	style="margin-right: 70px; width: 100px" data-dismiss="modal">Close</button>
+					</div>                  								       
+		 			</div>
+					</div>                  								       
+		 			</div>
+		 			 <div class="tab-content" >         
+			<div id="person" class="tab-pane fade in active"
+				style="width:90%; margin-left: 12%;padding-left:5%;margin-right:6%">
+				<br /> <br />
+				<div style="border-radius: 7px; border: 1px solid #ddd; padding: 2%">
+				
+				<form class="form" data-role="form">
+				
+					<div class="form-group row">
+					
+						<div class="form-group col-md-3">
+							<label>Financial Year&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.financial_year">
+							<option>--Select Year--</option>
+								<option data-ng-repeat="year in years" value="{{year.yearid}}">{{year.years}}</option>	
+							</select>
+							
+						</div>
+						<div class="form-group col-md-3">
+							<label>Purchase Order Type&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.po_type">
+							<option>--Select Year--</option>
+								<option data-ng-repeat="purchase in purchaseotypes" value="{{purchase.purchaseotypeid}}">{{purchase.purchaseotypename}}</option>	
+							</select>
+							
+						</div>
+						
+						<!-- <div class="form-group col-md-3">
+							<label>Purchase Order Type&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.po_type">
+							<option>--Select purchase order type--</option>
+								<option data-ng-repeat="purchaseotype in purchaseotypes" value="{{purchaseotype.purchaseotypeid}}">{{purchaseotype.purchaseotypename}}</option>	
+							</select>
+							
+						</div> -->
+						
+						<div class="form-group col-md-3">
+							<label>Purchase Type&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.p_type">
+							<option>--Select purchase  type--</option>
+								<option data-ng-repeat="purchasetype in purchasetypes" value="{{purchasetype.purchasetypeid}}">{{purchasetype.purchasetypename}}</option>	
+							</select>
+							
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>Service&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.service_id">
+							<option>--Select Services--</option>
+								<option data-ng-repeat="service in services" value="{{service.serviceid}}">{{service.servicename}}</option>	
+							</select>
+							
+						</div>
+						  
+						
+						
+					</div>
+					 			<div class="form-group row">
+					
+						<div class="form-group col-md-3">
+							<label>Program&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.program_id">
+							<option>--Select Programs--</option>
+								<option data-ng-repeat="program in programs" value="{{program.programid}}">{{program.programname}}</option>	
+							</select>
+							    
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>Sector&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.sector_id">
+							<option>--Select Sectors--</option>
+								<option data-ng-repeat="sector in sectors" value="{{sector.sectorid}}">{{sector.sectorname}}</option>	
+							</select>
+							
+						</div>
+						
+						<div class="form-group col-md-3">
+							<label>Vendor Name&nbsp;<b style="color: red">*</b></label>
+							<select class="form-control" data-ng-model="data.object.vendor_id">
+							<option>--Select --</option>
+								<option data-ng-repeat="vendor in vendors" value="{{vendor.vendorid}}">{{vendor.vendorname}}</option>	
+							</select>
+							
+						</div>
+						
+						<div class="form-group col-md-3">
+						<label class="control-label">Description&nbsp;<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.vendor_comment" placeholder="Enter Description Here" />
+						</div>
+						
+						
+						
+						
+					</div>
+					 
+					
+					<div class="form-group row">
+					<div class="form-group col-md-3">
+						<label class="control-label">Purchase Order NO&nbsp;<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.order_no" placeholder="Enter Purchase Order No" />
+						</div>
+					
+					
+					<div class="form-group col-md-3">
+						<label class="control-label">Purchase Order Date&nbsp;<b style="color: red">*</b></label>
+							<input type="date" class="form-control" data-ng-model="data.object.order_date" placeholder="Enter Purchase Order Date" />
+						</div>
+					
+					
+					<div class="form-group col-md-3">
+						<label class="control-label">Need By Date&nbsp;<b style="color: red">*</b></label>
+							<input type="date" class="form-control" data-ng-model="data.object.need_by_date" placeholder="Enter Purchase Order Delivery Date" />
+						</div>
+						
+						<div class="form-group col-md-3">
+						<label class="control-label">Delivery Address&nbsp;<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.address" placeholder="Enter Delivery Address" />
+						</div>
+					
+					
+					</div>
+					
+				
+					<div class="form-group row">
+					
+					<div class="form-group col-md-9">
+						<label class="control-label">Enter Amount in words&nbsp;<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.amount_words" placeholder="Enter Amount in Words" />
+						</div>
+						
+						<div class="form-group col-md-3">
+						<label class="control-label">Total Amount(in rupees)&nbsp;<b style="color: red">*</b></label>
+							<input type="text" class="form-control" data-ng-model="data.object.amount" placeholder="Enter Amount " />
+						</div>
+					
+					</div>
+				
+		</form>
+		</div>
+		</div>
+		</div>
+		
+		 			<div class="panel panel-default"  id="lb6b" style="padding-left:14%;margin-top:3%">    
+				<br>
+			<div class="panel-body" id="six-b" >
+			<H2>Instructions</H2>
+			<div class="form-group row" style="padding-left:1%;border:solid 3px lightgray">             
+			<textarea rows="10" cols="100" data-ng-model="data.object.instructions"></textarea>
+			</div>
+			</div>
+			<br>
+			<button  style="background-color: #4CAF50; /* Green */border: none;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;
+           font-size: 16px;"> Add Document</button>
+			</div>
+			<div class="panel panel-default"  id="lb6b" style="padding-left:14%;margin-top:3%">    
+		<div class="panel-heading">                  
+		          <div class="text-center">     
+		<b style="font-size: large;">Payment Terms</b>
+	
+					</div>
+		<h4></h4>
+		      
+			</div>
+			<br>
+			<h5 style="padding-left:10%;">payment group</h5>
+			<br>
+				<div class="row">  
+										 <div class="col-md-3"  >
+							                      <!-- <label>Consumable/Assets&nbsp;<b style="color: red">*</b></label> -->
+							                    <select class="form-control" data-ng-model="data.object.group_name">
+							           <option>--Select --</option>
+								        <option data-ng-repeat="group in groups" value="{{group.id}}">{{group.group_name}}</option>	
+							           </select>
+						                           </div>
+						                           </div>
+			
+		 	</div>
+		 <div class="col-md-3" style="margin-top:0.5%%;padding-left:50%">
+							<button type="button" class="btn btn-success" data-ng-click="savedata(data.object);">Submit</button>
+							&nbsp;&nbsp;&nbsp;
+							
+						</div>
+		 	</div>
+		 	<script>                                             
+		jQuery(document).ready(function() {     
+			 $("#add").hide();
+			$("#update").hide();
+			
+  			 angular.bootstrap(jQuery("#createpo"), [ 'CreatePOModule' ]); 
+	    });
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show(); 
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  
+		
+		
+	</script>
+		  
+	
+						

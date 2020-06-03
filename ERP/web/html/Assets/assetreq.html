@@ -1,0 +1,207 @@
+<script src="/erp/scripts/general/assetreq.js"></script>
+<!-- <script src="/erp/scripts/js/jquery.min.js"></script> -->
+ 
+               
+<div id="vendorId" data-ng-controller="assetcontroller" style="margin-top:-10%;margin-left:4%">
+			
+			   
+			
+			<div class="panel panel-primary"  id="lb6b"  style="margin-left:15%;padding-left:1%;margin-right:5%">    
+			
+			<br>
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row">             
+			
+			
+			<div class="form-group col-md-2">
+						<label>Request Type<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-3">
+			<select class="form-control"
+						data-ng-model="data.object.departmentid" id="reqtype">
+						<option value="select">Select</option>
+						<option value="Employee">Employee</option>
+						<option value="Location">Location</option>
+						<option value="Cost Center">Cost Center</option>
+			</select>
+			</div>
+			<div class="form-group col-md-2">
+						<label>Project<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-5">
+			<div class="form-group col-md-7">
+			<select class="form-control"
+						data-ng-model="data.object.departmentid">
+						<option></option>
+						<option data-ng-repeat="department in departments"
+							value="{{department.departmentid}}">{{department.department_name}}</option>
+					</select>
+			</div>
+			</div>
+			<div id="emp">
+			<div class="form-group col-md-2" >
+						<label>Employee<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-3">
+			<select class="form-control"
+						data-ng-model="data.object.empid">
+						<option></option>
+						<option data-ng-repeat="emp in empdetails"
+							value="{{emp.empid}}">{{emp.fullname}}</option>
+					</select>
+			</div>
+			</div>
+			<div id="loc">
+			<div class="form-group col-md-2" >
+						<label>Location<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-3">
+			<select class="form-control"
+						data-ng-model="data.object.id">
+						<option></option>
+						<option data-ng-repeat="loc in locations"
+							value="{{loc.id}}">{{loc.location_name}}</option>
+					</select>
+			</div>
+			</div>
+			<div id="cost">
+			<div class="form-group col-md-2" >
+						<label>Cost Center<b style="color: red">*</b></label>
+			</div>
+			<div class="form-group col-md-3">
+			<select class="form-control"
+						data-ng-model="data.object.id">
+						<option></option>
+						<option data-ng-repeat="cost_center in cost_centers"
+							value="{{cost_center.id}}">{{cost_center.name}}</option>
+					</select>
+			</div>
+			</div>
+			
+			</div>
+			</div>
+				</div>
+			
+			
+			
+			
+			
+  
+<div class="panel panel-primary" style="margin-left:15%;padding-left:1%;margin-top:3%;margin-right:2%">    
+		
+			<br>
+			<div class="panel-body" id="six-b" >
+			<div class="form-group row">             
+			<table class="table table-bordered">
+			
+				<tr  style="background-color: ghostwhite">   
+				<th>S.no</th>                       
+				   <th>Asset Name</th>
+				   <th>Request For</th>
+				    <th>Specifications</th>     
+				   <th>Quantity</th>       
+				   <th>Required Date</th>  
+				   <th>Add/Delete</th>     
+				</tr>
+				    
+				
+                  <tr data-ng-repeat="data in filteredResult=(regdetails | filter:search)" >   
+				     <td align="right">1</td>   
+					<td><input type="text"></td>
+					<td><input type="text"></td>   
+					<td><input type="text"></td>
+					<td><input type="text"></td>   
+					<td><input type="text"></td>  
+				
+					<td>&nbsp;&nbsp;&nbsp;
+					 <button type="button" id="editData"       
+					 data-ng-click="getById(data.vendor_id)"
+					 class="btn btn-primary btn-md" data-toggle="modal"
+					 data-target="#myModal">
+					 <span>Add</span>
+					 </button>        
+					</td>
+				</tr>
+				
+			</table>
+			
+			</div>
+			</div>
+				</div>
+					  <div class="panel-body" style="margin-left:45%;">   
+			<button type="button"   
+				class="btn btn-primary btn-md" data-toggle="modal"data-ng-click="">                                    
+				Submit    
+			</button>
+			<!-- <button   type ="button" class = "btn btn-xs btn-success pull-right" 
+            data-ng-click ="toggle('searchrow');"   
+            style = "margin-right:3% ;color:">   
+            <span class = "glyphicon glyphicon-search"></span></button>   -->
+            </div> 		
+			
+								 
+						</div>
+				<script>                                             
+		jQuery(document).ready(function() {     
+			$("#emp").hide();
+			$("#loc").hide();
+			$("#cost").hide();
+			/*$("#hide").hide();
+			 angular.bootstrap(jQuery("#lb6b"), [ 'assetreq' ]); */ 
+	    });
+		/* jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  */ 
+		
+		jQuery(document).on('change',"#reqtype",function(){
+			if($(this).val()=="Employee"){
+				$("#emp").show();
+				$("#loc").hide();
+				$("#cost").hide();
+			}
+			else if($(this).val()=="Location"){
+				$("#emp").hide();
+				$("#loc").show();
+				$("#cost").hide();
+			}
+			else if($(this).val()=="Cost Center"){
+				$("#emp").hide();
+				$("#loc").hide();
+				$("#cost").show();
+			}
+			else
+				{
+				$("#emp").hide();
+				$("#loc").hide();
+				$("#cost").hide();
+				}
+		});  
+		
+		
+		/* $("#vendortype").on('change',function(){
+			if($(this).val()=="domestic"){
+			$("swift").hide();
+			
+		}
+		else
+			{
+			$("ifsc").hide();
+			$("swift").show();
+			}
+		});
+		 */
+		
+	</script>
+	 <script>
+				jQuery(document).ready(function() {     
+			 $("#searchrow").hide();
+  			 angular.bootstrap(jQuery("#vendorId"), [ 'assetreq' ]); 
+	    }); 
+				</script>
+		  
+	

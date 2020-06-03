@@ -1,0 +1,71 @@
+ <!-- <script src="/sbtet/js/jquery.min.js"></script> -->
+<script src="/erp/scripts/general/servicesModule.js"></script>
+
+<style type="text/css">
+.glyphicon-refresh-animate {
+   -animation: spin .7s infinite linear;    
+   -ms-animation: spin .7s infinite linear;       
+   -webkit-animation: spinw .7s infinite linear;
+   -moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
+  
+@-webkit-keyframes spinw { 
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+    from { -moz-transform: rotate(0deg);}
+    to { -moz-transform: rotate(360deg);}                         
+}
+</style>
+<br />
+<div id="loginCreationDiv" data-ng-controller="servicesController">
+	<div class="form-group row">    
+	    
+		<div class="col-md-1"></div>
+		<div class="col-md-10" style="padding-left:10%;margin-top:0%;">   
+			<div class="panel panel-default">
+					<div id="loginsDiv">
+						<div class="text-center" >
+							<table class="table table-bordered">
+								<thead style="background-color: #f5f5f5; color: #333;">
+									<tr>
+										<th>EmployeeId</th>
+										<th>Name</th>
+										<th>Email</th>
+										<th>Mobile No</th>
+										<th>Create</th>
+									</tr>   
+								</thead>
+								<tbody>
+									<tr data-ng-repeat="emp in empdetails">
+										<td>{{emp.empid}}</td>
+										<td>{{emp.name}}</td>
+				     					<td>{{emp.email}}</td>
+										<td>{{emp.mobile}}</td>
+										<td><button class="btn btn-primary" data-ng-click="createHR(emp);">Create HR</button>&nbsp;&nbsp;
+										<button class="btn btn-success" data-ng-click="createEmployee(emp);">Create Employee</button></td>
+									</tr>
+								</tbody>
+							</table>
+							<div style="text-align: center;" id="msgDiv">
+								<label style="font-weight: normal; font-size: medium;">No data available</label>
+							</div>
+						</div>     
+					</div>   
+				</div>
+			</div>                  
+		</div>
+	</div>
+<script>
+	jQuery(document).ready(function() {
+		$("#msgDiv").hide();		
+		angular.bootstrap(jQuery("#loginCreationDiv"), [ 'servicesModule' ]);
+	});
+</script>

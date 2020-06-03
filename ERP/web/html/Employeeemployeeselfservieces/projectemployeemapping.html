@@ -1,0 +1,247 @@
+<script src="/erp/scripts/employeeemployeeselfserviece/projectemployeemapping.js"></script>
+<style>
+/* input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+} */
+/*     
+input:focus { 
+	background-color: #ffe6b3;
+}      
+ */   
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;   
+	color: black;    
+	border-width: 1px;
+	border-style: solid;          
+	border-color: #63afdc;
+}
+   
+.button {
+	background-color: #63afdc;              
+	border: none;
+	color: black;   
+	padding: 10px 20px;      
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;       
+	border-radius: 10px;
+}      
+</style>
+<div id="projectempid" data-ng-controller="projectempController" style="margin-left: 1.5%; margin-top: 10%; margin-right: -2.5%">
+	<br>
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -11%; margin-right: 5%">
+
+		<div class="panel-heading"><b><h4>Project Employee Mapping</h4></b></div>
+		<div class="panel-body">
+			<div class="form-group row">
+			<div class="form-group col-md-4">
+				<label>Project <b style="color: red">*</b></label>    
+				<select class="form-control"   
+					data-ng-model="data.object.project">     
+						<option></option>    
+						<option data-ng-repeat="project in projects"
+							value="{{project.project}}">{{project.project_name}}</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4">
+				<label>Location <b style="color: red">*</b></label>
+				 <select class="form-control"
+					data-ng-model="data.object.id">
+						<option></option>   
+						<option data-ng-repeat="loc in locations"
+							value="{{loc.id}}">{{loc.location_name}}</option>       
+				</select>       
+			</div>       
+			<div class="form-group col-md-4">       
+				<label>From Date <b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"
+					data-ng-model="data.object.from_date" placeholder="" />
+			</div>
+			</div>
+			<div class="form-group row"> 
+			<div class="form-group col-md-4">    
+				<label>To Date<b style="color: red">*</b></label> <input
+					class="form-control" type="date" id="pincodeId"    
+					data-ng-model="data.object.to_date" placeholder="" />
+			</div>
+			<div class="form-group col-md-4">
+				<label>Reporting To <b style="color: red">*</b></label>    
+				<select class="form-control"    
+					data-ng-model="data.object.reporting">    
+						<option></option>   
+						<option data-ng-repeat="report in reporting"
+							value="{{report.reporting}}">{{report.reporting_to}}</option>
+				</select>
+			</div> 
+			</div>
+			<br>       
+			<div>   
+			<center>
+				<button type="button" class="btn btn-primary" id="b1"
+					data-ng-click="getprojectdata(data.object); getallemployees(data.object);">Get</button>
+			</center>
+			</div>
+	</div>
+ <div id="table">
+	<div class="panel panel-primary" id="report" style="margin-left:-1%;top:530px;width:1020px;margin-right: 0%;position:absolute;padding:0px;">
+		<div class="panel-body">
+ 			<div class="dataTables_length" id="scheduleTimetableList_length">
+ 			<br><br>
+ 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  					<select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    	<option value="10">10</option>
+				    	<option value="25">25 </option>
+				    	<option value="50">50 </option>                  
+				    	<option value="-1">all</option>    
+					</select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<div class="input-group col-md-4" style="float: right;">
+	   				<span class="input-group-btn">
+        				<button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      				</span>  
+      				<input type="text" class="form-control" placeholder="Search Records">     
+            	</div>
+			</div>	         
+			 <br>   
+		   		<div id="dataDiv" class="scroll">                 
+				<table class="table table-bordered"> 
+				 <thread>    
+			  		 <tr style='background-color:CornflowerBlue'>        
+						<th align="left">S.no</th>
+						<th><input type="checkbox" data-ng-model="allStudents" data-ng-true-value="true" data-ng-false-value="false" data-ng-click="setAllRegIds(allStudents);"></th>   
+						<th align="left">Employee Name</th>     
+						<th align="left">Project Name</th>
+				    	<th align="left">location</th>              
+				    	<th align="left">Status</th>                           
+					</tr>     	         
+					<tr data-ng-repeat="userdata in filteredResult = (regdetails | filter:search)"> 
+				     	<td align="left">{{$index+1}}</td> 
+						<td><input type="checkbox" data-ng-model="studentsPresentArr[userdata.project]"></td>
+				     	<td align="left">{{userdata.name}}</td> 
+					 	<td align="left">{{userdata.projectname}}</td>    
+					 	<td align="left">{{userdata.locationname}}</td>      
+					 	<td align="left">{{userdata.status}}</td>       
+					 	<!-- <td align="left">{{userdata.status}}</td> --> 
+					</tr>            
+				</thread>                             
+			</table>			          
+		</div>
+	  </div>
+	 
+	 <!-- Getting all employees -->
+	 <div class="panel-body">
+	    <div class="dataTables_length" id="scheduleTimetableList_length">
+ 			<br><br>
+ 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  					<select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    	<option value="10">10</option>
+				    	<option value="25">25 </option>
+				    	<option value="50">50 </option>                  
+				    	<option value="-1">all</option>    
+					</select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<div class="input-group col-md-4" style="float: right;">
+	   				<span class="input-group-btn">
+        				<button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      				</span>  
+      				<input type="text" class="form-control" placeholder="Search Records">     
+            	</div>
+			</div>	    
+			 <br> 
+			 
+		<div id="dataDiv2" class="scroll">              
+				<table class="table table-bordered">     
+				 <thread>    
+			  		 <tr style='background-color:CornflowerBlue'>        
+						<th align="left">S.no</th>
+						<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></th>     
+						<th align="left">Name</th>     
+						<th align="left">Mobile</th>     
+				    	<th align="left">Email</th>  
+				    	<th align="left">Cadre</th>    
+				    	<th align="left">Grade</th>             
+				    	<th align="left">Designation</th>                   
+					</tr>     	      
+					<tr data-ng-repeat="userdata in filteredResult = (empdetails | filter:search)"> 
+				     	<td align="left">{{$index+1}}</td> 
+				     	<td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td>
+				     	<td align="left">{{userdata.full_name}}</td> 
+					 	<td align="left">{{userdata.phone}}</td>         
+					 	<td align="left">{{userdata.email_id}}</td>      
+					 	<td align="left">{{userdata.cader_name}}</td>      
+					 	<td align="left">{{userdata.grade_name}}</td>          
+					 	<td align="left">{{userdata.designation_name}}</td>      
+					 	<!-- <td align="left">{{userdata.status}}</td> --> 
+					</tr>          
+				</thread>                    
+			</table>			       
+		</div>    
+	</div>	 
+	</div>
+	
+	<!-- Total employee table -->
+	<!-- <div class="panel panel-primary" id="report" style="margin-left:-1%;top:735px;width:1020px;margin-right: 0%;position:absolute;padding:0px;">
+	  <div class="panel-body">
+	    <div class="dataTables_length" id="scheduleTimetableList_length">
+ 			<br><br>
+ 				<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Show
+  					<select name="scheduleTimetableList_length" aria-controls="scheduleTimetableList" class="">
+				    	<option value="10">10</option>
+				    	<option value="25">25 </option>
+				    	<option value="50">50 </option>                  
+				    	<option value="-1">all</option>    
+					</select> entries</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        		<div class="input-group col-md-4" style="float: right;">
+	   				<span class="input-group-btn">
+        				<button class="btn btn-search" type="button"><i class="fa fa-search fa-fw"></i>Search</button>
+      				</span>  
+      				<input type="text" class="form-control" placeholder="Search Records">     
+            	</div>
+			</div>	    
+			 <br> 
+			 
+		<div id="dataDiv2" class="scroll">              
+				<table class="table table-bordered"> 
+				 <thread>    
+			  		 <tr style='background-color:CornflowerBlue'>        
+						<th align="left">S.no</th>
+						<th><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></th>     
+						<th align="left">Name</th>     
+						<th align="left">Mobile</th>     
+				    	<th align="left">Email</th>  
+				    	<th align="left">Cadre</th>    
+				    	<th align="left">Grade</th>          
+				    	<th align="left">Designation</th>                   
+					</tr>     	      
+					<tr data-ng-repeat="userdata in filteredResult = (regdetails | filter:search)"> 
+				     	<td align="left">{{$index+1}}</td> 
+				     	<td><input onclick="selectAllGRNLineItems(this)" id="selectAll" type="checkbox"></td>
+				     	<td align="left">{{userdata.full_name}}</td> 
+					 	<td align="left">{{userdata.phone}}</td>         
+					 	<td align="left">{{userdata.email_id}}</td>      
+					 	<td align="left">{{userdata.cader_name}}</td>      
+					 	<td align="left">{{userdata.grade_name}}</td>          
+					 	<td align="left">{{userdata.designation_name}}</td>      
+					 	<td align="left">{{userdata.status}}</td> 
+					</tr>          
+				</thread>                    
+			</table>			       
+		</div>    
+	</div>  
+	<div class="dataTables_info" id="scheduleTimetableList_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+	</div> -->
+	</div>
+   </div> 
+</div>   
+<script>
+	jQuery(document).ready(function() {
+		$("#table").hide();
+		angular.bootstrap(jQuery("#projectempid"), [ 'projectemployeemapping' ]);
+	});
+	jQuery("#b1").click(function() {
+		$("#table").show();
+	});
+</script>

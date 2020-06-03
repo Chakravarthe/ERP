@@ -1,0 +1,151 @@
+ <script src="/erp/scripts/leaves/calendar.js"></script>
+<style>
+input[type=text] {
+	border: none;
+	border-bottom: 1px solid #ffeecc;
+}
+
+input:focus {
+	background-color: #ffe6b3;
+}
+
+.btn-search {
+	background: #63afdc;
+	border-radius: 0;
+	color: black;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #63afdc;
+}
+
+.button {
+	background-color: #63afdc;
+	border: none;
+	color: black;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 10px;
+}
+</style>
+<br>
+
+<div id="calendar" data-ng-controller="calendarcontroller">
+	<div class="panel panel-primary"
+		style="margin-left: 19%; margin-top: -10%; margin-right: 5%">
+
+		<div class="panel-heading">Define Calendar</div>
+		<div class="panel-body">
+			<div class="form-group col-md-4">
+				<label>Year&nbsp;<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.year_id">
+					<option></option>
+					<option data-ng-repeat="year in years" value="{{year.year_id}}">{{year.year}}</option>
+				</select>
+			</div>
+			
+
+			<div class="form-group col-md-4">
+				<label>Holiday Type<b style="color: red">*</b></label> <select
+					class="form-control" data-ng-model="data.object.holiday_type">
+					<option>select</option>
+					<option value="Declared Holiday">Declared Holiday</option>
+					<option value="Week Off">Week Off</option>
+					<option value="Flexi Leave">Flexi Leave</option>
+				</select>
+			</div>
+
+
+<br><br><br><br>
+			<div
+				data-ng-show="data.object.holiday_type=='Declared Holiday' || data.object.holiday_type =='Flexi Leave'">
+				
+					<div class="form-group col-md-3">
+						<label>FromDate <b style="color: red">*</b></label> <input
+							class="form-control" type="date"
+							data-ng-model="data.object.from_date" placeholder="" />
+					</div>
+					<div class="form-group col-md-3">
+						<label>ToDate<b style="color: red">*</b></label> <input
+							class="form-control" type="date"
+							data-ng-model="data.object.to_date" placeholder="" />
+					</div>
+					
+
+					<div class="form-group col-md-3">
+						<label>Holiday Name<b style="color: red">*</b></label> <input
+							class="form-control" type="text"
+							data-ng-model="data.object.holiday_name"
+							placeholder="Enter Holiday Name" />
+					</div>
+
+				</div>
+
+
+			<div data-ng-show="data.object.holiday_type =='Week Off'">
+
+
+<!-- <td><center><label class="checkbox-inline" style="padding-left: 30px;"><input type="checkbox" 
+class="feedback" value="" data-ng-model="data.object.feedback12.satisfactory" 
+data-ng-true-value="'Satisfactory'"></label></center></td> -->
+
+				<div class="form-group col-md-12">
+					<label>Days&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+					 <input type="checkbox"  data-ng-true-value="'Sunday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Sunday</input>&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Monday'" data-ng-checked="monday" data-ng-model="data.object.day">Monday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Tuesday'" data-ng-checked="tueday" data-ng-model="data.object.day">Tuesday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Wednesday'" data-ng-checked="wednesday" data-ng-model="data.object.day">Wednesday&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Thursday'" data-ng-checked="thursday" data-ng-model="data.object.day">Thursday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Friday'" data-ng-checked="friday" data-ng-model="data.object.day">Friday&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Saturday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Saturday&nbsp;&nbsp;&nbsp; 
+ <!-- <input type="checkbox"  data-ng-true-value="'Sunday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Sunday</input>&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Monday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Monday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Tuesday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Tuesday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Wednesday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Wednesday&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Thursday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Thursday&nbsp;&nbsp;&nbsp; 
+					<input type="checkbox" data-ng-true-value="'Friday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Friday&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" data-ng-true-value="'Saturday'" data-ng-checked="data.object.day" data-ng-model="data.object.day">Saturday&nbsp;&nbsp;&nbsp;  -->
+					 
+                    
+				</div>
+				<br><br><br><br>    
+
+
+
+
+
+			</div>
+
+
+
+			 <div class="form-group col-md-3">
+				<button type="button" class="btn btn-primary" id="submit"
+					data-ng-click="insertion(data.object);"  style="margin-left: 60%">Submit</button>
+			</div>
+			
+			
+	
+		</div>
+	</div>
+	
+
+</div>
+
+
+<script>
+	jQuery(document).ready(function() {
+		angular.bootstrap(jQuery("#calendar"), [ 'calendar' ]);
+	});
+	jQuery("#submit").click(function() {
+
+		$("#add").show();
+	});
+	
+</script>
+
+
+
+

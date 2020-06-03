@@ -1,0 +1,87 @@
+
+    <style>
+body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 5px;
+  font-size: 17px;
+ border: none;
+    border-bottom: 1px solid #2196F3;  
+  float: left;
+  width:90%;
+  background: #ffeecc;
+}
+
+form.example button {
+  float: left;
+  width: 10%;
+  padding: 5px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+ border: none;
+    border-bottom: 1px solid #2196F3;  
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+ <script src="/erp/scripts/general/CreateGrn.js"></script>
+<script src="/erp/scripts/js/jquery.min.js"></script>
+<script src="/erp/scripts/js/angular.js"></script>
+             <h3 style="margin-left:19%;margin-top:-10%" >Employee Directory</h3>
+             
+<div id="grnId" data-ng-controller="CreateGrnController">
+ <br>
+  <div class="panel panel-primary" style="margin-left:19%;margin-right:5%;padding:0px">
+   
+   <div class="panel-heading">Directory</div>
+    <div class="panel-body">
+      <form class="example">
+  <input type="text" placeholder="Search from directory List.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+   </div>
+  </div>
+
+  </div>
+ 
+
+<!-- ----------------------------------------------------------------------------- -->
+
+
+  
+          
+<script>                        
+		jQuery(document).ready(function() {         
+			 $("#add").hide();
+			$("#update").hide(); 
+  			 angular.bootstrap(jQuery("#grnId"), [ 'CreateGrn' ]); 
+	    });
+		jQuery("#register").click(function(){
+			$("#update").hide();
+			$("#add").show();
+		});   
+		jQuery(document).on('click',"#editData",function(){
+			$("#update").show();
+			$("#add").hide();     
+		});  
+		
+		
+	</script>
+	
